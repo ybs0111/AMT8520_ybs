@@ -1,0 +1,20 @@
+14:22:30 [Proc:Seq] Initialize() : TCP/IP Ret = 0 th=324c
+14:22:30 [Proc:Seq] Execute Process(C:\Program Files\IT Innovation\XGem v3.x\SE\Bin\XGem.exe) reading sucessed from registry. th=324c
+14:23:00 changed from INIT to IDLE.
+         [Proc:Seq] Success to initialize th=324c
+14:23:00 [Proc:Seq] Start() : TCP/IP Ret = 0, IP:127.0.0.1, Port:2001, Active:true th=324c
+14:23:00 changed from IDLE to SETUP.
+         [Proc:Seq] Success to start th=324c
+14:23:00 [Proc:Seq] Connected TCP/IP th=324c
+14:23:00 [Proc:Seq] send message(GEMGetLicense) th=324c
+14:23:00 [Proc:Seq] send message(GEMGetParam) th=324c
+14:23:00 [Proc:Seq] receive message(GEMGetLicense) th=3240
+14:23:00 [Proc:Seq] send message(GEMGetAttributeV) th=324c
+14:23:00 [Proc:Seq] receive message(GEMGetParam) th=3240
+14:23:00 [Proc:Seq] receive message(GEMGetAttributeV) th=3240
+14:23:00 changed from SETUP to EXECUTE.
+         [Proc:Seq] send message(GEMSetEstablish) th=324c
+14:23:00 [Proc:Seq] call function(GEMSetEstablish) state=1 th=324c
+14:23:00 [Proc:Seq] send message(GEMEQInitialized) th=324c
+14:23:00 [Proc:Seq] call function(GEMEQInitialized) inittype=1 th=324c
+14:23:01 [Proc:Seq] receive message(GEMCommStateChanged) th=3240

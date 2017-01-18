@@ -1,0 +1,2125 @@
+// Screen_Basic.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "Handler.h"
+#include "Screen_Basic.h"
+#include "AMTLotManager.h"
+#include "Srcbase\ALocalization.h"
+#include "SrcPart\DataManager.h"
+#include "Run_Network.h"
+#include "SrcPart/APartHandler_COK.h"
+
+#include "io.h"  // 파일 존재 유무 검사 함수 호출하기 위해서는 반드시 INCLUDE 필요
+
+// ******************************************************************************
+// 대화 상자 클래스 추가
+// ******************************************************************************
+#include "Dialog_Select.h"
+#include "Dialog_Message.h"
+#include "Dialog_KeyBoard.h"
+
+#include "Dialog_KeyPad.h"
+// ******************************************************************************
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// CScreen_Basic
+
+IMPLEMENT_DYNCREATE(CScreen_Basic, CFormView)
+
+CScreen_Basic::CScreen_Basic()
+	: CFormView(CScreen_Basic::IDD)
+{
+	//{{AFX_DATA_INIT(CScreen_Basic)
+	//}}AFX_DATA_INIT
+}
+
+CScreen_Basic::~CScreen_Basic()
+{
+}
+
+void CScreen_Basic::DoDataExchange(CDataExchange* pDX)
+{
+	CFormView::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CScreen_Basic)
+	DDX_Control(pDX, IDC_CHK_MODULE_TEACH_GAP_USE, m_chk_use_mdl_tch_gap);
+	DDX_Control(pDX, IDC_CHK_MODULE_TEACH_GAP_TESTSITE, m_chk_use_mdl_tch_gap_testsite);
+	DDX_Control(pDX, IDC_CHK_MODULE_TEACH_GAP_REJ, m_chk_use_mdl_tch_gap_rej);
+	DDX_Control(pDX, IDC_CHK_MODULE_TEACH_GAP_BIN2, m_chk_use_mdl_tch_gap_bin2);
+	DDX_Control(pDX, IDC_CHK_MODULE_TEACH_GAP_BIN1, m_chk_use_mdl_tch_gap_bin1);
+	DDX_Control(pDX, IDC_GROUP_TIME_OUT, m_group_time_out);
+	DDX_Control(pDX, IDC_RADIO_ONLINE_MODE, m_radio_online_mode);
+	DDX_Control(pDX, IDC_RADIO_OFFLINE_MODE, m_radio_offline_mode);
+	DDX_Control(pDX, IDC_GROUP_ONLINE_MODE, m_group_online_mode);
+	DDX_Control(pDX, IDC_RADIO_PT_2V1M_USE2, m_radio_pt_2v1m_2use);
+	DDX_Control(pDX, IDC_RADIO_PT_1V1M_USE2, m_radio_pt_1v1m_2use);
+	DDX_Control(pDX, IDC_RADIO_PT_1V1M_USE4, m_radio_pt_1v1m_4use);
+	DDX_Control(pDX, IDC_GROUP_PICK_TYPE, m_group_pick_type);
+	DDX_Control(pDX, IDC_RADIO_DEGREE_180, m_radio_degree_180);
+	DDX_Control(pDX, IDC_RADIO_DEGREE_270, m_radio_degree_270);
+	DDX_Control(pDX, IDC_RADIO_DEGREE_90, m_radio_degree_90);
+	DDX_Control(pDX, IDC_RADIO_DEGREE_0, m_radio_degree_0);
+	DDX_Control(pDX, IDC_GROUP_DEGREE, m_group_degree);
+	DDX_Control(pDX, IDC_RADIO_COK_5, m_radio_cok_5);
+	DDX_Control(pDX, IDC_RADIO_COK_4, m_radio_cok_4);
+	DDX_Control(pDX, IDC_RADIO_COK_3, m_radio_cok_3);
+	DDX_Control(pDX, IDC_RADIO_COK_2, m_radio_cok_2);
+	DDX_Control(pDX, IDC_RADIO_COK_1, m_radio_cok_1);
+	DDX_Control(pDX, IDC_RADIO_COK_0, m_radio_cok_0);
+	DDX_Control(pDX, IDC_GROUP_COK_TYPE, m_group_cok_type);
+	DDX_Control(pDX, IDC_GROUP_RECIPE_SELECT, m_group_recipe_select);
+	DDX_Control(pDX, IDC_MSG_TRAY_Y, m_msg_tray_y);
+	DDX_Control(pDX, IDC_MSG_TRAY_X, m_msg_tray_x);
+	DDX_Control(pDX, IDC_GROUP_TRAY_SIZE_SETTING, m_group_tray_size_setting);
+	DDX_Control(pDX, IDC_GROUP_ALARM_DELAY_TIME, m_group_alarm_delay_time);
+	DDX_Control(pDX, IDC_GROUP_NETWORK_WAIT_TIME, m_group_network_wait_time);
+	DDX_Control(pDX, IDC_GROUP_NETWORK_RETRY_COUNT, m_group_network_retry_count);
+	DDX_Control(pDX, IDC_LABEL_ELECTROSTATIC_5, m_label_electrostatic_5);
+	DDX_Control(pDX, IDC_LABEL_ELECTROSTATIC_4, m_label_electrostatic_4);
+	DDX_Control(pDX, IDC_LABEL_ELECTROSTATIC_3, m_label_electrostatic_3);
+	DDX_Control(pDX, IDC_LABEL_ELECTROSTATIC_2, m_label_electrostatic_2);
+	DDX_Control(pDX, IDC_LABEL_ELECTROSTATIC_1, m_label_electrostatic_1);
+	DDX_Control(pDX, IDC_MSG_ELECTROSTATIC_5, m_msg_electrostatic_5);
+	DDX_Control(pDX, IDC_MSG_ELECTROSTATIC_4, m_msg_electrostatic_4);
+	DDX_Control(pDX, IDC_MSG_ELECTROSTATIC_3, m_msg_electrostatic_3);
+	DDX_Control(pDX, IDC_MSG_ELECTROSTATIC_2, m_msg_electrostatic_2);
+	DDX_Control(pDX, IDC_MSG_ELECTROSTATIC_1, m_msg_electrostatic_1);
+	DDX_Control(pDX, IDC_RADIO_DEVICE_MODE_USE, m_radio_device_mode_use);
+	DDX_Control(pDX, IDC_RADIO_DEVICE_MODE_NOTUSE, m_radio_device_mode_notuse);
+	DDX_Control(pDX, IDC_DGT_ELECTROSTATIC_CHECK_VALUE, m_dgt_electrostatic_check_value);
+	DDX_Control(pDX, IDC_LIST_DEVICE_TYPE, m_list_device_type);
+	DDX_Control(pDX, IDC_GROUP_ELECTROSTATIC_TEST, m_group_electrostatic_test);
+	DDX_Control(pDX, IDC_GROUP_ELECTROSTATIC_CHECK_VALUE, m_group_electrostatic_check_value);
+	DDX_Control(pDX, IDC_GROUP_ELECTROSTATIC_CHECK_GAP, m_group_electrostatic_check_gap);
+	DDX_Control(pDX, IDC_GROUP_DEVICE_MODE, m_group_device_mode);
+	DDX_Control(pDX, IDC_BTN_ELECTROSTATIC_TEST, m_btn_electostatic_test);
+	DDX_Control(pDX, IDC_BTN_DVC_DELETE, m_btn_dvc_delete);
+	DDX_Control(pDX, IDC_BTN_DVC_CREATE, m_btn_dvc_create);
+	DDX_Control(pDX, IDC_BTN_BASIC_CANCLE, m_btn_basic_cancel);
+	DDX_Control(pDX, IDC_BTN_BASIC_APPLY, m_btn_basic_apply);
+	//}}AFX_DATA_MAP
+}
+
+
+BEGIN_MESSAGE_MAP(CScreen_Basic, CFormView)
+	//{{AFX_MSG_MAP(CScreen_Basic)
+	ON_WM_DESTROY()
+	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_RADIO_DEVICE_MODE_USE, OnRadioDeviceModeUse)
+	ON_BN_CLICKED(IDC_RADIO_DEVICE_MODE_NOTUSE, OnRadioDeviceModeNotuse)
+	ON_BN_CLICKED(IDC_DGT_ELECTROSTATIC_CHECK_GAP, OnDgtElectrostaticCheckGap)
+	ON_BN_CLICKED(IDC_DGT_ELECTROSTATIC_CHECK_VALUE, OnDgtElectrostaticCheckValue)
+	ON_BN_CLICKED(IDC_BTN_DVC_CREATE, OnBtnDvcCreate)
+	ON_LBN_SELCHANGE(IDC_LIST_DEVICE_TYPE, OnSelchangeListDeviceType)
+	ON_BN_CLICKED(IDC_BTN_DVC_DELETE, OnBtnDvcDelete)
+	ON_BN_CLICKED(IDC_BTN_ELECTROSTATIC_TEST, OnBtnElectrostaticTest)
+	ON_BN_CLICKED(IDC_BTN_BASIC_APPLY, OnBtnBasicApply)
+	ON_BN_CLICKED(IDC_BTN_BASIC_CANCLE, OnBtnBasicCancle)
+	ON_BN_CLICKED(IDC_DGT_NETWORK_WAIT_TIME, OnDgtNetworkWaitTime)
+	ON_BN_CLICKED(IDC_DGT_NETWORK_RETRY_COUNT, OnDgtNetworkRetryCount)
+	ON_BN_CLICKED(IDC_DGT_ALARM_DELAY_TIME, OnDgtAlarmDelayTime)
+	ON_BN_CLICKED(IDC_BTN_IP_SAVE_ECSERVER, OnBtnIpSaveEcserver)
+	ON_BN_CLICKED(IDC_BTN_PORT_SAVE_ECSERVER, OnBtnPortSaveEcserver)
+	ON_BN_CLICKED(IDC_BTN_CONNECT_ECSERVER, OnBtnConnectEcserver)
+	ON_BN_CLICKED(IDC_BTN_TEST_ECSERVER, OnBtnTestEcserver)
+	ON_BN_CLICKED(IDC_DGT_TRAY_X, OnDgtTrayX)
+	ON_BN_CLICKED(IDC_DGT_TRAY_Y, OnDgtTrayY)
+	ON_BN_CLICKED(IDC_RADIO_COK_0, OnRadioCok0)
+	ON_BN_CLICKED(IDC_RADIO_COK_1, OnRadioCok1)
+	ON_BN_CLICKED(IDC_RADIO_COK_2, OnRadioCok2)
+	ON_BN_CLICKED(IDC_RADIO_COK_3, OnRadioCok3)
+	ON_BN_CLICKED(IDC_RADIO_COK_4, OnRadioCok4)
+	ON_BN_CLICKED(IDC_RADIO_COK_5, OnRadioCok5)
+	ON_BN_CLICKED(IDC_RADIO_DEGREE_0, OnRadioDegree0)
+	ON_BN_CLICKED(IDC_RADIO_DEGREE_90, OnRadioDegree90)
+	ON_BN_CLICKED(IDC_RADIO_DEGREE_180, OnRadioDegree180)
+	ON_BN_CLICKED(IDC_RADIO_DEGREE_270, OnRadioDegree270)
+	ON_BN_CLICKED(IDC_RADIO_PT_1V1M_USE4, OnRadioPt1v1mUse4)
+	ON_BN_CLICKED(IDC_RADIO_PT_1V1M_USE2, OnRadio1v1mUse2)
+	ON_BN_CLICKED(IDC_RADIO_PT_2V1M_USE2, OnRadio2v1mUse2)
+	ON_BN_CLICKED(IDC_RADIO_ONLINE_MODE, OnRadioOnlineMode)
+	ON_BN_CLICKED(IDC_RADIO_OFFLINE_MODE, OnRadioOfflineMode)
+	ON_BN_CLICKED(IDC_DGT_TIME_OUT, OnDgtTimeOut)
+	ON_BN_CLICKED(IDC_BTN_CALC_MDL, OnBtnCalcMdl)
+	ON_BN_CLICKED(IDC_BTN_CALC_TESTSITE, OnBtnCalcTestsite)
+	ON_BN_CLICKED(IDC_BTN_CALC_BIN1, OnBtnCalcBin1)
+	ON_BN_CLICKED(IDC_BTN_CALC_BIN2, OnBtnCalcBin2)
+	ON_BN_CLICKED(IDC_CALC_REJ, OnCalcRej)
+	ON_BN_CLICKED(IDC_CHK_MODULE_TEACH_GAP_USE, OnChkModuleTeachGapUse)
+	ON_BN_CLICKED(IDC_CHK_MODULE_TEACH_GAP_TESTSITE, OnChkModuleTeachGapTestsite)
+	ON_BN_CLICKED(IDC_CHK_MODULE_TEACH_GAP_BIN1, OnChkModuleTeachGapBin1)
+	ON_BN_CLICKED(IDC_CHK_MODULE_TEACH_GAP_BIN2, OnChkModuleTeachGapBin2)
+	ON_BN_CLICKED(IDC_CHK_MODULE_TEACH_GAP_REJ, OnChkModuleTeachGapRej)
+	//}}AFX_MSG_MAP
+	ON_MESSAGE(WM_BASIC_APPLY, OnBasic_Info_Apply)  // BASIC DATA를 APPLY 시키기 위한 사용자 정의 메시지 선언
+END_MESSAGE_MAP()
+
+/////////////////////////////////////////////////////////////////////////////
+// CScreen_Basic diagnostics
+
+#ifdef _DEBUG
+void CScreen_Basic::AssertValid() const
+{
+	CFormView::AssertValid();
+}
+
+void CScreen_Basic::Dump(CDumpContext& dc) const
+{
+	CFormView::Dump(dc);
+}
+#endif //_DEBUG
+
+/////////////////////////////////////////////////////////////////////////////
+// CScreen_Basic message handlers
+
+void CScreen_Basic::OnInitialUpdate() 
+{
+	CFormView::OnInitialUpdate();
+	
+	// **************************************************************************
+	// 컨트롤에 설정할 폰트 생성한다
+	// **************************************************************************
+	mp_basic_font = NULL;
+	mp_basic_font = new CFont;
+	mp_basic_font->CreateFont(15,8,0,0,900,0,0,0,0,0,0,DEFAULT_QUALITY,0,"Arial");
+	// **************************************************************************
+ 	
+ 	OnBasic_Data_Set();				// 전역 변수의 Data를 받아온다.
+ 	OnBasic_Data_Change();
+	
+	OnBasic_GroupBox_Set();
+	OnBasic_EditBox_Set();
+ 	OnBasic_Digital_Count_Set();
+	OnBasic_Label_Set();
+
+ 	OnBasic_Data_Display();
+	
+	// **************************************************************************
+    // 칼라 리스트 박스 컨트롤 생성한다
+    // **************************************************************************
+	OnBasic_Create_ImageList();		// 이미지 리스트 생성 함수
+	
+	// Associate image list to list box
+	m_list_device_type.SetImageList(&mp_device_image_list);
+	
+	OnBasic_Init_List(st_path.mstr_path_dvc);  // 파일 폴더 초기화 함수
+	// **************************************************************************
+	
+	OnBasic_Device_Focus_Set();  // 선택된 디바이스명 포커스 설정 함수
+
+	st_handler.cwnd_basic = this;  // BASIC 화면에 대한 핸들 정보 설정
+
+	OnBasic_Init_Modue_Gap( IDC_CUSTOM_MODULE_TEACH_GAP );
+	OnBasic_Init_Modue_Gap( IDC_CUSTOM_MODULE_TEACH_GAP_TESTSITE );
+	OnBasic_Init_Modue_Gap( IDC_CUSTOM_MODULE_TEACH_GAP_BIN1 );
+	OnBasic_Init_Modue_Gap( IDC_CUSTOM_MODULE_TEACH_GAP_BIN2 );
+	OnBasic_Init_Modue_Gap( IDC_CUSTOM_MODULE_TEACH_GAP_REJ );
+
+	OnBasic_Display_Module_Gap();
+	OnBasic_Display_Module_Gap_TestSite();
+	OnBasic_Display_Module_Gap_Bin1();
+	OnBasic_Display_Module_Gap_Bin2();
+	OnBasic_Display_Module_Gap_Rej();
+}
+
+void CScreen_Basic::OnDestroy() 
+{
+	int n_response = 0;  // 대화 상자에 대한 리턴 값 저장 변수
+	int Ret = 0;
+	
+	CDialog_Select select_dlg;
+	
+	mp_device_image_list.DeleteImageList();
+	
+	// **************************************************************************
+	// 생성한 폰트 정보 삭제한다
+	// **************************************************************************
+	delete mp_basic_font;
+	mp_basic_font = NULL;
+	// **************************************************************************
+	
+	st_handler.cwnd_basic = NULL;  // BASIC 화면 핸들 초기화
+
+	CFormView::OnDestroy();	
+}
+
+void CScreen_Basic::OnTimer(UINT nIDEvent) 
+{
+	// TODO: Add your message handler code here and/or call default
+	
+	CFormView::OnTimer(nIDEvent);
+}
+
+void CScreen_Basic::OnBasic_GroupBox_Set()
+{
+	CSxLogFont basic_font(15,FW_SEMIBOLD,false,"Arial");
+	
+	m_group_device_mode.SetFont(basic_font);
+	m_group_device_mode.SetCatptionTextColor(RGB(145,25,0));
+	m_group_device_mode.SetFontBold(TRUE);
+
+	m_group_recipe_select.SetFont(basic_font);
+	m_group_recipe_select.SetCatptionTextColor(RGB(145,25,0));
+	m_group_recipe_select.SetFontBold(TRUE);
+
+	m_group_electrostatic_check_gap.SetFont(basic_font);
+	m_group_electrostatic_check_gap.SetCatptionTextColor(RGB(145,25,0));
+	m_group_electrostatic_check_gap.SetFontBold(TRUE);
+
+	m_group_electrostatic_check_value.SetFont(basic_font);
+	m_group_electrostatic_check_value.SetCatptionTextColor(RGB(145,25,0));
+	m_group_electrostatic_check_value.SetFontBold(TRUE);
+
+	m_group_electrostatic_test.SetFont(basic_font);
+	m_group_electrostatic_test.SetCatptionTextColor(RGB(145,25,0));
+	m_group_electrostatic_test.SetFontBold(TRUE);
+
+	m_group_alarm_delay_time.SetFont(basic_font);
+	m_group_alarm_delay_time.SetCatptionTextColor(RGB(145,25,0));
+	m_group_alarm_delay_time.SetFontBold(TRUE);
+
+	m_group_network_retry_count.SetFont(basic_font);
+	m_group_network_retry_count.SetCatptionTextColor(RGB(145,25,0));
+	m_group_network_retry_count.SetFontBold(TRUE);
+
+	m_group_network_wait_time.SetFont(basic_font);
+	m_group_network_wait_time.SetCatptionTextColor(RGB(145,25,0));
+	m_group_network_wait_time.SetFontBold(TRUE);
+
+	m_group_tray_size_setting.SetFont(basic_font);
+	m_group_tray_size_setting.SetCatptionTextColor(RGB(145,25,0));
+	m_group_tray_size_setting.SetFontBold(TRUE);
+}
+
+void CScreen_Basic::OnBasic_EditBox_Set()
+{
+	m_edit_device_type.SubclassDlgItem(IDC_EDIT_DEVICE_TYPE, this);
+	m_edit_device_type.bkColor(RGB(50, 100, 150));
+	m_edit_device_type.textColor(RGB(255, 255,255));
+	m_edit_device_type.setFont(-16, FW_BOLD, DEFAULT_PITCH | FF_DONTCARE, "Arial");
+}
+
+void CScreen_Basic::OnBasic_Digital_Count_Set()
+{	
+	m_dgt_electrostatic_check_gap.SubclassDlgItem(IDC_DGT_ELECTROSTATIC_CHECK_GAP, this);
+	m_dgt_electrostatic_check_gap.SetStyle(IDB_BIG3, 4);
+	m_dgt_electrostatic_check_gap.SetValue( g_dataMgr.GetBackupData( &st_basic.mn_electrostatic_check_gap ) );
+		
+	m_dgt_electrostatic_check_value.SetStyle(CDigit::DS_FLOAT3, 7, CDigit::DC_BBLACK);
+
+	m_dgt_alarm_delay_time.SubclassDlgItem(IDC_DGT_ALARM_DELAY_TIME, this);
+	m_dgt_alarm_delay_time.SetStyle(IDB_BIG3, 4);
+	m_dgt_alarm_delay_time.SetValue( g_dataMgr.GetBackupData( &st_basic.mn_alarm_delay_time ) );
+
+	m_dgt_network_retry_cnt.SubclassDlgItem(IDC_DGT_NETWORK_RETRY_COUNT, this);
+	m_dgt_network_retry_cnt.SetStyle(IDB_BIG3, 4);
+	m_dgt_network_retry_cnt.SetValue( g_dataMgr.GetBackupData( &st_basic.mn_network_retry_cnt ) );
+
+	m_dgt_network_wait_time.SubclassDlgItem(IDC_DGT_NETWORK_WAIT_TIME, this);
+	m_dgt_network_wait_time.SetStyle(IDB_BIG3, 4);
+	m_dgt_network_wait_time.SetValue( g_dataMgr.GetBackupData( &st_basic.mn_network_wait_time ) );
+
+	m_dgt_time_out.SubclassDlgItem(IDC_DGT_TIME_OUT, this);
+	m_dgt_time_out.SetStyle(IDB_BIG3, 4);
+	m_dgt_time_out.SetValue( g_dataMgr.GetBackupData( &st_basic.mn_time_out ) );
+
+	m_dgt_tray_x.SubclassDlgItem(IDC_DGT_TRAY_X, this);
+	m_dgt_tray_x.SetStyle(IDB_BIG3, 2);
+	m_dgt_tray_x.SetValue( g_dataMgr.GetBackupData( &st_basic.n_tray_x ) );
+
+	m_dgt_tray_y.SubclassDlgItem(IDC_DGT_TRAY_Y, this);
+	m_dgt_tray_y.SetStyle(IDB_BIG3, 2);
+	m_dgt_tray_y.SetValue( g_dataMgr.GetBackupData( &st_basic.n_tray_y ) );
+}
+
+void CScreen_Basic::OnBasic_Data_Set()
+{
+	g_dataMgr.BackupDatas();
+}
+
+void CScreen_Basic::OnBasic_Data_Change()
+{
+	OnBasic_DeviceMode_Change();
+	OnBasic_CokType_Change();
+	OnBasic_Degree_Change();
+	OnBasic_PickType_Change();
+	OnBasic_RunMode_Change();
+}
+
+void CScreen_Basic::OnBasic_Label_Set()
+{
+	m_msg_electrostatic_1.SetFont(mp_basic_font);
+	m_msg_electrostatic_1.SetWindowText(_T(""));
+	m_msg_electrostatic_1.SetCenterText();
+	m_msg_electrostatic_1.SetColor(YELLOW_C);
+	m_msg_electrostatic_1.SetGradientColor(YELLOW_C);
+	m_msg_electrostatic_1.SetTextColor(RGB(0,0,0));
+
+	m_msg_electrostatic_2.SetFont(mp_basic_font);
+	m_msg_electrostatic_2.SetWindowText(_T(""));
+	m_msg_electrostatic_2.SetCenterText();
+	m_msg_electrostatic_2.SetColor(YELLOW_C);
+	m_msg_electrostatic_2.SetGradientColor(YELLOW_C);
+	m_msg_electrostatic_2.SetTextColor(RGB(0,0,0));
+
+	m_msg_electrostatic_3.SetFont(mp_basic_font);
+	m_msg_electrostatic_3.SetWindowText(_T(""));
+	m_msg_electrostatic_3.SetCenterText();
+	m_msg_electrostatic_3.SetColor(YELLOW_C);
+	m_msg_electrostatic_3.SetGradientColor(YELLOW_C);
+	m_msg_electrostatic_3.SetTextColor(RGB(0,0,0));
+
+	m_msg_electrostatic_4.SetFont(mp_basic_font);
+	m_msg_electrostatic_4.SetWindowText(_T(""));
+	m_msg_electrostatic_4.SetCenterText();
+	m_msg_electrostatic_4.SetColor(YELLOW_C);
+	m_msg_electrostatic_4.SetGradientColor(YELLOW_C);
+	m_msg_electrostatic_4.SetTextColor(RGB(0,0,0));
+
+	m_msg_electrostatic_5.SetFont(mp_basic_font);
+	m_msg_electrostatic_5.SetWindowText(_T(""));
+	m_msg_electrostatic_5.SetCenterText();
+	m_msg_electrostatic_5.SetColor(YELLOW_C);
+	m_msg_electrostatic_5.SetGradientColor(YELLOW_C);
+	m_msg_electrostatic_5.SetTextColor(RGB(0,0,0));
+
+	m_label_electrostatic_1.SetFont(mp_basic_font);
+	m_label_electrostatic_1.SetWindowText(_T("Robot Z Axis"));
+	m_label_electrostatic_1.SetCenterText();
+	m_label_electrostatic_1.SetColor(RGB(0,0,255));
+	m_label_electrostatic_1.SetGradientColor(RGB(0,0,0));
+	m_label_electrostatic_1.SetTextColor(RGB(255,255,255));
+	
+	m_label_electrostatic_2.SetFont(mp_basic_font);
+	m_label_electrostatic_2.SetWindowText(_T("LOB Buffer 1"));
+	m_label_electrostatic_2.SetCenterText();
+	m_label_electrostatic_2.SetColor(RGB(0,0,255));
+	m_label_electrostatic_2.SetGradientColor(RGB(0,0,0));
+	m_label_electrostatic_2.SetTextColor(RGB(255,255,255));
+	
+	m_label_electrostatic_3.SetFont(mp_basic_font);
+	m_label_electrostatic_3.SetWindowText(_T("LOB Buffer 2"));
+	m_label_electrostatic_3.SetCenterText();
+	m_label_electrostatic_3.SetColor(RGB(0,0,255));
+	m_label_electrostatic_3.SetGradientColor(RGB(0,0,0));
+	m_label_electrostatic_3.SetTextColor(RGB(255,255,255));
+	
+	m_label_electrostatic_4.SetFont(mp_basic_font);
+	m_label_electrostatic_4.SetWindowText(_T("Reject Buffer"));
+	m_label_electrostatic_4.SetCenterText();
+	m_label_electrostatic_4.SetColor(RGB(0,0,255));
+	m_label_electrostatic_4.SetGradientColor(RGB(0,0,0));
+	m_label_electrostatic_4.SetTextColor(RGB(255,255,255));
+	
+	m_label_electrostatic_5.SetFont(mp_basic_font);
+	m_label_electrostatic_5.SetWindowText(_T("Retest Buffer"));
+	m_label_electrostatic_5.SetCenterText();
+	m_label_electrostatic_5.SetColor(RGB(0,0,255));
+	m_label_electrostatic_5.SetGradientColor(RGB(0,0,0));
+	m_label_electrostatic_5.SetTextColor(RGB(255,255,255));
+
+	m_msg_tray_x.SetFont(mp_basic_font);
+	m_msg_tray_x.SetWindowText(_T("X size"));
+	m_msg_tray_x.SetCenterText();
+	m_msg_tray_x.SetColor(RGB(0,0,255));
+	m_msg_tray_x.SetGradientColor(RGB(0,0,0));
+	m_msg_tray_x.SetTextColor(RGB(255,255,255));
+
+	m_msg_tray_y.SetFont(mp_basic_font);
+	m_msg_tray_y.SetWindowText(_T("Y size"));
+	m_msg_tray_y.SetCenterText();
+	m_msg_tray_y.SetColor(RGB(0,0,255));
+	m_msg_tray_y.SetGradientColor(RGB(0,0,0));
+	m_msg_tray_y.SetTextColor(RGB(255,255,255));
+}
+
+void CScreen_Basic::OnRadioDeviceModeUse() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.n_mode_device ) == CTL_YES )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_mode_device, (int)CTL_YES );
+	OnBasic_DeviceMode_Change();
+}
+
+void CScreen_Basic::OnRadioDeviceModeNotuse() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.n_mode_device ) == CTL_NO )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_mode_device, (int)CTL_NO );
+	OnBasic_DeviceMode_Change();
+}
+
+void CScreen_Basic::OnBasic_DeviceMode_Change()
+{
+	int nDeviceMode = g_dataMgr.GetBackupData( &st_basic.n_mode_device );
+	if (nDeviceMode < 0 || nDeviceMode > 1)
+	{
+		nDeviceMode = 0;
+		g_dataMgr.SetDataTemp( &st_basic.n_mode_device, (int)0 );
+	}
+	
+	switch (nDeviceMode)
+	{
+	case 0:
+		m_radio_device_mode_use.SetCheck(FALSE);
+		m_radio_device_mode_notuse.SetCheck(TRUE);
+		break;
+		
+	case 1:
+		m_radio_device_mode_use.SetCheck(TRUE);
+		m_radio_device_mode_notuse.SetCheck(FALSE);
+		break;
+	}
+}
+
+void CScreen_Basic::OnBasic_CokType_Change()
+{
+	int nCokType = g_dataMgr.GetBackupData( &st_basic.n_cok_type );
+	if( nCokType < 0 || nCokType >= COK_TYPE_CNT )
+	{
+		nCokType = 0;
+		g_dataMgr.SetDataTemp( &st_basic.n_cok_type, (int)0 );
+	}
+
+	m_radio_cok_0.SetCheck( FALSE );
+	m_radio_cok_1.SetCheck( FALSE );
+	m_radio_cok_2.SetCheck( FALSE );
+	m_radio_cok_3.SetCheck( FALSE );
+	m_radio_cok_4.SetCheck( FALSE );
+	m_radio_cok_5.SetCheck( FALSE );
+	
+	switch( nCokType )
+	{
+	case 0:	m_radio_cok_0.SetCheck( TRUE );	break;
+	case 1:	m_radio_cok_1.SetCheck( TRUE );	break;
+	case 2:	m_radio_cok_2.SetCheck( TRUE );	break;
+	case 3:	m_radio_cok_3.SetCheck( TRUE );	break;
+	case 4:	m_radio_cok_4.SetCheck( TRUE );	break;
+	case 5:	m_radio_cok_5.SetCheck( TRUE );	break;
+	}
+}
+
+void CScreen_Basic::OnIP_Address(CString str_ip, int n_section)
+{
+	int nDot1, nDot2, nDot3, nStart;
+	
+	nStart = 0;
+	nDot1 = str_ip.Find('.');
+	nDot2 = str_ip.Find('.', nDot1 + 1);
+	nDot3 = str_ip.Find('.', nDot2 + 1);
+	
+	if (n_section < NETWORK_ECSERVER || n_section > NETWORK_ECSERVER)		// 0: TESTER, 1: FTP
+	{
+		return;
+	}
+	
+	nIPFiled0[n_section] = atoi(str_ip.Mid(nStart, nDot1 - nStart));
+	nStart = nDot1 + 1;
+	nIPFiled1[n_section] = atoi(str_ip.Mid(nStart, nDot2 - nStart));
+	nStart = nDot2 + 1;
+	nIPFiled2[n_section] = atoi(str_ip.Mid(nStart, nDot3 - nStart));
+	nStart = nDot3 + 1;
+	nIPFiled3[n_section] = atoi(str_ip.Mid(nStart));
+}
+
+void CScreen_Basic::OnDgtElectrostaticCheckGap() 
+{
+	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+	char chr_buf[20] ;
+	int mn_minute;
+	
+	mn_minute = m_dgt_electrostatic_check_gap.GetValue();
+	mstr_temp = LPCTSTR(_itoa(mn_minute, chr_buf, 10));
+	
+	st_msg.mstr_keypad_msg = _T("정전기 확인 시간 (분)");
+	if ( g_local.GetLocalType() == LOCAL_ENG )	st_msg.mstr_keypad_msg = _T("Check the electrostatic time (minutes)");
+    
+	st_msg.mstr_keypad_val = mstr_temp;
+
+	mstr_temp = KeyPad.GetNumEditString_I(1, 1440, atoi(st_msg.mstr_keypad_val), st_msg.mstr_keypad_msg);
+
+	int iTemp = atoi(mstr_temp);
+	g_dataMgr.SetDataTemp(&st_basic.mn_electrostatic_check_gap, iTemp );
+	m_dgt_electrostatic_check_gap.SetValue( iTemp );
+}
+
+void CScreen_Basic::OnDgtElectrostaticCheckValue() 
+{
+// 	int mn_response;	// 대화 상자에 대한 리턴 값 저장 변수
+ 	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+ 	double d_dgt_data;
+
+	d_dgt_data = (double)m_dgt_electrostatic_check_value.GetFloatVal();
+
+	mstr_temp = _T("그라운드 설정값");
+ 	if ( g_local.GetLocalType() == LOCAL_ENG )	mstr_temp = _T("Setting ground");
+	
+	CRect r;
+	
+	m_dgt_electrostatic_check_value.GetWindowRect(&r);
+	
+	mstr_temp = KeyPad.GetNumEditString_D((double)0, (double)100, d_dgt_data, mstr_temp, &r);
+	
+	d_dgt_data = atof(mstr_temp);
+
+	g_dataMgr.SetDataTemp( &st_basic.md_electrostatic_value, d_dgt_data );
+	m_dgt_electrostatic_check_value.SetFloatVal((float)d_dgt_data);
+}
+
+void CScreen_Basic::OnBtnDvcCreate() 
+{
+//	int n_response;									// 대화 상자 리턴 플래그
+	CString str_selected_dvc;						// 선택된 디바이스 이름 저장 변수
+
+	str_selected_dvc = Keyboard.GetEditString("RECEPI NAME", "");
+
+	if (str_selected_dvc != "")
+	{
+		mstr_new_device = str_selected_dvc;
+		
+		if (OnBasic_New_Device_Check() == FALSE)	return;
+		
+		OnBasic_Create_Device();
+		
+		// ******************************************************************
+		// 폴더에 존재하는 파일 목록 리스트 박스에 재설정한다
+		// ******************************************************************
+		m_list_device_type.ResetContent();		// 리스트 박스의 모든 목록 삭제
+		mp_device_image_list.DeleteImageList();	// 이미지 리스트에 설정된 정보 삭제
+		
+		OnBasic_Create_ImageList();				// 이미지 리스트 생성 함수
+		
+		// Associate image list to list box
+		m_list_device_type.SetImageList(&mp_device_image_list);
+		
+		OnBasic_Init_List(st_path.mstr_path_dvc);// 파일 폴더 초기화 함수
+		OnSelchangeListDeviceType();
+		OnBasic_Device_Focus_Set();				// 선택된 디바이스명 포커스 설정 함수
+		
+		if (mn_device_name > 0)
+		{
+			m_list_device_type.GetText(mn_device_name, str_selected_dvc);
+		}
+		
+		OnBasic_Device_Display(str_selected_dvc);	// 선택된 디바이스 이름 출력 함수
+		// ******************************************************************
+	}
+	
+// 	CDialog_Keyboard  keyboard_dlg;
+// 	
+// 	(st_msg.mstr_typing_msg).Empty();				// 키보드 상자 출력 데이터 초기화
+// 	
+// 	n_response = keyboard_dlg.DoModal();
+// 	
+// 	if (n_response == IDOK)
+// 	{
+// 		mstr_new_device = st_msg.mstr_typing_msg;  // 키보드 상자 입력 정보 클래스 변수에 설정
+// 		
+// 		if (OnBasic_New_Device_Check() == FALSE)	return;
+// 		
+// 		OnBasic_Create_Device();
+// 		
+// 		// ******************************************************************
+// 		// 폴더에 존재하는 파일 목록 리스트 박스에 재설정한다
+// 		// ******************************************************************
+// 		m_list_device_type.ResetContent();		// 리스트 박스의 모든 목록 삭제
+// 		mp_device_image_list.DeleteImageList();	// 이미지 리스트에 설정된 정보 삭제
+// 		
+// 		OnBasic_Create_ImageList();				// 이미지 리스트 생성 함수
+// 		
+// 		// Associate image list to list box
+// 		m_list_device_type.SetImageList(&mp_device_image_list);
+// 		
+// 		OnBasic_Init_List(st_path.mstr_path_dvc);// 파일 폴더 초기화 함수
+// 		OnSelchangeListDeviceType();
+// 		OnBasic_Device_Focus_Set();				// 선택된 디바이스명 포커스 설정 함수
+// 		
+// 		if (mn_device_name > 0)
+// 		{
+// 			m_list_device_type.GetText(mn_device_name, str_selected_dvc);
+// 		}
+// 		
+// 		OnBasic_Device_Display(str_selected_dvc);	// 선택된 디바이스 이름 출력 함수
+// 		// ******************************************************************
+// 	}
+// 	else if (n_response == IDCANCEL)
+// 	{
+// 	}
+}
+
+int CScreen_Basic::OnBasic_New_Device_Check()
+{
+	CString str_chk_file;  // 생성할 [폴더]+[파일명] 저장 변수
+	CString str_chk_ext;   // 확장자 저장 변수
+	int n_pos;
+	
+	// **************************************************************************
+    // 입력된 디바이스명 설정한다
+    // **************************************************************************
+	mstr_new_device.MakeUpper();
+	mstr_new_device.TrimLeft(' ');               
+	mstr_new_device.TrimRight(' ');
+	
+	if (mstr_new_device.IsEmpty())  
+	{
+		if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
+		{
+//			st_msg.mstr_abnormal_msg = _T("[DEVICE] A name input error occurrence.");
+			sprintf(st_msg.c_abnormal_msg, "[DEVICE] A name input error occurrence.");
+			st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+		}
+		return FALSE;
+	}
+	// **************************************************************************
+	
+	str_chk_file = st_path.mstr_path_dvc + mstr_new_device;  // 생성할 [폴더]+[파일명] 설정
+
+	n_pos = str_chk_file.Find(".");  // 확장자 검사
+	if (n_pos == -1) 
+		str_chk_file += _T(".TXT");
+	else 
+	{
+		str_chk_ext = str_chk_file.Mid(n_pos);  // 확장자 정보 설정
+		if (str_chk_ext != _T(".TXT"))  
+		{
+			if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
+			{
+//				st_msg.mstr_abnormal_msg = _T("[DEVICE] A name extension input error occurrence.");
+				sprintf(st_msg.c_abnormal_msg, "[DEVICE] A name extension input error occurrence.");
+				st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+			}
+			return FALSE;
+		}
+	}
+	
+	mstr_load_file = str_chk_file;  // 생성할 [폴더]+[파일명]+[확장자] 설정
+	
+	return TRUE;
+}
+
+void CScreen_Basic::OnBasic_Create_Device()
+{
+	int n_existence;								// 파일 존재 유무 플래그
+	char chr_file_name[256];
+	CString str_device_temp;
+	CString str_original_path;
+	CString str_original_file;
+	CString str_copy_file;
+	CString str_chk_ext;
+	CString str_copy_info;
+	
+	sprintf(chr_file_name, "%s", mstr_load_file);	// [폴더]+[파일명] 설정
+	
+	n_existence = access(chr_file_name, 0) ;
+	
+	if (n_existence != -1)							// 파일 존재
+		return ;
+	else  
+	{
+		str_device_temp = st_basic.mstr_device_name;
+		st_basic.mstr_device_name = mstr_new_device;
+		
+		:: WritePrivateProfileString("Device", "DeviceFile", LPCTSTR(mstr_new_device), mstr_load_file); 
+		
+		mcls_basic.On_Teach_Data_Save();
+		
+		st_basic.mstr_device_name = str_device_temp;
+	}
+}
+
+void CScreen_Basic::OnSelchangeListDeviceType() 
+{
+	CString str_selected_dvc;						// 선택된 디바이스 이름 저장 변수
+	
+	int n_index = m_list_device_type.GetCurSel();	// 선택된 리스트 위치 설정
+	if (n_index != LB_ERR)							// 에러 검사
+	{
+		m_list_device_type.GetText(n_index, str_selected_dvc);
+		
+		OnBasic_Device_Display(str_selected_dvc);	// 선택된 디바이스 이름 출력 함수
+	}
+	else
+		OnBasic_Device_Display("");	// 빈 이름 출력 함수
+}
+
+void CScreen_Basic::OnBasic_Device_Focus_Set()
+{
+	if (mn_device_name == -1)
+		return;
+	
+	m_list_device_type.SetCurSel(mn_device_name);
+}
+
+void CScreen_Basic::OnBasic_Device_Display(CString str_dvc)
+{
+	((CEdit*)GetDlgItem(IDC_EDIT_DEVICE_TYPE))->SetWindowText(_T(str_dvc));
+}
+
+void CScreen_Basic::OnBasic_Create_ImageList()
+{
+	BOOL bRetValue = FALSE;
+	
+	// Create image list
+	bRetValue = mp_device_image_list.Create(32, 32, ILC_COLOR32 | ILC_MASK, 5, 1);
+	ASSERT(bRetValue == TRUE);
+}
+
+int CScreen_Basic::OnBasic_Init_List(LPCTSTR pszPath)
+{
+	int n_chk;						// 함수 리턴 플래그
+    CString str_path = pszPath;		// 폴더 설정
+	
+	HANDLE hFind;
+    WIN32_FIND_DATA fd;
+	int n_count = 0;				// 리스트 박스에 추가한 목록 갯수 저장 변수
+
+	mn_device_name = -1;
+	
+	if (str_path.Right (1) != "\\")
+        str_path += "\\";
+	
+	str_path += "*.*";
+    
+    if ((hFind = ::FindFirstFile ((LPCTSTR) str_path, &fd)) != INVALID_HANDLE_VALUE) 
+	{
+        if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) 
+		{
+			n_chk = AddItem(n_count, &fd);
+			if (n_chk == TRUE)
+				n_count++;
+        }
+		
+        while (::FindNextFile (hFind, &fd)) 
+		{
+            if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+			{
+				n_chk = AddItem(n_count, &fd);
+				if (n_chk == FALSE) 
+					break;
+			}
+			if (n_chk != CTL_READY)
+				n_count++;
+        }
+		::FindClose(hFind);
+    }
+	
+	return n_count;
+}
+
+BOOL CScreen_Basic::AddItem(int nIndex, WIN32_FIND_DATA *pfd)
+{
+	CString str_temp_dvc;
+	CString str_device;
+	CString str_expansion;
+	int n_pos;
+	
+	HICON	hIcon = NULL;
+	
+	str_temp_dvc = (pfd->cFileName);	// 파일 이름 설정
+	
+	str_temp_dvc.MakeUpper();
+	
+	// **************************************************************************
+	// 파일 이름 중 확장자 확인
+	// **************************************************************************
+	n_pos = str_temp_dvc.Find('.');		// 확장자 위치 설정
+	
+	if (n_pos == -1)					// 확장자 미존재
+		str_expansion = "";
+	else								// 확장자 존재
+		str_expansion = str_temp_dvc.Mid(n_pos + 1);
+	// **************************************************************************
+	
+	if (str_expansion != "TXT")
+	{
+		return CTL_READY;	
+	}
+	
+	str_device = str_temp_dvc;			// 파일명 전체 화면 출력
+	
+	if (str_device == g_dataMgr.GetBackupData( &st_basic.mstr_device_name ) )
+		mn_device_name = nIndex-1;
+	// **************************************************************************
+	
+	hIcon = AfxGetApp()->LoadIcon(IDI_MODULE);
+	mp_device_image_list.Add(hIcon);
+	
+    if (m_list_device_type.AddString(_T(str_device), nIndex - 1) == -1)
+		return FALSE;
+	
+    return TRUE;
+}
+
+void CScreen_Basic::OnBtnDvcDelete() 
+{
+	int n_response;				// 대화 상자 리턴 플래그
+	int n_existence;			// 파일 존재 유무 플래그
+	CString str_file_name;
+	CString str_selected_dvc;
+	int n_pos;
+	
+	char chr_file_name[256];
+	char chr_speed_file_name[256];
+	char chr_teach_file_name[256];
+	char chr_time_file_name[256];
+	
+	CDialog_Select  select_dlg;
+	CDialog_Message msg_dlg;
+	
+	if (OnBasic_Input_Device_Check() == FALSE)  // 입력된 디바이스 이름 정상 유무 검사 함수
+		return ;
+	
+	st_msg.mstr_confirm_msg = _T(mstr_temp_device + " Device Type Delete?");
+	
+	n_response = select_dlg.DoModal();
+	
+	if (n_response == IDOK)
+	{
+		sprintf(chr_file_name, "%s", mstr_load_file);  // [폴더]+[파일명] 설정
+
+		n_pos = mstr_load_file.Find(".");  // 확장자 검사
+		
+		if (n_pos == -1) 
+		{
+			sprintf(chr_speed_file_name, "%s_Speed.DAT", mstr_load_file);  // [폴더]+[파일명] 설정
+			sprintf(chr_teach_file_name, "%s_Teach.DAT", mstr_load_file);  // [폴더]+[파일명] 설정
+			sprintf(chr_time_file_name, "%s_Time.DAT", mstr_load_file);  // [폴더]+[파일명] 설정
+		}
+		else 
+		{
+			sprintf(chr_speed_file_name, "%s_Speed.DAT", mstr_load_file.Mid(0, n_pos));  // [폴더]+[파일명] 설정
+			sprintf(chr_teach_file_name, "%s_Teach.DAT", mstr_load_file.Mid(0, n_pos));  // [폴더]+[파일명] 설정
+			sprintf(chr_time_file_name, "%s_Time.DAT", mstr_load_file.Mid(0, n_pos));  // [폴더]+[파일명] 설정
+		}
+		
+		n_existence = access(chr_file_name, 0) ;
+		
+		if (n_existence != -1)					// 파일 존재
+		{
+			DeleteFile(chr_file_name);			// 해당 파일 삭제
+			DeleteFile(chr_speed_file_name);	// 해당 파일 삭제
+			DeleteFile(chr_teach_file_name);	// 해당 파일 삭제
+			DeleteFile(chr_time_file_name);		// 해당 파일 삭제
+			
+			// ******************************************************************
+			// 폴더에 존재하는 파일 목록 리스트 박스에 재설정한다
+			// ******************************************************************
+			m_list_device_type.ResetContent();		// 리스트 박스의 모든 목록 삭제
+			mp_device_image_list.DeleteImageList();	// 이미지 리스트에 설정된 정보 삭제
+			
+			OnBasic_Create_ImageList();				// 이미지 리스트 생성 함수
+			
+			// Associate image list to list box
+			m_list_device_type.SetImageList(&mp_device_image_list);
+			
+			OnBasic_Init_List(st_path.mstr_path_dvc);// 파일 폴더 초기화 함수
+			OnSelchangeListDeviceType();
+			OnBasic_Device_Focus_Set();				// 선택된 디바이스명 포커스 설정 함수
+			
+			if (mn_device_name > -1)
+			{
+				m_list_device_type.GetText(mn_device_name, str_selected_dvc);
+				
+				OnBasic_Device_Display(str_selected_dvc);	// 선택된 디바이스 이름 출력 함수
+			}
+			// ******************************************************************
+		}
+		else  
+			return ;
+	}
+	else if (n_response == IDCANCEL)
+	{
+	}
+}
+
+int CScreen_Basic::OnBasic_Input_Device_Check()
+{
+	CString str_chk_file;  // 생성할 [폴더]+[파일명] 저장 변수
+	CString str_chk_ext;   // 확장자 저장 변수
+	int n_pos;
+	
+	// **************************************************************************
+    // 입력된 디바이스명 설정한다                                                
+    // **************************************************************************
+	((CEdit*)GetDlgItem(IDC_EDIT_DEVICE_TYPE))->GetWindowText(mstr_temp_device) ;
+	mstr_temp_device.MakeUpper();
+	mstr_temp_device.TrimLeft(' ');               
+	mstr_temp_device.TrimRight(' ');
+	
+	if (mstr_temp_device.IsEmpty())  
+	{
+		if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
+		{
+//			st_msg.mstr_abnormal_msg = _T("[DEVICE] A name input error occurrence.");
+			sprintf(st_msg.c_abnormal_msg, "[DEVICE] A name input error occurrence.");
+			st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+		}
+		return FALSE;
+	}
+	// **************************************************************************
+	
+	str_chk_file = st_path.mstr_path_dvc + mstr_temp_device;  // 생성할 [폴더]+[파일명] 설정
+	n_pos = str_chk_file.Find(".");  // 확장자 검사
+	if (n_pos == -1) 
+		str_chk_file += _T(".TXT");
+	else 
+	{
+		str_chk_ext = str_chk_file.Mid(n_pos);  // 확장자 정보 설정
+		if (str_chk_ext != _T(".TXT"))  
+		{
+			if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
+			{
+//				st_msg.mstr_abnormal_msg = _T("[DEVICE] A name extension input error occurrence.");
+				sprintf(st_msg.c_abnormal_msg, "[DEVICE] A name extension input error occurrence.");
+				st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+			}
+			return FALSE;
+		}
+	}
+	
+	mstr_load_file = str_chk_file;  // 생성할 [폴더]+[파일명]+[확장자] 설정
+	
+	return TRUE;
+}
+
+void CScreen_Basic::OnBtnElectrostaticTest() 
+{
+	m_msg_electrostatic_1.SetWindowText(_T(""));
+	m_msg_electrostatic_2.SetWindowText(_T(""));
+	m_msg_electrostatic_3.SetWindowText(_T(""));
+	m_msg_electrostatic_4.SetWindowText(_T(""));
+	m_msg_electrostatic_5.SetWindowText(_T(""));
+	
+	::PostMessage(st_handler.hWnd, WM_MAINFRAME_WORK, 2, 0);
+	
+	m_btn_electostatic_test.EnableWindow(FALSE);
+}
+
+void CScreen_Basic::OnBasic_Electrostatic_Data_View(int nChannel)
+{
+	CString strData;
+	switch (nChannel)
+	{
+	case 1:
+		if (st_work.mdReadElectData[nChannel-1] == -99999)
+		{
+			strData = "OPEN";
+		}
+		else if (st_work.mdReadElectData[nChannel-1] == -99998)
+		{
+			strData = "OVER";
+		}
+		else
+		{
+			strData.Format("%0.3f", st_work.mdReadElectData[nChannel-1]);
+		}
+		m_msg_electrostatic_1.SetWindowText(_T(strData));
+		break;
+		
+	case 2:
+		if (st_work.mdReadElectData[nChannel-1] == -99999)
+		{
+			strData = "OPEN";
+		}
+		else if (st_work.mdReadElectData[nChannel-1] == -99998)
+		{
+			strData = "OVER";
+		}
+		else
+		{
+			strData.Format("%0.3f", st_work.mdReadElectData[nChannel-1]);
+		}
+		m_msg_electrostatic_2.SetWindowText(_T(strData));
+		break;
+		
+	case 3:
+		if (st_work.mdReadElectData[nChannel-1] == -99999)
+		{
+			strData = "OPEN";
+		}
+		else if (st_work.mdReadElectData[nChannel-1] == -99998)
+		{
+			strData = "OVER";
+		}
+		else
+		{
+			strData.Format("%0.3f", st_work.mdReadElectData[nChannel-1]);
+		}
+		m_msg_electrostatic_3.SetWindowText(_T(strData));
+		break;
+		
+	case 4:
+		if (st_work.mdReadElectData[nChannel-1] == -99999)
+		{
+			strData = "OPEN";
+		}
+		else if (st_work.mdReadElectData[nChannel-1] == -99998)
+		{
+			strData = "OVER";
+		}
+		else
+		{
+			strData.Format("%0.3f", st_work.mdReadElectData[nChannel-1]);
+		}
+		m_msg_electrostatic_4.SetWindowText(_T(strData));
+		break;
+		
+	case 5:
+		if (st_work.mdReadElectData[nChannel-1] == -99999)
+		{
+			strData = "OPEN";
+		}
+		else if (st_work.mdReadElectData[nChannel-1] == -99998)
+		{
+			strData = "OVER";
+		}
+		else
+		{
+			strData.Format("%0.3f", st_work.mdReadElectData[nChannel-1]);
+		}
+		m_msg_electrostatic_5.SetWindowText(_T(strData));
+		m_btn_electostatic_test.EnableWindow(TRUE);
+		break;
+	}
+}
+
+LRESULT CScreen_Basic::OnBasic_Info_Apply(WPARAM wParam, LPARAM lParam)  
+{
+	if (wParam == 0)
+	{
+		g_dataMgr.CheckAndLogAll();
+		OnBasic_Data_Apply();			// 베이식 화면 셋팅 정보 전역 변수에 전송 함수
+		
+		OnBasic_Data_Set();
+		
+		OnBasic_TitleBar_Info_Send();   // 타이틀 바 화면에 정보 출력 요청하는 함수
+	}
+	else if (wParam == 1)
+	{
+		OnBasic_Electrostatic_Data_View(lParam);
+	}
+	
+	return 0;
+}
+
+void CScreen_Basic::OnBasic_Data_Apply()
+{
+	((CEdit*)GetDlgItem(IDC_EDIT_DEVICE_TYPE))->GetWindowText(mstr_temp_device);
+	mstr_temp_device.MakeUpper();
+	mstr_temp_device.TrimLeft(' ');               
+	mstr_temp_device.TrimRight(' ');
+	
+	if (st_basic.mstr_device_name != mstr_temp_device)
+	{
+		OnBasic_DeviceData_Apply();
+		
+		OnBasic_Data_Set();				// 전역 변수의 Data를 받아온다.
+		
+		OnBasic_Data_Change();
+		OnBasic_Data_Display();
+	}
+	else
+	{
+		g_dataMgr.UpdateDatas();
+	}
+
+	if (st_handler.cwnd_list != NULL)
+	{
+		st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, MACHINE_INFO);
+	}
+}
+
+void CScreen_Basic::OnBasic_TitleBar_Info_Send()
+{
+	if(st_handler.cwnd_title != NULL)
+	{
+		int nDeviceMode = g_dataMgr.GetBackupData( &st_basic.n_mode_device );
+		st_handler.cwnd_title->PostMessage(WM_STATUS_CHANGE, DEVICE_MODE, nDeviceMode );			// Device Mode
+	}
+	
+	if (st_handler.cwnd_list != NULL)
+	{
+		st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, DEVICE_INFO);
+	}
+}
+
+void CScreen_Basic::OnBasic_DeviceData_Apply()
+{
+	int n_response = 0;  // 대화 상자 리턴 플래그
+	int n_check;
+	CString str_msg;
+	
+	n_check = OnBasic_Input_Data_Check();  // 입력 정보 정상 유무 검사 함수
+	
+	if (n_check == TRUE)  
+	{
+		if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
+			st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, DEVICE_INFO);  // 디바이스명 출력 요청
+		
+		
+		g_dataMgr.CheckAndLogByPointer( &st_basic.mstr_device_name );
+	}
+	else if (n_check == FALSE)  
+	{
+		if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
+		{
+//			st_msg.mstr_abnormal_msg = _T("[LOT INFORMATION] An input device setting up error.");
+			sprintf(st_msg.c_abnormal_msg, "[LOT INFORMATION] An input device setting up error.");
+			st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+		}
+		return ;
+	}
+	
+	g_dataMgr.UpdateData( &st_basic.mstr_device_name );
+	
+	// **********************************************************************
+	// 디바이스 관련 화면 설정 데이터 로딩 부분                              
+	// **********************************************************************
+	mcls_basic.OnBasic_Data_Load();
+	mcls_basic.On_Teach_Data_Load();
+	// **********************************************************************
+		
+	st_work.mn_reinstatement_mode = 0;		// 복구 동작용 위치값을 다시 읽어라. 2K4/09/21/ViboX
+	
+	// **************************************************************************
+	// 폴더에 존재하는 파일 목록 리스트 박스에 재설정한다                        
+	// **************************************************************************
+	m_list_device_type.ResetContent();			// 리스트 박스의 모든 목록 삭제
+	mp_device_image_list.DeleteImageList();		// 이미지 리스트에 설정된 정보 삭제
+	
+	OnBasic_Create_ImageList();					// 이미지 리스트 생성 함수
+	
+	// Associate image list to list box
+	m_list_device_type.SetImageList(&mp_device_image_list);
+	
+	OnBasic_Init_List(st_path.mstr_path_dvc);	// 파일 폴더 초기화 함수
+	
+	OnBasic_Device_Focus_Set();					// 선택된 디바이스명 포커스 설정 함수
+	// **************************************************************************
+	
+	if (st_handler.cwnd_list != NULL)			// 리스트 바 화면 존재
+		st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, DEVICE_INFO);  // 디바이스 종류 출력 요청
+}
+
+void CScreen_Basic::OnBasic_Data_Display()
+{
+	m_dgt_electrostatic_check_gap.SetValue( g_dataMgr.GetBackupData( &st_basic.mn_electrostatic_check_gap ) );
+	m_dgt_electrostatic_check_value.SetFloatVal((float)g_dataMgr.GetBackupData( &st_basic.md_electrostatic_value) );
+	
+	((CEdit*)GetDlgItem(IDC_EDIT_DEVICE_TYPE))->SetWindowText( g_dataMgr.GetBackupData( &st_basic.mstr_device_name ) );
+	
+	m_dgt_tray_x.SetValue( g_dataMgr.GetBackupData( &st_basic.n_tray_x ) );
+	m_dgt_tray_y.SetValue( g_dataMgr.GetBackupData( &st_basic.n_tray_y ) );
+
+	m_dgt_time_out.SetValue( g_dataMgr.GetBackupData( &st_basic.mn_time_out ) );
+}
+
+int CScreen_Basic::OnBasic_Input_Data_Check()
+{
+	CString str_chk_ext;   // 확장자 저장 변수
+	int n_pos;
+	
+	/* ************************************************************************** */
+    /* 입력된 디바이스명 설정한다                                                 */
+    /* ************************************************************************** */
+	((CEdit*)GetDlgItem(IDC_EDIT_DEVICE_TYPE))->GetWindowText(mstr_temp_device) ;
+	mstr_temp_device.MakeUpper();
+	mstr_temp_device.TrimLeft(' ');               
+	mstr_temp_device.TrimRight(' ');
+	
+	if (mstr_temp_device.IsEmpty())  
+	{
+		if (st_handler.cwnd_list != NULL)			// 리스트 바 화면 존재
+		{
+//			st_msg.mstr_abnormal_msg = _T("[DEVICE] A name input error occurrence.");
+			sprintf(st_msg.c_abnormal_msg, "[DEVICE] A name input error occurrence.");
+			st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+		}
+		return FALSE;
+	}
+	/* ************************************************************************** */
+	
+	n_pos = mstr_temp_device.Find(".");				// 확장자 검사
+	if (n_pos == -1) 
+		mstr_temp_device += _T(".TXT");
+	else 
+	{
+		str_chk_ext = mstr_temp_device.Mid(n_pos);  // 확장자 정보 설정
+		if (str_chk_ext != _T(".TXT"))  
+		{
+			if (st_handler.cwnd_list != NULL)		// 리스트 바 화면 존재
+			{
+//				st_msg.mstr_abnormal_msg = _T("[DEVICE] A name extension input error occurrence.");
+				sprintf(st_msg.c_abnormal_msg, "[DEVICE] A name extension input error occurrence.");
+				st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+			}
+			return FALSE;
+		}
+	}
+	
+	g_dataMgr.SetDataTemp( &st_basic.mstr_device_name, mstr_temp_device );
+	/* ************************************************************************** */
+	
+	return TRUE;
+}
+
+void CScreen_Basic::OnBtnBasicApply() 
+{
+	CString str_selected_dvc;
+	int nDeviceCur = m_list_device_type.GetCurSel();
+
+	// 바꿀 수 없는 상황 고려하시오.
+
+	int n_response;  // 대화 상자 리턴 플래그
+	
+	CDialog_Select  select_dlg;
+	
+	st_msg.mstr_confirm_msg = _T("Basic : Setting Data Apply?");
+	
+	n_response = select_dlg.DoModal();
+	
+	if (n_response == IDOK)
+	{
+		g_dataMgr.CheckAndLogAll();
+		OnBasic_Data_Apply();			// 베이식 화면 셋팅 정보 전역 변수에 전송 함수
+		
+		OnBasic_Data_Set();
+		
+		OnBasic_TitleBar_Info_Send();    // 타이틀 바 화면에 정보 출력 요청하는 함수
+	}
+	else if (n_response == IDCANCEL)
+	{
+		
+	}
+}
+
+void CScreen_Basic::OnBtnBasicCancle() 
+{
+	int n_response;  // 대화 상자 리턴 플래그
+	
+	CDialog_Select  select_dlg;
+	
+	st_msg.mstr_confirm_msg = _T("Basic : Previous Data Recovery?");
+	
+	n_response = select_dlg.DoModal();
+	
+	if (n_response == IDOK)
+	{
+		OnBasic_Data_Set();					// Recovery		// 베이식 화면 셋팅 정보 백업 받아놓은 변수로 복구 함수
+		
+		OnBasic_Data_Change();				// Data에 맞게 변경.
+		
+		OnBasic_Data_Display();
+		
+		OnBasic_TitleBar_Info_Send();		// 타이틀 바 화면에 정보 출력 요청하는 함수
+	}
+	else if (n_response == IDCANCEL)
+	{
+		
+	}
+}
+
+void CScreen_Basic::OnDgtNetworkWaitTime() 
+{
+	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+	int mn_minute;
+		
+	mn_minute = m_dgt_network_wait_time.GetValue();
+	
+	mstr_temp = _T("Network 메세지 대기 시간 (초)");
+	if ( g_local.GetLocalType() == LOCAL_ENG )	mstr_temp = _T("Network wait time (sec)");
+	
+	CRect r;
+	
+	m_dgt_network_wait_time.GetWindowRect(&r);
+	
+	mstr_temp = KeyPad.GetNumEditString_I(0, 100, mn_minute, mstr_temp, &r);
+	
+	int iTemp = atoi(mstr_temp);
+	g_dataMgr.SetDataTemp( &st_basic.mn_network_wait_time, iTemp );
+	m_dgt_network_wait_time.SetValue(iTemp);
+}
+
+void CScreen_Basic::OnDgtNetworkRetryCount() 
+{
+	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+	char chr_buf[20] ;
+	int mn_minute;
+	
+	mn_minute = m_dgt_network_retry_cnt.GetValue();
+	mstr_temp = LPCTSTR(_itoa(mn_minute, chr_buf, 10));
+	
+	st_msg.mstr_keypad_msg = _T("Network 메세지 재전송 횟수");
+	if ( g_local.GetLocalType() == LOCAL_ENG )	st_msg.mstr_keypad_msg = _T("Network retry count");
+    
+	st_msg.mstr_keypad_val = mstr_temp;
+
+	mstr_temp = KeyPad.GetNumEditString_I(1, 120, atoi(st_msg.mstr_keypad_val), st_msg.mstr_keypad_msg);
+
+	int iTemp = atoi(mstr_temp);
+	g_dataMgr.SetDataTemp( &st_basic.mn_network_retry_cnt, iTemp );
+	m_dgt_network_retry_cnt.SetValue( iTemp );
+}
+
+void CScreen_Basic::OnDgtAlarmDelayTime() 
+{
+	// TODO: Add your control notification handler code here
+	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+	char chr_buf[20] ;
+	int mn_Sec;
+	
+	mn_Sec = m_dgt_alarm_delay_time.GetValue();
+	mstr_temp = LPCTSTR(_itoa(mn_Sec, chr_buf, 10));
+	
+	st_msg.mstr_keypad_msg = _T("Alarm Delay Time (Sec)");
+    
+	st_msg.mstr_keypad_val = mstr_temp;
+		
+	mstr_temp = KeyPad.GetNumEditString_I(1, 1000, atoi(st_msg.mstr_keypad_val), st_msg.mstr_keypad_msg);
+
+	int iTemp = atoi(mstr_temp);
+	g_dataMgr.SetDataTemp( &st_basic.mn_alarm_delay_time, iTemp ); 
+	m_dgt_alarm_delay_time.SetValue( iTemp );
+}
+
+void CScreen_Basic::OnBtnIpSaveEcserver() 
+{
+	
+}
+
+void CScreen_Basic::OnBtnPortSaveEcserver() 
+{
+	int n_response;	// 대화 상자에 대한 리턴 값 저장 변수
+	CString str_temp;  // 저장할 정보 임시 저장 변수 
+	
+	CDialog_Message msg_dlg;
+	
+	if (st_handler.mn_level_teach != TRUE)
+	{
+		st_msg.str_fallacy_msg = _T("Level2 에서 동작 가능합니다.");
+		if ( g_local.GetLocalType() == LOCAL_ENG )	st_msg.str_fallacy_msg = _T("Level2 is able to operate in");
+		
+		n_response = msg_dlg.DoModal();
+		return;
+	}
+	
+	CString strGetText;
+	((CEdit*)GetDlgItem(IDC_EDIT_PORT_ECSERVER))->GetWindowText(strGetText);
+	strGetText.TrimLeft(' ');	
+	strGetText.TrimRight(' ');
+	
+	str_temp = strGetText;
+	
+	st_msg.mstr_keypad_msg = _T("EC Server port Setting");
+	
+	st_msg.mstr_keypad_val = str_temp;
+
+	str_temp = KeyPad.GetNumEditString_I(0, 99999, atoi(st_msg.mstr_keypad_val), st_msg.mstr_keypad_msg);
+
+//	g_dataMgr.SetDataTemp( Run_Network.m_Net_ECServer.GetPointer_Port(), atoi((LPCSTR)str_temp) );
+//	((CEdit*)GetDlgItem(IDC_EDIT_PORT_ECSERVER))->SetWindowText(str_temp);
+}
+
+void CScreen_Basic::OnBtnConnectEcserver() 
+{
+
+}
+
+void CScreen_Basic::OnBtnTestEcserver() 
+{
+	// TODO: Add your control notification handler code here
+	
+}
+
+void CScreen_Basic::OnDgtTrayX() 
+{
+	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+	char chr_buf[20] ;
+	int mn_x;
+	
+	mn_x = m_dgt_tray_x.GetValue();
+	mstr_temp = LPCTSTR(_itoa(mn_x, chr_buf, 10));
+	
+	st_msg.mstr_keypad_msg = _T("Tray X Size [EA]");
+    
+	st_msg.mstr_keypad_val = mstr_temp;
+
+	mstr_temp = KeyPad.GetNumEditString_I(1, 5, atoi(st_msg.mstr_keypad_val), st_msg.mstr_keypad_msg);
+
+	int iTemp = atoi(mstr_temp);
+	g_dataMgr.SetDataTemp( &st_basic.n_tray_x, iTemp );
+	m_dgt_tray_x.SetValue( iTemp );
+}
+
+void CScreen_Basic::OnDgtTrayY() 
+{
+	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+	char chr_buf[20] ;
+	int mn_y;
+	
+	mn_y = m_dgt_tray_y.GetValue();
+	mstr_temp = LPCTSTR(_itoa(mn_y, chr_buf, 10));
+	
+	st_msg.mstr_keypad_msg = _T("Tray Y Size [EA]");
+    
+	st_msg.mstr_keypad_val = mstr_temp;
+
+	mstr_temp = KeyPad.GetNumEditString_I(1, 5, atoi(st_msg.mstr_keypad_val), st_msg.mstr_keypad_msg);
+
+	int iTemp = atoi(mstr_temp);
+	g_dataMgr.SetDataTemp( &st_basic.n_tray_y, iTemp );
+	m_dgt_tray_y.SetValue( iTemp );
+}
+
+void CScreen_Basic::OnRadioCok0() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_cok_type ) == 0 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_cok_type, (int)0 );
+	OnBasic_CokType_Change();
+}
+
+void CScreen_Basic::OnRadioCok1() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_cok_type ) == 1 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_cok_type, (int)1 );
+	OnBasic_CokType_Change();
+}
+
+void CScreen_Basic::OnRadioCok2() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_cok_type ) == 2 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_cok_type, (int)2 );
+	OnBasic_CokType_Change();
+}
+
+void CScreen_Basic::OnRadioCok3() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_cok_type ) == 3 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_cok_type, (int)3 );
+	OnBasic_CokType_Change();
+}
+
+void CScreen_Basic::OnRadioCok4() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_cok_type ) == 4 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_cok_type, (int)4 );
+	OnBasic_CokType_Change();
+}
+
+void CScreen_Basic::OnRadioCok5() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_cok_type ) == 5 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_cok_type, (int)5 );
+	OnBasic_CokType_Change();
+}
+
+void CScreen_Basic::OnRadioDegree0() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_degree ) == EDEG_0 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_degree, (int)EDEG_0 );
+	OnBasic_Degree_Change();
+}
+
+void CScreen_Basic::OnBasic_Degree_Change()
+{
+ 	int nDegree = g_dataMgr.GetBackupData( &st_basic.n_degree );
+ 	if( nDegree < EDEG_0 || nDegree >= MAX_EDEG )
+ 	{
+ 		nDegree = EDEG_0;
+ 		g_dataMgr.SetDataTemp( &st_basic.n_degree, nDegree );
+ 	}
+ 
+ 	m_radio_degree_0.SetCheck( FALSE );
+	m_radio_degree_90.SetCheck( FALSE );
+	m_radio_degree_180.SetCheck( FALSE );
+	m_radio_degree_270.SetCheck( FALSE );
+
+	switch( nDegree )
+	{
+	case EDEG_0:	m_radio_degree_0.SetCheck( TRUE );		break;
+	case EDEG_90:	m_radio_degree_90.SetCheck( TRUE );		break;
+	case EDEG_180:	m_radio_degree_180.SetCheck( TRUE );	break;
+	case EDEG_270:	m_radio_degree_270.SetCheck( TRUE );	break;
+ 	}
+}
+
+void CScreen_Basic::OnRadioDegree90() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_degree ) == EDEG_90 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_degree, (int)EDEG_90 );
+	OnBasic_Degree_Change();
+}
+
+void CScreen_Basic::OnRadioDegree180() 
+{
+	// TODO: Add your control notification handler code here
+	if( g_dataMgr.GetBackupData( &st_basic.n_degree ) == EDEG_180 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_degree, (int)EDEG_180 );
+	OnBasic_Degree_Change();
+}
+
+void CScreen_Basic::OnRadioDegree270() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.n_degree ) == EDEG_270 )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_degree, (int)EDEG_270 );
+	OnBasic_Degree_Change();
+}
+
+void CScreen_Basic::OnRadioPt1v1mUse4() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.n_pick_type ) == EPT_1V1M_4USE )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_pick_type, (int)EPT_1V1M_4USE );
+	OnBasic_PickType_Change();
+}
+
+void CScreen_Basic::OnRadio1v1mUse2() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.n_pick_type ) == EPT_1V1M_2USE )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_pick_type, (int)EPT_1V1M_2USE );
+	OnBasic_PickType_Change();
+}
+
+void CScreen_Basic::OnRadio2v1mUse2() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.n_pick_type ) == EPT_2V1M_2USE )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.n_pick_type, (int)EPT_2V1M_2USE );
+	OnBasic_PickType_Change();
+}
+
+void CScreen_Basic::OnBasic_PickType_Change()
+{
+	int nPickType = g_dataMgr.GetBackupData( &st_basic.n_pick_type );
+ 	if( nPickType < EPT_1V1M_4USE || nPickType >= MAX_EPT )
+ 	{
+ 		nPickType = EPT_1V1M_4USE;
+ 		g_dataMgr.SetDataTemp( &st_basic.n_pick_type, nPickType );
+ 	}
+ 
+	m_radio_pt_1v1m_4use.SetCheck( FALSE );
+	m_radio_pt_1v1m_2use.SetCheck( FALSE );
+	m_radio_pt_2v1m_2use.SetCheck( FALSE );
+	
+	switch( nPickType )
+	{
+	case EPT_1V1M_4USE:	m_radio_pt_1v1m_4use.SetCheck( TRUE );		break;
+	case EPT_1V1M_2USE:	m_radio_pt_1v1m_2use.SetCheck( TRUE );		break;
+ 	case EPT_2V1M_2USE:	m_radio_pt_2v1m_2use.SetCheck( TRUE );		break;
+	}
+}
+
+void CScreen_Basic::OnBasic_RunMode_Change()
+{
+	int nRunMode = g_dataMgr.GetBackupData( &st_basic.mn_mode_run );
+	if (nRunMode < 0 || nRunMode > 1)
+	{
+		nRunMode = 0;
+		g_dataMgr.SetDataTemp( &st_basic.mn_mode_run, (int)0 );
+	}
+	
+	switch (nRunMode)
+	{
+	case 0:
+		m_radio_online_mode.SetCheck(FALSE);
+		m_radio_offline_mode.SetCheck(TRUE);
+		break;
+		
+	case 1:
+		m_radio_online_mode.SetCheck(TRUE);
+		m_radio_offline_mode.SetCheck(FALSE);
+		break;
+	}
+}
+
+void CScreen_Basic::OnRadioOnlineMode() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.mn_mode_run ) == CTL_YES )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.mn_mode_run, (int)CTL_YES );
+	OnBasic_RunMode_Change();
+}
+
+void CScreen_Basic::OnRadioOfflineMode() 
+{
+	if( g_dataMgr.GetBackupData( &st_basic.mn_mode_run ) == CTL_NO )
+		return;
+
+	g_dataMgr.SetDataTemp( &st_basic.mn_mode_run, (int)CTL_NO );
+	OnBasic_RunMode_Change();
+}
+
+void CScreen_Basic::OnDgtTimeOut() 
+{
+	CString mstr_temp;  // 저장할 정보 임시 저장 변수 
+	int mn_sec;
+		
+	mn_sec = m_dgt_time_out.GetValue();
+	
+	mstr_temp = _T("테스트 타임아웃 (초)");
+	if ( g_local.GetLocalType() == LOCAL_ENG )	mstr_temp = _T("Test Time Out (sec)");
+	
+	CRect r;
+	
+	m_dgt_network_wait_time.GetWindowRect(&r);
+	mstr_temp = KeyPad.GetNumEditString_I(0, 9999, mn_sec, mstr_temp, &r);
+	
+	int iTemp = atoi(mstr_temp);
+	g_dataMgr.SetDataTemp( &st_basic.mn_time_out, iTemp );
+	m_dgt_time_out.SetValue(iTemp);
+}
+
+void CScreen_Basic::OnBasic_Init_Modue_Gap( int iGrid )
+{
+	TSpread* Grid;
+	int row = 3;
+	int col = 2;
+
+	Grid = (TSpread*)GetDlgItem( iGrid );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	Grid -> SetColWidthInPixels(1, 40 );
+	Grid -> SetColWidthInPixels(2, 103 );
+	for( int iw=0; iw<row; iw++ )
+	{
+		Grid -> SetRowHeightInPixels(iw + 1, 20 );
+		for( int ih=0; ih<col; ih++ )
+		{
+			GridFont( iGrid, iw + 1, ih + 1, 15);
+			GridControl(iGrid, STATIC, iw + 1, ih + 1, 0);
+		}
+	}
+
+	GridData( iGrid, 1, 1, "X" );
+	GridData( iGrid, 2, 1, "Y" );
+	GridData( iGrid, 3, 1, "Z" );
+	
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Basic::GridColor(UINT nID, int row, int col, COLORREF bk, COLORREF tk)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+	
+	COLORREF bk_old, tk_old;
+	Grid->GetColor(col, row, &bk_old, &tk_old);
+	if( bk_old != bk || tk_old != tk )
+	{
+		Grid->SetColor(col, row, bk, tk);
+		Grid->SetBackColorStyle(SS_BACKCOLORSTYLE_UNDERGRID);
+	}
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Basic::GridControl(UINT nID, int type, int row, int col, int pos)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+	
+	SS_CELLTYPE CellType;
+	SS_DATEFORMAT dateFormat = { TRUE, '/', IDF_DDMMYY, FALSE };
+	SS_TIMEFORMAT tmFormat;
+	CString strList;
+	strList = "combo1\tcombo2\tcombo3\tcombo4\tcombo5\tcombo6";
+	double a = 0.5;
+
+	switch (type)
+	{
+		case DATE:			
+			Grid->SetTypeDate(&CellType, 0 , &dateFormat, NULL, NULL);
+			break;
+
+		case EDIT:
+			Grid->SetTypeEdit(&CellType,ES_CENTER,60,SS_CHRSET_CHR,SS_CASE_NOCASE);
+			break;
+
+		case COMBO:
+			// SetValue(col, row, data); data = ""0"(1선택) data = "1"(2선택) data = "2"(3선택)
+			Grid->SetTypeComboBox(&CellType, 0, strList);
+			break;
+
+		case BUTTON:
+			if (pos == 0)
+			{
+				Grid->SetTypeButton(&CellType, SBS_DEFPUSHBUTTON, "Go", NULL, SUPERBTN_PICT_NONE,
+					NULL, SUPERBTN_PICT_NONE, SUPERBTN_TYPE_NORMAL, 2, NULL);
+			}
+			else
+			{
+				Grid->SetTypeButton(&CellType, SBS_DEFPUSHBUTTON, "Read", NULL, SUPERBTN_PICT_NONE,
+					NULL, SUPERBTN_PICT_NONE,SUPERBTN_TYPE_NORMAL, 2, NULL);
+			}
+			break;
+
+		case STATIC:
+			Grid->SetTypeStaticText(&CellType, SS_TEXT_CENTER | SS_TEXT_VCENTER);
+			break;
+
+		case TIME:
+			tmFormat.b24Hour=TRUE;
+			tmFormat.bSpin=FALSE;
+			tmFormat.bSeconds=FALSE;
+			tmFormat.cSeparator=':';
+			Grid->SetTypeTime(&CellType, 0, &tmFormat, NULL, NULL);
+			break;
+
+		case PERCENT:
+			Grid->SetTypePercentEx(&CellType,ES_LEFTALIGN,2,.01,100,".",0,0,0,0,1.001);
+			break;
+
+		case CHECK1:
+			Grid->SetTypeCheckBox(&CellType,BS_CENTER, "", 
+				"CheckUp", BT_BITMAP,
+				"CheckDown", BT_BITMAP,
+				"CheckFocusUp", BT_BITMAP,
+				"CheckFocusDown", BT_BITMAP,
+				"CheckDisabledUp", BT_BITMAP,
+				"CheckDisabledDown", BT_BITMAP);
+			break;
+
+		case NUMBER:
+			Grid->SetTypeNumberEx(&CellType,0, 0, 0, 9999,0,".",",",0,0,1,0,1.001);
+			break;
+	}
+	
+	Grid->SetCellType(col,row,&CellType);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Basic::GridData(UINT nID, int row, int col, CString data)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+
+	char szBuf[1024];
+	Grid->GetValue(col, row, szBuf);
+	if( data == szBuf )
+	{
+		Grid = NULL;
+		delete Grid;
+		return;
+	}
+
+	Grid->SetValue(col, row, data);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+CString CScreen_Basic::GetGridData( UINT nID, int row, int col )
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+
+	char szBuf[1024];
+	Grid->GetValue(col, row, szBuf);
+
+	Grid = NULL;
+	delete Grid;
+
+	return szBuf;
+}
+
+
+void CScreen_Basic::GridFont(UINT nID, int row, int col, int size)
+{
+	TSpread *Grid = (TSpread *)GetDlgItem(nID);
+	HFONT font;
+	CString strTemp;
+	
+	font = CreateFont(size, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 0, 0, "돋음체");
+	Grid->SetFont(col, row, font, TRUE);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Basic::GridMerge(UINT nID, int srow, int scol, int nrow, int ncol)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+	
+	Grid->AddCellSpan(scol, srow, ncol, nrow);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Basic::OnBtnCalcMdl() 
+{
+	double gapX = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_X ) - st_motor[MOTOR_ROBOT_X].d_pos[P_XY_SITE1_START];
+	double gapY = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Y ) - st_motor[MOTOR_ROBOT_Y].d_pos[P_XY_SITE1_START];
+	double gapZ = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Z ) - st_motor[MOTOR_ROBOT_Z].d_pos[P_Z_SITE1_PICK_START];
+
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap[0], gapX );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap[1], gapY );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap[2], gapZ );
+
+	OnBasic_Display_Module_Gap();
+}
+
+void CScreen_Basic::OnBtnCalcTestsite() 
+{
+	double gapX = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_X ) - st_motor[MOTOR_ROBOT_X].d_pos[P_XY_SITE1_START];
+	double gapY = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Y ) - st_motor[MOTOR_ROBOT_Y].d_pos[P_XY_SITE1_START];
+	double gapZ = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Z ) - st_motor[MOTOR_ROBOT_Z].d_pos[P_Z_SITE1_PICK_START];
+
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_testsite[0], gapX );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_testsite[1], gapY );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_testsite[2], gapZ );
+
+	OnBasic_Display_Module_Gap_TestSite();
+}
+
+void CScreen_Basic::OnBtnCalcBin1() 
+{
+	double gapX = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_X ) - st_motor[MOTOR_ROBOT_X].d_pos[P_XY_TRAY1_START];
+	double gapY = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Y ) - st_motor[MOTOR_ROBOT_Y].d_pos[P_XY_TRAY1_START];
+	double gapZ = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Z ) - st_motor[MOTOR_ROBOT_Z].d_pos[P_Z_TRAY1_PICK];
+
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_bin1[0], gapX );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_bin1[1], gapY );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_bin1[2], gapZ );
+
+	OnBasic_Display_Module_Gap_Bin1();
+}
+
+void CScreen_Basic::OnBtnCalcBin2() 
+{
+	double gapX = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_X ) - st_motor[MOTOR_ROBOT_X].d_pos[P_XY_TRAY2_START];
+	double gapY = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Y ) - st_motor[MOTOR_ROBOT_Y].d_pos[P_XY_TRAY2_START];
+	double gapZ = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Z ) - st_motor[MOTOR_ROBOT_Z].d_pos[P_Z_TRAY2_PICK];
+
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_bin2[0], gapX );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_bin2[1], gapY );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_bin2[2], gapZ );
+
+	OnBasic_Display_Module_Gap_Bin2();
+}
+
+void CScreen_Basic::OnCalcRej() 
+{
+	double gapX = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_X ) - st_motor[MOTOR_ROBOT_X].d_pos[P_XY_REJ_START];
+	double gapY = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Y ) - st_motor[MOTOR_ROBOT_Y].d_pos[P_XY_REJ_START];
+	double gapZ = g_comiMgr.Get_MotCurrentPos( MOTOR_ROBOT_Z ) - st_motor[MOTOR_ROBOT_Z].d_pos[P_Z_REJ_PLACE];
+
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_rej[0], gapX );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_rej[1], gapY );
+	g_dataMgr.SetDataTemp( &st_basic.d_mdl_tch_gap_rej[2], gapZ );
+
+	OnBasic_Display_Module_Gap_Rej();
+}
+
+void CScreen_Basic::OnChkModuleTeachGapUse() 
+{
+	if( m_chk_use_mdl_tch_gap.GetCheck() )
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap, TRUE );
+	}
+	else
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap, FALSE );
+	}
+	
+}
+
+void CScreen_Basic::OnChkModuleTeachGapTestsite() 
+{
+	if( m_chk_use_mdl_tch_gap_testsite.GetCheck() )
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_testsite, TRUE );
+	}
+	else
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_testsite, FALSE );
+	}
+}
+
+void CScreen_Basic::OnChkModuleTeachGapBin1() 
+{
+	if( m_chk_use_mdl_tch_gap_bin1.GetCheck() )
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_bin1, TRUE );
+	}
+	else
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_bin1, FALSE );
+	}
+}
+
+void CScreen_Basic::OnChkModuleTeachGapBin2() 
+{
+	if( m_chk_use_mdl_tch_gap_bin2.GetCheck() )
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_bin2, TRUE );
+	}
+	else
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_bin2, FALSE );
+	}
+}
+
+void CScreen_Basic::OnChkModuleTeachGapRej() 
+{
+	if( m_chk_use_mdl_tch_gap_rej.GetCheck() )
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_rej, TRUE );
+	}
+	else
+	{
+		g_dataMgr.SetDataTemp( &st_basic.n_use_mdl_tch_gap_rej, FALSE );
+	}
+}
+
+void CScreen_Basic::OnBasic_Display_Module_Gap()
+{
+	int nUseMdlGap = g_dataMgr.GetBackupData( &st_basic.n_use_mdl_tch_gap );
+	if( nUseMdlGap )
+	{
+		m_chk_use_mdl_tch_gap.SetCheck( TRUE );
+	}
+	else
+	{
+		m_chk_use_mdl_tch_gap.SetCheck( FALSE );
+	}
+
+	CString strX, strY, strZ;
+	strX.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap[0] ) );
+	strY.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap[1] ) );
+	strZ.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap[2] ) );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP, 1, 2, strX );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP, 2, 2, strY );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP, 3, 2, strZ );
+}
+
+void CScreen_Basic::OnBasic_Display_Module_Gap_TestSite()
+{
+	int nUseMdlGap = g_dataMgr.GetBackupData( &st_basic.n_use_mdl_tch_gap_testsite );
+	if( nUseMdlGap )
+	{
+		m_chk_use_mdl_tch_gap_testsite.SetCheck( TRUE );
+	}
+	else
+	{
+		m_chk_use_mdl_tch_gap_testsite.SetCheck( FALSE );
+	}
+
+	CString strX, strY, strZ;
+	strX.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_testsite[0] ) );
+	strY.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_testsite[1] ) );
+	strZ.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_testsite[2] ) );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_TESTSITE, 1, 2, strX );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_TESTSITE, 2, 2, strY );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_TESTSITE, 3, 2, strZ );
+}
+
+void CScreen_Basic::OnBasic_Display_Module_Gap_Bin1()
+{
+	int nUseMdlGap = g_dataMgr.GetBackupData( &st_basic.n_use_mdl_tch_gap_bin1 );
+	if( nUseMdlGap )
+	{
+		m_chk_use_mdl_tch_gap_bin1.SetCheck( TRUE );
+	}
+	else
+	{
+		m_chk_use_mdl_tch_gap_bin1.SetCheck( FALSE );
+	}
+
+	CString strX, strY, strZ;
+	strX.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_bin1[0] ) );
+	strY.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_bin1[1] ) );
+	strZ.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_bin1[2] ) );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_BIN1, 1, 2, strX );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_BIN1, 2, 2, strY );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_BIN1, 3, 2, strZ );
+}
+
+void CScreen_Basic::OnBasic_Display_Module_Gap_Bin2()
+{
+	int nUseMdlGap = g_dataMgr.GetBackupData( &st_basic.n_use_mdl_tch_gap_bin2 );
+	if( nUseMdlGap )
+	{
+		m_chk_use_mdl_tch_gap_bin2.SetCheck( TRUE );
+	}
+	else
+	{
+		m_chk_use_mdl_tch_gap_bin2.SetCheck( FALSE );
+	}
+
+	CString strX, strY, strZ;
+	strX.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_bin2[0] ) );
+	strY.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_bin2[1] ) );
+	strZ.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_bin2[2] ) );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_BIN2, 1, 2, strX );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_BIN2, 2, 2, strY );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_BIN2, 3, 2, strZ );
+}
+
+void CScreen_Basic::OnBasic_Display_Module_Gap_Rej()
+{
+	int nUseMdlGap = g_dataMgr.GetBackupData( &st_basic.n_use_mdl_tch_gap_rej );
+	if( nUseMdlGap )
+	{
+		m_chk_use_mdl_tch_gap_rej.SetCheck( TRUE );
+	}
+	else
+	{
+		m_chk_use_mdl_tch_gap_rej.SetCheck( FALSE );
+	}
+
+	CString strX, strY, strZ;
+	strX.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_rej[0] ) );
+	strY.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_rej[1] ) );
+	strZ.Format( "%.03f", g_dataMgr.GetBackupData( &st_basic.d_mdl_tch_gap_rej[2] ) );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_REJ, 1, 2, strX );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_REJ, 2, 2, strY );
+	GridData( IDC_CUSTOM_MODULE_TEACH_GAP_REJ, 3, 2, strZ );
+}

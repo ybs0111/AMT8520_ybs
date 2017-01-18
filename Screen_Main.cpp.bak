@@ -1,0 +1,2228 @@
+// Screen_Main.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "Handler.h"
+#include "Screen_Main.h"
+
+#include "Dialog_KeyBoard.h"
+#include "Dialog_Keypad.h"
+#include "Dialog_Message.h"
+#include "FastechPublic_IO.h"
+
+#include "Dialog_Select.h"
+#include "Dialog_Buffer_Status.h"
+#include "Dialog_Data_Lot.h"
+#include "Dialog_Data_TestSite.h"
+#include "Dialog_Data_Cok.h"
+#include "Dialog_Data_Module.h"
+#include "io.h" 
+
+#include "CtlBd_Function.h"
+#include "GridControlAlg.h"
+
+#include "CtlBd_Library.h"
+#include "SrcBase\ALocalization.h"
+
+#include "IO_Manager.h"
+#include "ComizoaPublic.h"
+
+#include "AMTLotManager.h"
+#include "SrcPart/APartHandler_COK.h"
+#include "SrcPart/PartFunction.h"
+#include "SrcPart/APartTray.h"
+
+#include "SrcPart/APartNetworkManager.h"
+#include "SrcPart/APartTestSite.h"
+#include "SrcPart/APartRobot.h"
+#include "SrcPart/APartHandler.h"
+
+#include "AMTRegistry.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// CScreen_Main
+
+IMPLEMENT_DYNCREATE(CScreen_Main, CFormView)
+
+CScreen_Main::CScreen_Main()
+	: CFormView(CScreen_Main::IDD)
+{
+	//{{AFX_DATA_INIT(CScreen_Main)
+	//}}AFX_DATA_INIT
+	m_emvt_ts = EMVT_SERIAL;
+	m_emvt_mdl = EMVT_SERIAL;
+}
+
+CScreen_Main::~CScreen_Main()
+{
+}
+
+void CScreen_Main::DoDataExchange(CDataExchange* pDX)
+{
+	CFormView::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CScreen_Main)
+	DDX_Control(pDX, IDC_GROUP_BIN_TRAY, m_group_bin_tray);
+	DDX_Control(pDX, IDC_GROUP_ROBOT, m_group_robot);
+	DDX_Control(pDX, IDC_GROUP_REFERENCE, m_group_reference);
+	DDX_Control(pDX, IDC_GROUP_SITE, m_group_site);
+	DDX_Control(pDX, IDC_GROUP_TRAY_MOVE_REJ, m_group_tray_move_rej);
+	DDX_Control(pDX, IDC_GROUP_TRAY_MOVE, m_group_tray_move);
+	DDX_Control(pDX, IDC_GROUP_REJ_STACKER, m_group_rej_stacker);
+	DDX_Control(pDX, IDC_GROUP_SELECTED_TRAY, m_group_selected_tray);
+	DDX_Control(pDX, IDC_GROUP_SSD_AUTO_SORTER, m_group_ssd_auto_sorter);
+	DDX_Control(pDX, IDC_GROUP_BIN_INFO, m_group_bin_info);
+	DDX_Control(pDX, IDC_BTN_DOOR_OPEN, m_btn_door_open);
+	DDX_Control(pDX, IDC_GROUP_B_LOT_INFO, m_group_b_lot_info);
+	DDX_Control(pDX, IDC_DGT_ALARM, m_dgt_alarm);
+	DDX_Control(pDX, IDC_MSG_STOP, m_msg_stop);
+	DDX_Control(pDX, IDC_MSG_RUN, m_msg_run);
+	DDX_Control(pDX, IDC_MSG_ALARM, m_msg_alarm);
+	DDX_Control(pDX, IDC_GROUP_DAILY_YIELD_INFO, m_group_daily_yield_info);
+	DDX_Control(pDX, IDC_GROUP_TIME_INFO, m_group_time_info);
+	DDX_Control(pDX, IDC_GROUP_LOT_INFO, m_group_lot_info);
+	DDX_Control(pDX, IDC_GROUP_LOT_YIELD_INFO, m_group_lot_yield_info);
+	DDX_Control(pDX, IDC_DGT_STOP, m_dgt_stop);
+	DDX_Control(pDX, IDC_DGT_RUN, m_dgt_run);
+	//}}AFX_DATA_MAP
+}
+
+
+BEGIN_MESSAGE_MAP(CScreen_Main, CFormView)
+	//{{AFX_MSG_MAP(CScreen_Main)
+	ON_WM_DESTROY()
+	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BTN_DOOR_OPEN, OnBtnDoorOpen)
+	ON_BN_CLICKED(IDC_BTN_TEST1, OnBtnTest1)
+	ON_BN_CLICKED(IDC_BTN_TEST2, OnBtnTest2)
+	ON_BN_CLICKED(IDC_BTN_TEST3, OnBtnTest3)
+	ON_BN_CLICKED(IDC_BTN_TEST4, OnBtnTest4)
+	ON_BN_CLICKED(IDC_BTN_TEST5, OnBtnTest5)
+	ON_BN_CLICKED(IDC_BTN_TEST6, OnBtnTest6)
+	//}}AFX_MSG_MAP
+ 	ON_MESSAGE(WM_WORK_END, OnMain_Work_Info_Display)  // 테스트 결과 정보 화면에 출력하기 위한 사용자 정의 메시지 추가 
+	ON_MESSAGE( WM_DRAW_UI_MAIN, OnMain_Draw_UI)
+	ON_MESSAGE( WM_DRAW_DATA_MAIN, OnMain_Draw_Data)
+ 	ON_MESSAGE(SSM_CLICK, OnCellClick)
+
+	ON_MESSAGE( WM_CHANGE_VIEW_TYPE, OnMain_Change_View )
+// 	ON_MESSAGE(WM_RECEIVED_NEW_LOT, OnReceivedNewLot)  // 새로운 Lot을 받았다.
+// 	ON_MESSAGE(WM_DRAW_LOT_TIME, OnDrawLotTime)
+// 	ON_MESSAGE(WM_DRAW_WORK_SITE, OnDrawWorkSite)
+END_MESSAGE_MAP()
+
+/////////////////////////////////////////////////////////////////////////////
+// CScreen_Main diagnostics
+
+#ifdef _DEBUG
+void CScreen_Main::AssertValid() const
+{
+	CFormView::AssertValid();
+}
+
+void CScreen_Main::Dump(CDumpContext& dc) const
+{
+	CFormView::Dump(dc);
+}
+#endif //_DEBUG
+
+/////////////////////////////////////////////////////////////////////////////
+// CScreen_Main message handlers
+
+void CScreen_Main::OnInitialUpdate() 
+{
+	CFormView::OnInitialUpdate();
+
+	int i = 0;
+
+	// ************************************************************************** 
+	// 컨트롤에 설정할 폰트 생성한다                                              
+	// ************************************************************************** 
+	mp_main_font = NULL;
+	mp_main_font = new CFont;
+	mp_main_font->CreateFont(15,0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 0, 0, "돋음체");
+
+	mp_main_big_font = NULL;
+	mp_main_big_font = new CFont;
+	mp_main_big_font->CreateFont(21,0,0,0,0,0,0,0,0,0,0,DEFAULT_QUALITY,0,"2002L");
+	// ************************************************************************** 
+	OnMain_GroupBox_Set();
+	OnMain_Label_Set();
+	OnMain_Digital_Count_Set();
+	OnMain_Init_Lot_Yield_info();
+	OnMain_Init_Daily_Yield_info();
+	OnMain_Init_Lot_Info();
+	OnMain_Init_B_Lot_Info();
+	OnMain_Init_Bin_Info();
+
+	OnMain_Init_COK_TSITE();
+	OnMain_Init_COK_CNT();
+	OnMain_Init_TrayMove();
+	OnMain_Init_Reject_Floor();
+	OnMain_Change_Reject_Floor();
+	OnMain_Init_SelectedTray();
+	OnMain_Change_Selected_Tray();
+	OnMain_Init_TestSite( 0 );
+	OnMain_Init_TestSite( 1 );
+	OnMain_Display_TestSite();
+
+	OnMain_Init_COK_Robot();
+	OnMain_Init_Robot_Module();
+	OnMain_Init_BinTray(0);
+	OnMain_Init_BinTray(1);
+	OnMain_Init_NetUsable();
+
+	OnMain_Init_Door();
+
+	OnMain_Display_Lot_Info();
+	OnMain_Display_Lot_Yield_info();
+	OnMain_Display_Daily_Yield_info();
+	OnMain_Display_NetUsable();
+	OnMain_Display_Bin_Info();
+
+	OnMain_Change_BinTray(0);
+	OnMain_Change_BinTray(1);
+
+	OnMain_Draw_UI( 0, 0 );
+	OnDrawVideo();
+	OnMain_display_RobotPicker();
+
+	OnMain_Init_Ref_Color();
+
+	SetTimer(1234, 500, 0);
+
+	mn_time_select = 0;	
+	
+	st_handler.cwnd_main = this;		// MAIN 화면 핸들 설정
+
+
+	m_iClick = -1;
+	m_dwTimeClicked = -1;
+	m_iClickCnt = 0;
+
+	m_emvt_ts = EMVT_SERIAL;
+	m_emvt_mdl = EMVT_SERIAL;
+}
+
+void CScreen_Main::OnDestroy() 
+{
+	st_handler.cwnd_main = NULL;		// MAIN 화면 핸들 초기화
+	
+	// **************************************************************************
+	// 생성한 폰트 정보 삭제한다
+	// **************************************************************************
+	
+  	delete mp_main_font;
+	mp_main_font = NULL;
+
+	delete mp_main_big_font;
+	mp_main_big_font = NULL;
+	// **************************************************************************
+
+	CFormView::OnDestroy();
+}
+
+void CScreen_Main::OnTimer(UINT nIDEvent) 
+{
+	int nResponse = CTLBD_RET_GOOD;
+	
+	switch(nIDEvent)
+	{
+	case 1234:
+		{
+			OnMain_Display_Door();
+		}
+		break;
+	case 200:
+
+		if (nResponse == CTLBD_RET_GOOD)
+		{
+			KillTimer(200);
+		}
+		break;
+	}
+
+	CFormView::OnTimer(nIDEvent);
+}
+
+void CScreen_Main::OnMain_GroupBox_Set()
+{
+	CSxLogFont main_font(13, FW_THIN, false, "Bitstream Vera Sans Mono");
+
+	m_group_lot_info.SetFont(main_font);
+	m_group_lot_info.SetCatptionTextColor(RGB(145, 25, 0));
+	m_group_lot_info.SetFontBold(TRUE);
+
+	m_group_b_lot_info.SetFont(main_font);
+	m_group_b_lot_info.SetCatptionTextColor(RGB(145, 25, 0));
+	m_group_b_lot_info.SetFontBold(TRUE);
+	
+	m_group_daily_yield_info.SetFont(main_font);
+	m_group_daily_yield_info.SetCatptionTextColor(RGB(145, 25, 0));
+	m_group_daily_yield_info.SetFontBold(TRUE);
+	
+	m_group_lot_yield_info.SetFont(main_font);
+	m_group_lot_yield_info.SetCatptionTextColor(RGB(145, 25, 0));
+	m_group_lot_yield_info.SetFontBold(TRUE);
+		
+	m_group_time_info.SetFont(main_font);
+	m_group_time_info.SetCatptionTextColor(RGB(145, 25, 0));
+	m_group_time_info.SetFontBold(TRUE);
+
+	m_group_bin_info.SetFont(main_font);
+	m_group_bin_info.SetCatptionTextColor(RGB(145, 25, 0));
+	m_group_bin_info.SetFontBold(TRUE);
+
+	m_group_ssd_auto_sorter.SetFont(main_font);
+	m_group_ssd_auto_sorter.SetCatptionTextColor(RGB(145, 25, 0));
+	m_group_ssd_auto_sorter.SetFontBold(TRUE);
+}
+
+void CScreen_Main::GridColor(UINT nID, int row, int col, COLORREF bk, COLORREF tk)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+	Grid->SetColor(col, row, bk, tk);
+	Grid->SetBackColorStyle(SS_BACKCOLORSTYLE_UNDERGRID);
+	
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::GridControl(UINT nID, int type, int row, int col, int pos)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+	
+	SS_CELLTYPE CellType;
+	SS_DATEFORMAT dateFormat = { TRUE, '/', IDF_DDMMYY, FALSE };
+	SS_TIMEFORMAT tmFormat;
+	CString strList;
+	strList = "combo1\tcombo2\tcombo3\tcombo4\tcombo5\tcombo6";
+	double a = 0.5;
+
+	switch (type)
+	{
+		case DATE:			
+			Grid->SetTypeDate(&CellType, 0 , &dateFormat, NULL, NULL);
+			break;
+
+		case EDIT:
+			Grid->SetTypeEdit(&CellType,ES_CENTER,60,SS_CHRSET_CHR,SS_CASE_NOCASE);
+			break;
+
+		case COMBO:
+			// SetValue(col, row, data); data = ""0"(1선택) data = "1"(2선택) data = "2"(3선택)
+			Grid->SetTypeComboBox(&CellType, 0, strList);
+			break;
+
+		case BUTTON:
+			if (pos == 0)
+			{
+				Grid->SetTypeButton(&CellType, SBS_DEFPUSHBUTTON, "Go", NULL, SUPERBTN_PICT_NONE,
+					NULL, SUPERBTN_PICT_NONE, SUPERBTN_TYPE_NORMAL, 2, NULL);
+			}
+			else
+			{
+				Grid->SetTypeButton(&CellType, SBS_DEFPUSHBUTTON, "Read", NULL, SUPERBTN_PICT_NONE,
+					NULL, SUPERBTN_PICT_NONE,SUPERBTN_TYPE_NORMAL, 2, NULL);
+			}
+			break;
+
+		case STATIC:
+			Grid->SetTypeStaticText(&CellType, SS_TEXT_CENTER | SS_TEXT_VCENTER);
+			break;
+
+		case TIME:
+			tmFormat.b24Hour=TRUE;
+			tmFormat.bSpin=FALSE;
+			tmFormat.bSeconds=FALSE;
+			tmFormat.cSeparator=':';
+			Grid->SetTypeTime(&CellType, 0, &tmFormat, NULL, NULL);
+			break;
+
+		case PERCENT:
+			Grid->SetTypePercentEx(&CellType,ES_LEFTALIGN,2,.01,100,".",0,0,0,0,1.001);
+			break;
+
+		case CHECK1:
+			Grid->SetTypeCheckBox(&CellType,BS_CENTER, "", 
+				"CheckUp", BT_BITMAP,
+				"CheckDown", BT_BITMAP,
+				"CheckFocusUp", BT_BITMAP,
+				"CheckFocusDown", BT_BITMAP,
+				"CheckDisabledUp", BT_BITMAP,
+				"CheckDisabledDown", BT_BITMAP);
+			break;
+
+		case NUMBER:
+			Grid->SetTypeNumberEx(&CellType,0,pos, 0, 10000,0,".",",",0,0,1,0,1.001);
+			break;
+	}
+
+	Grid->SetCellType(col,row,&CellType);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::GridData(UINT nID, int row, int col, CString data)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+	
+	Grid->SetValue(col, row, data);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::GridFont(UINT nID, int row, int col, int size)
+{
+	TSpread *Grid = (TSpread *)GetDlgItem(nID);
+	HFONT font;
+	CString strTemp;
+	
+	font = CreateFont(size, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 0, 0, "돋음체");
+	Grid->SetFont(col, row, font, TRUE);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::GridMerge(UINT nID, int srow, int scol, int nrow, int ncol)
+{
+	TSpread *Grid = (TSpread*)GetDlgItem(nID);
+	
+	Grid->AddCellSpan(scol, srow, ncol, nrow);
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Label_Set()
+{
+	m_msg_alarm.SetFont(mp_main_font);
+	m_msg_alarm.SetWindowText(_T("Alarm"));
+	m_msg_alarm.SetCenterText();
+	m_msg_alarm.SetColor(RGB(0, 0, 0));
+	m_msg_alarm.SetGradientColor(RGB(255, 255, 0));
+	m_msg_alarm.SetTextColor(RGB(255, 255, 255));
+	
+	m_msg_run.SetFont(mp_main_font);
+	m_msg_run.SetWindowText(_T("Run"));
+	m_msg_run.SetCenterText();
+	m_msg_run.SetColor(RGB(0, 0, 0));
+	m_msg_run.SetGradientColor(RGB(0, 0, 255));
+	m_msg_run.SetTextColor(RGB(255, 255, 255));
+	
+	m_msg_stop.SetFont(mp_main_font);
+	m_msg_stop.SetWindowText(_T("Stop"));
+	m_msg_stop.SetCenterText();
+	m_msg_stop.SetColor(RGB(0, 0, 0));
+	m_msg_stop.SetGradientColor(RGB(255, 0, 0));
+	m_msg_stop.SetTextColor(RGB(255, 255, 255));
+}
+
+void CScreen_Main::OnMain_Digital_Count_Set()
+{
+	m_dgt_alarm.SetStyle(CDigit::DS_TIMER, NULL, CDigit::DC_YELLOW, CDigit::DC_CYAN);
+	m_dgt_run.SetStyle(CDigit::DS_TIMER, NULL, CDigit::DC_YELLOW, CDigit::DC_CYAN);
+	m_dgt_stop.SetStyle(CDigit::DS_TIMER, NULL, CDigit::DC_YELLOW, CDigit::DC_CYAN);
+}
+
+void CScreen_Main::OnMain_Init_Lot_Yield_info()
+{
+	TSpread *Grid;
+	CString str_pos;
+	int row = 5;
+	int col = 3;
+	int i, j;
+
+	CString str_tmp[4] = {"Input", "Pass", "Fail", "Yield"};
+	Grid = (TSpread*)GetDlgItem(IDC_CUSTOM_LOT_YIELD_INFO);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	for (i = 1; i <= row; i++)
+	{
+		for (j = 1; j <= col; j++)
+		{
+			Grid -> SetRowHeightInPixels(i, 20);
+
+			if (j == 1)
+			{
+				Grid -> SetColWidthInPixels(j, 42);
+			}
+			else
+			{
+				Grid -> SetColWidthInPixels(j, 56);
+			}
+
+			if (i == 1 && j == 1)
+			{
+				GridColor(IDC_CUSTOM_LOT_YIELD_INFO, i, j, ORANGE_C, WHITE_C);
+			}
+			else if (i == 1 || j == 1)
+			{
+				GridColor(IDC_CUSTOM_LOT_YIELD_INFO, i, j, PINK_D, BLACK_C);
+			}
+			else
+			{
+				if (j == 4)
+				{
+					GridColor(IDC_CUSTOM_LOT_YIELD_INFO, i, j, BLACK_C, RED_C);
+				}
+				else
+				{
+					GridColor(IDC_CUSTOM_LOT_YIELD_INFO, i, j, BLACK_C, GREEN_B);
+				}
+			}
+
+			GridControl(IDC_CUSTOM_LOT_YIELD_INFO, STATIC, i, j, 0);
+			GridFont(IDC_CUSTOM_LOT_YIELD_INFO, i, j, 15);
+		}
+	}
+
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 1, 1, " ");
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 1, 2, "Prime");
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 1, 3, "Cum");
+
+	for (i = 2; i < row + 1; i++)
+	{
+		GridData(IDC_CUSTOM_LOT_YIELD_INFO, i, 1, str_tmp[i - 2]);
+	}
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Init_Daily_Yield_info()
+{
+	TSpread *Grid;
+	CString str_pos;
+	int row = 5;
+	int col = 3;
+	int i, j;
+
+	CString str_tmp[4] = {"Input", "Pass", "Fail", "Yield"};
+	Grid = (TSpread*)GetDlgItem(IDC_CUSTOM_DAILY_YIELD_INFO);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	for (i = 1; i <= row; i++)
+	{
+		for (j = 1; j <= col; j++)
+		{
+			Grid -> SetRowHeightInPixels(i, 20);
+			
+			if (j == 1)
+			{
+				Grid -> SetColWidthInPixels(j, 42);
+			}
+			else
+			{
+				Grid -> SetColWidthInPixels(j, 56);
+			}
+			
+			if (i == 1 && j == 1)
+			{
+				GridColor(IDC_CUSTOM_DAILY_YIELD_INFO, i, j, ORANGE_C, WHITE_C);
+			}
+			else if (i == 1 || j == 1)
+			{
+				GridColor(IDC_CUSTOM_DAILY_YIELD_INFO, i, j, PINK_D, BLACK_C);
+			}
+			else
+			{
+				if (j == 4)
+				{
+					GridColor(IDC_CUSTOM_DAILY_YIELD_INFO, i, j, BLACK_C, RED_C);
+				}
+				else
+				{
+					GridColor(IDC_CUSTOM_DAILY_YIELD_INFO, i, j, BLACK_C, GREEN_B);
+				}
+			}
+			GridControl(IDC_CUSTOM_DAILY_YIELD_INFO, STATIC, i, j, 0);
+			GridFont(IDC_CUSTOM_DAILY_YIELD_INFO, i, j, 15);
+		}
+	}
+
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 1, 1, " ");
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 1, 2, "Prime");
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 1, 3, "Cum");
+	
+	for (i = 2; i < row + 1; i++)
+	{
+		GridData(IDC_CUSTOM_DAILY_YIELD_INFO, i, 1, str_tmp[i - 2]);
+	}
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Init_Lot_Info()
+{
+	TSpread *Grid;
+	CString str_pos;
+	int row = 4;
+	int col = 2;
+	int i, j;
+
+	CString str_tmp[4] = {"Lot No", "Part No", "Last Mdl","ByPass"};
+	Grid = (TSpread*)GetDlgItem(IDC_CUSTOM_LOT_INFO);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	for (i = 0; i <= row; i++)
+	{
+		for (j = 0; j <= col; j++)
+		{
+			Grid -> SetRowHeightInPixels(i, 24);
+  			
+			if (j == 1)
+			{
+				Grid -> SetColWidthInPixels(j, 50);
+				GridColor(IDC_CUSTOM_LOT_INFO, i, j, YELLOW_L, BLACK_C);
+
+				GridControl(IDC_CUSTOM_LOT_INFO, STATIC, i, j, 0);
+				GridFont(IDC_CUSTOM_LOT_INFO, i, j, 15);
+			}
+			else
+			{
+				Grid -> SetColWidthInPixels(j, 105);
+				GridColor(IDC_CUSTOM_LOT_INFO, i, j, BLACK_C, WHITE_C);
+
+				GridControl(IDC_CUSTOM_LOT_INFO, STATIC, i, j, 0);
+
+				if (i == 2)
+				{
+					GridFont(IDC_CUSTOM_LOT_INFO, i, j, 13);
+				}
+				else
+				{
+					GridFont(IDC_CUSTOM_LOT_INFO, i, j, 15);
+				}
+			}
+		}
+	}
+
+	for (i = 1; i < row + 1; i++)
+	{
+		GridData(IDC_CUSTOM_LOT_INFO, i, 1, str_tmp[i - 1]);
+	}
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Init_B_Lot_Info()
+{
+	TSpread *Grid;
+	CString str_pos;
+	int row = 2;
+	int col = 2;
+	int i, j;
+	
+	CString str_tmp[2] = {"Lot No", "Part No"};
+	Grid = (TSpread*)GetDlgItem(IDC_CUSTOM_B_LOT_INFO);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+	
+	for (i = 0; i <= row; i++)
+	{
+		for (j = 0; j <= col; j++)
+		{
+			Grid -> SetRowHeightInPixels(i, 24);
+			
+			if (j == 1)
+			{
+				Grid -> SetColWidthInPixels(j, 50);
+				GridColor(IDC_CUSTOM_B_LOT_INFO, i, j, YELLOW_L, BLACK_C);
+				
+				GridControl(IDC_CUSTOM_B_LOT_INFO, STATIC, i, j, 0);
+				GridFont(IDC_CUSTOM_B_LOT_INFO, i, j, 15);
+			}
+			else
+			{
+				Grid -> SetColWidthInPixels(j, 105);
+				GridColor(IDC_CUSTOM_B_LOT_INFO, i, j, BLACK_C, WHITE_C);
+				
+				GridControl(IDC_CUSTOM_B_LOT_INFO, STATIC, i, j, 0);
+				
+				if (i == 2)
+				{
+					GridFont(IDC_CUSTOM_B_LOT_INFO, i, j, 13);
+				}
+				else
+				{
+					GridFont(IDC_CUSTOM_B_LOT_INFO, i, j, 15);
+				}
+			}
+		}
+	}
+	
+	for (i = 1; i < row + 1; i++)
+	{
+		GridData(IDC_CUSTOM_B_LOT_INFO, i, 1, str_tmp[i - 1]);
+	}
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Time_Display(int n_state)
+{
+	m_dgt_run.ActivateTimer(FALSE);
+	m_dgt_stop.ActivateTimer(FALSE);
+	m_dgt_alarm.ActivateTimer(FALSE);
+	
+	mn_time_select = 0;
+	switch(n_state)
+	{
+	case dRUN:
+		m_dgt_run.ActivateTimer();
+		if (mn_time_select == 0)
+		{
+			m_dgt_run.SetTime(st_handler.m_tDR.GetTotalHours(), st_handler.m_tDR.GetMinutes(), st_handler.m_tDR.GetSeconds());
+		}
+		else
+		{
+			m_dgt_run.SetTime(st_handler.m_tR.GetTotalHours(), st_handler.m_tR.GetMinutes(), st_handler.m_tR.GetSeconds());
+		}
+		break;
+		
+	case dWARNING:
+	case dJAM:
+		m_dgt_alarm.ActivateTimer();
+		if (mn_time_select == 0)
+		{
+			m_dgt_alarm.SetTime(st_handler.m_tDJ.GetTotalHours(), st_handler.m_tDJ.GetMinutes(), st_handler.m_tDJ.GetSeconds());
+		}
+		else
+		{
+			m_dgt_alarm.SetTime(st_handler.m_tJ.GetTotalHours(), st_handler.m_tJ.GetMinutes(), st_handler.m_tJ.GetSeconds());
+		}
+		break;
+		
+	case dLOCK:
+	case dSTOP:
+		m_dgt_stop.ActivateTimer();
+		if (mn_time_select == 0)
+		{
+			m_dgt_stop.SetTime(st_handler.m_tDS.GetTotalHours(), st_handler.m_tDS.GetMinutes(), st_handler.m_tDS.GetSeconds());
+		}
+		else
+		{
+			m_dgt_stop.SetTime(st_handler.m_tS.GetTotalHours(), st_handler.m_tS.GetMinutes(), st_handler.m_tS.GetSeconds());
+		}
+		break;
+	}
+	m_dgt_run.UpdateTimer();
+	m_dgt_stop.UpdateTimer();
+	m_dgt_alarm.UpdateTimer();
+}
+
+void CScreen_Main::OnMain_TimeInfo_Display()
+{
+	m_dgt_run.ActivateTimer(FALSE);
+	m_dgt_stop.ActivateTimer(FALSE);
+	m_dgt_alarm.ActivateTimer(FALSE);
+
+	
+	if (mn_time_select == 0)
+	{
+		m_dgt_run.SetTime(st_handler.m_tDR.GetTotalHours(), st_handler.m_tDR.GetMinutes(), st_handler.m_tDR.GetSeconds());
+		m_dgt_stop.SetTime(st_handler.m_tDS.GetTotalHours(), st_handler.m_tDS.GetMinutes(), st_handler.m_tDS.GetSeconds());
+		m_dgt_alarm.SetTime(st_handler.m_tDJ.GetTotalHours(), st_handler.m_tDJ.GetMinutes(), st_handler.m_tDJ.GetSeconds());
+	}
+	else
+	{
+		m_dgt_run.SetTime(st_handler.m_tR.GetTotalHours(), st_handler.m_tR.GetMinutes(), st_handler.m_tR.GetSeconds());
+		m_dgt_stop.SetTime(st_handler.m_tS.GetTotalHours(), st_handler.m_tS.GetMinutes(), st_handler.m_tS.GetSeconds());
+		m_dgt_alarm.SetTime(st_handler.m_tJ.GetTotalHours(), st_handler.m_tJ.GetMinutes(), st_handler.m_tJ.GetSeconds());
+	}
+	
+	m_dgt_run.UpdateTimer();
+	m_dgt_stop.UpdateTimer();
+	m_dgt_alarm.UpdateTimer();
+}
+
+LRESULT CScreen_Main::OnMain_Work_Info_Display(WPARAM wParam,LPARAM lParam) 
+{
+	int mn_state = wParam;
+	
+	switch(mn_state)
+	{	
+	case MAIN_TIMEINFO:
+		OnMain_Time_Display(lParam);
+		break;
+
+	case MAIN_COUNTINFO:
+		OnMain_Display_Lot_Yield_info();
+		OnMain_Display_Daily_Yield_info();
+		OnMain_Display_Bin_Info();
+		break;
+
+	case MAIN_LOTINFO:
+		OnMain_Display_Lot_Info();
+		break;
+
+	case MAIN_CYCLETIME:
+		break;
+		
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+LRESULT CScreen_Main::OnMain_Draw_UI(WPARAM wParam,LPARAM lParam)
+{
+	m_btn_door_open.SetWindowText( g_local.Get( "L_U_0000") );
+	return 0;
+}
+
+LRESULT CScreen_Main::OnMain_Draw_Data(WPARAM wParam,LPARAM lParam)
+{
+	switch( wParam )
+	{
+	case EDDC_SITE:			OnDrawCOKSite( lParam );		break;
+	case EDDC_COKSTACKER:	OnDrawCokStacker( lParam );		break;
+
+	case EDDT_INIT:			OnMain_Init_TrayMove( lParam );	break;
+
+	case EDDT_REJ_FLOOR:	OnMain_Change_Reject_Floor();	break;
+	case EDDT_SEL_TRAY:		OnMain_Change_Selected_Tray();	break;
+	case EDDT_BINTRAY_0:	OnMain_Change_BinTray(0);		break;
+	case EDDT_BINTRAY_1:	OnMain_Change_BinTray(1);		break;
+
+	case EDDR_PICKER:		OnMain_display_RobotPicker();	break;
+	case EDDS_TESTSITE:		OnMain_Display_TestSite();		break;
+	case EDDS_VIDEO:		OnDrawVideo();					break;
+
+	case EDDN_NETUSABLE:	OnMain_Display_NetUsable();		break;
+	}
+
+	return 0;
+}
+
+void CScreen_Main::OnBtnDoorOpen() 
+{
+	int nRet, nRet2;
+	
+	nRet = g_ioMgr.get_in_bit(st_io.i_front_select_switch_chk, IO_OFF);
+	nRet2 = g_ioMgr.get_in_bit(st_io.i_rear_select_switch_chk, IO_OFF);
+
+	if (nRet == IO_ON && nRet2 == IO_ON)
+	{
+		sprintf(st_msg.c_abnormal_msg, "Manual Mode가 아닙니다.");
+		st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+		return;
+	}
+
+	if (COMI.mn_run_status != dSTOP)
+	{
+		sprintf(st_msg.c_abnormal_msg, "장비가 Stop 상태가 아닙니다..");
+		st_handler.cwnd_list->PostMessage(WM_LIST_DATA, 0, ABNORMAL_MSG);  // 동작 실패 출력 요청
+		return ;
+	} 
+
+	g_ioMgr.set_out_bit(st_io.o_door_lock, IO_OFF);
+}
+
+void CScreen_Main::OnMain_Display_Lot_Info()
+{
+	if( g_lotMgr.GetLotCount() > 0 )
+	{
+		GridData(IDC_CUSTOM_LOT_INFO, 1, 2, g_lotMgr.GetLotIDAt( 0 ) );
+		GridData(IDC_CUSTOM_LOT_INFO, 2, 2, g_lotMgr.GetLotAt(0).GetPartID() );
+		GridData(IDC_CUSTOM_LOT_INFO, 3, 2, g_lotMgr.GetLotAt(0).GetStrLastModule());
+		GridData(IDC_CUSTOM_LOT_INFO, 4, 2, g_lotMgr.GetLotAt(0).GetStrBypass());
+	}
+	else
+	{
+		GridData(IDC_CUSTOM_LOT_INFO, 1, 2, "" );
+		GridData(IDC_CUSTOM_LOT_INFO, 2, 2, "" );
+		GridData(IDC_CUSTOM_LOT_INFO, 3, 2, "");
+		GridData(IDC_CUSTOM_LOT_INFO, 4, 2, "");
+	}
+
+	if( g_lotMgr.GetLotCount() > 1 )
+	{
+		GridData( IDC_CUSTOM_B_LOT_INFO, 1, 2, g_lotMgr.GetLotIDAt( 1 ) );
+		GridData( IDC_CUSTOM_B_LOT_INFO, 2, 2, g_lotMgr.GetLotAt( 1 ).GetPartID() );
+	}
+	else
+	{
+		GridData( IDC_CUSTOM_B_LOT_INFO, 1, 2, "" );
+		GridData( IDC_CUSTOM_B_LOT_INFO, 2, 2, "" );
+	}
+}
+
+void CScreen_Main::OnMain_Display_Lot_Yield_info()
+{	//st_work.nMdlInputCount
+	CString strTemp;
+	
+	// Prime
+	strTemp.Format( "%06d", g_lotMgr.GetLotAt(0).GetInputCnt(PRIME) );
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 2, 2, strTemp);		// Input
+	strTemp.Format( "%06d", g_lotMgr.GetLotAt(0).GetPassCnt(PRIME) );
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 3, 2, strTemp);		// Pass
+	strTemp.Format( "%06d", g_lotMgr.GetLotAt(0).GetFailCnt(PRIME) );
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 4, 2, strTemp);		// Reject
+
+	double dYield = 0;
+	if (g_lotMgr.GetLotAt(0).GetInputCnt(PRIME) > 0)
+	{
+		dYield = (double)g_lotMgr.GetLotAt(0).GetPassCnt(PRIME) / (double)g_lotMgr.GetLotAt(0).GetInputCnt(PRIME) * 100.0f;
+	}
+
+	strTemp.Format("%3.2f%%", dYield);
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 5, 2, strTemp);		// Yield
+
+	// Cum
+	strTemp.Format("%06d", g_lotMgr.GetLotAt(0).GetInputCnt(CUM));
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 2, 3, strTemp);		// Input
+	strTemp.Format("%06d", g_lotMgr.GetLotAt(0).GetPassCnt(CUM));
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 3, 3, strTemp);		// Pass
+	strTemp.Format("%06d", g_lotMgr.GetLotAt(0).GetFailCnt(CUM));
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 4, 3, strTemp);		// Reject
+
+	dYield = 0;
+	if (g_lotMgr.GetLotAt(0).GetInputCnt(CUM) > 0)
+	{
+		dYield = (double)g_lotMgr.GetLotAt(0).GetPassCnt(CUM) / (double)g_lotMgr.GetLotAt(0).GetInputCnt(CUM) * 100.0f;
+	}
+	
+	strTemp.Format("%3.2f%%", dYield);
+
+	GridData(IDC_CUSTOM_LOT_YIELD_INFO, 5, 3, strTemp);		// Yield
+}	
+
+void CScreen_Main::OnMain_Display_Daily_Yield_info()
+{
+	CString strTemp;
+	// Prime
+	strTemp.Format( "%06d", g_lotMgr.GetInputCnt(PRIME) );
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 2, 2, strTemp);		// Input
+	strTemp.Format( "%06d", g_lotMgr.GetPassCnt(PRIME) );
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 3, 2, strTemp);		// Pass
+	strTemp.Format( "%06d", g_lotMgr.GetFailCnt(PRIME) );
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 4, 2, strTemp);		// Reject
+	
+	double dYield = 0;
+	if (g_lotMgr.GetInputCnt(PRIME) > 0)
+	{
+		dYield = (double)g_lotMgr.GetPassCnt(PRIME) / (double)g_lotMgr.GetInputCnt(PRIME) * 100.0f;
+	}
+	strTemp.Format("%3.2f%%", dYield);
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 5, 2, strTemp);		// Yield
+	
+	// Retest
+	strTemp.Format( "%06d", g_lotMgr.GetInputCnt(CUM) );
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 2, 3, strTemp);		// Input
+	strTemp.Format( "%06d", g_lotMgr.GetPassCnt(CUM) );
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 3, 3, strTemp);		// Pass
+	strTemp.Format( "%06d", g_lotMgr.GetFailCnt(CUM) );
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 4, 3, strTemp);		// Reject
+
+	dYield = 0;
+	if (g_lotMgr.GetInputCnt(CUM) > 0)
+	{
+		dYield = (double)g_lotMgr.GetPassCnt(CUM) / (double)g_lotMgr.GetInputCnt(CUM) * 100.0f;
+	}
+
+	strTemp.Format("%3.2f%%", dYield);
+	GridData(IDC_CUSTOM_DAILY_YIELD_INFO, 5, 3, strTemp);		// Yield
+}
+
+void CScreen_Main::OnMain_Init_Bin_Info()
+{
+	TSpread *Grid;
+	CString str_pos, str_temp;
+	int row = 9;
+	int col = 3;
+	int i, j;
+	
+	Grid = (TSpread*)GetDlgItem(IDC_CUSTOM_BIN_INFO);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, TRUE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, TRUE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+	
+	for (i = 0; i <= row; i++)
+	{
+		for (j = 1; j <= col; j++)
+		{
+			Grid -> SetRowHeightInPixels(i, 20);
+			
+			if (j == 1)
+			{
+				Grid -> SetColWidthInPixels(j, 32);
+			}
+			else
+			{
+				Grid -> SetColWidthInPixels(j, 52);
+			}
+			
+			if (i == 0 && j == 1)
+			{
+				GridColor(IDC_CUSTOM_BIN_INFO, i, j, ORANGE_C, WHITE_C);
+			}
+			else if (i == 0 || j == 1)
+			{
+				GridColor(IDC_CUSTOM_BIN_INFO, i, j, PINK_D, BLACK_C);
+			}
+			else
+			{
+				if (j == 4)
+				{
+					GridColor(IDC_CUSTOM_BIN_INFO, i, j, BLACK_C, RED_C);
+				}
+				else
+				{
+					GridColor(IDC_CUSTOM_BIN_INFO, i, j, BLACK_C, GREEN_B);
+				}
+			}
+			GridControl(IDC_CUSTOM_BIN_INFO, STATIC, i, j, 0);
+			GridFont(IDC_CUSTOM_BIN_INFO, i, j, 15);
+		}
+	}
+	
+	GridData(IDC_CUSTOM_BIN_INFO, 0, 1, "Bin");
+	GridData(IDC_CUSTOM_BIN_INFO, 0, 2, "Daily");
+	GridData(IDC_CUSTOM_BIN_INFO, 0, 3, "Lot");
+	
+	for (i = 1; i < row + 1; i++)
+	{
+		str_temp.Format("%d", i);
+		GridData(IDC_CUSTOM_BIN_INFO, i, 1, str_temp);
+	}
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Init_COK_TSITE()
+{
+	TSpread *Grid;
+	int row = 21;
+	int col = 1;
+	int i;
+
+	Grid = (TSpread*)GetDlgItem(IDC_CUSTOM_COK_TSITE);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	Grid -> SetColWidthInPixels(1, 54);
+	for (i = 1; i <= row; i++)
+	{
+		Grid -> SetRowHeightInPixels(i, 17);
+		if( i > 1 )
+			GridColor(IDC_CUSTOM_COK_TSITE, i, 1, GetCokCol( g_handler_cok.GetSiteCok( i - 2 )), BLACK_C);
+
+		GridControl(IDC_CUSTOM_COK_TSITE, STATIC, i, 1, 0);
+		GridFont(IDC_CUSTOM_COK_TSITE, i, 1, 15);
+	}
+	GridColor(IDC_CUSTOM_COK_TSITE, 1, 1, BLACK, WHITE_C);
+	GridData(IDC_CUSTOM_COK_TSITE, 1, 1, "T-SITE");
+
+	for (i = 2; i <= row; i++)
+	{
+		CString strSiteName;
+		strSiteName.Format( "S-%d [%02d]", (i-2) / 10 + 1, (i-2) % 10 + 1);
+		GridData(IDC_CUSTOM_COK_TSITE, i, 1, strSiteName );
+		
+	}
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Init_COK_CNT()
+{
+	TSpread *Grid;
+	int row = 7;
+	int col = 1;
+	int i;
+
+	Grid = (TSpread*)GetDlgItem(IDC_CUSTOM_COK_CNT);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	Grid -> SetColWidthInPixels(1, 37);
+	for (i = 1; i <= row; i++)
+	{
+		Grid -> SetRowHeightInPixels(i, 17);
+		if( i > 1 )	
+		{
+			CString strData;
+			strData.Format( "%d", g_handler_cok.GetCokCnt( i - 2) );
+			GridColor(IDC_CUSTOM_COK_CNT, i, 1, GetCokCol( i - 2 ), BLACK);
+			GridData(IDC_CUSTOM_COK_CNT, i, 1, strData );
+		}
+		GridControl(IDC_CUSTOM_COK_CNT, STATIC, i, 1, 0);
+	}
+	GridFont(IDC_CUSTOM_COK_CNT, 1, 1, 15);
+	GridMerge( IDC_CUSTOM_COK_CNT, 1, 1, 1, 2 );
+	GridColor(IDC_CUSTOM_COK_CNT, 1, 1, BLACK, WHITE_C);
+	GridData(IDC_CUSTOM_COK_CNT, 1, 1, "CNT");
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnDrawCOKSite( int iIdx )
+{
+	GridColor(IDC_CUSTOM_COK_TSITE, iIdx + 2, 1, GetCokCol( g_handler_cok.GetSiteCok( iIdx )), BLACK );
+	GridColor( IDC_CUSTOM_COK_ROBOT, 1, 1, GetCokCol( Run_Robot.GetCokID() ), BLACK );
+}
+
+void CScreen_Main::OnDrawCokStacker( int iIdx )
+{
+	CString strData;
+			strData.Format( "%d", g_handler_cok.GetCokCnt( iIdx ) );
+	GridData(IDC_CUSTOM_COK_CNT, iIdx + 2, 1, strData);
+	GridColor( IDC_CUSTOM_COK_ROBOT, 1, 1, GetCokCol( Run_Robot.GetCokID() ), BLACK );
+}
+
+void CScreen_Main::OnBtnTest1() 
+{
+	if( g_lotMgr.GetLotCount() == 0 )
+		return;
+
+	static int nstBufferNo = 0;
+
+	if( g_handler.GetControlConv( 0 ) == EC_NONE )
+	{
+		g_handler.ControlConv(0, EC_RECEIVE );
+	}
+	else
+	{
+		int nCnt = st_basic.n_tray_x * st_basic.n_tray_y;
+		CString strBufferIn;
+		strBufferIn.Format( "FUNCTION=BUFFER_IN EQPID=SRS-01 LOTID=%s BUFFER_NO=%02d LAST_MDL=NO EMPTY_TRAY=NO POCKET_CNT=%d ", g_lotMgr.GetLotIDAt(0),
+			nstBufferNo + 1, nCnt );
+		for( int i=1; i<=nCnt; i++ )
+		{
+			int iIdx = i + nCnt * nstBufferNo;
+			CString strTemp;
+			strTemp.Format( " POCKET_%02d=(ARRAYSN=MZCPA2561127000000%02d_3 SERIAL=S11ZNYAC5000%02d PPID=KR0NMY6F018511CJ0219A%02d WWN= BIN=)", i,
+				iIdx, iIdx, iIdx );
+			strBufferIn += strTemp;
+		}
+		
+		g_server_front.OnReceived_BufferIn( strBufferIn ); 
+		
+		nstBufferNo++;
+	}
+}
+
+void CScreen_Main::OnMain_Init_TrayMove()
+{
+	for( int i=0; i<16; i++ )
+	{
+		RECT rt;
+		rt.left = 0;
+		rt.top = 0;
+		rt.right = 0;
+		rt.bottom = 0;
+		GetDlgItem( GetCustom_TrayMove(i) )->MoveWindow( &rt );	
+	}
+
+	for( i=0; i<MAX_TRAY; i++ )
+	{
+		OnMain_Init_TrayMove(i);
+	}
+}
+
+void CScreen_Main::OnMain_Init_TrayMove( int iIdx )
+{
+	if( iIdx < 0 )	
+		return;
+
+	if( g_Tray.GetTray(iIdx).GetPos() == TPOS_NONE )
+	{
+		SetTrayPos( iIdx );
+		return;
+	}
+
+	TSpread *Grid;
+
+	int col = st_basic.n_tray_x;
+	int row = st_basic.n_tray_y;
+
+	bool bTurn = (g_Tray.GetTray(iIdx).GetPos() == TPOS_BIN1 ||
+		g_Tray.GetTray(iIdx).GetPos() == TPOS_BIN2 ||
+		g_Tray.GetTray(iIdx).GetPos() == TPOS_BIN3 ||
+		g_Tray.GetTray(iIdx).GetPos() == TPOS_REJECT ||
+		g_Tray.GetTray(iIdx).GetPos() == TPOS_BIN3_TO_REJECT ||
+		g_Tray.GetTray(iIdx).GetPos() == TPOS_REJECT_TO_BIN3 );
+	
+	if( bTurn && 
+		(st_basic.n_degree == EDEG_90 || st_basic.n_degree == EDEG_270 ) )
+	{
+		row = st_basic.n_tray_x;
+		col = st_basic.n_tray_y;
+	}
+	
+	int iGrid = GetCustom_TrayMove(iIdx);
+	Grid = (TSpread*)GetDlgItem( iGrid );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+	
+	for( int iw=0; iw<row; iw++ )
+	{
+		Grid -> SetRowHeightInPixels(iw + 1, 120 / row );
+		for( int ih=0; ih<col; ih++ )
+		{
+			if( iw == 0 )
+				Grid -> SetColWidthInPixels(ih + 1, 120 / col );
+			
+			GridFont( iGrid, iw + 1, ih + 1, 15);
+			GridColor( iGrid, iw + 1, ih + 1, WHITE_C, BLACK_C);
+			GridControl(iGrid, STATIC, iw + 1, ih + 1, 0);
+
+			int iMdlIdx = GetMdlIdx( ih, iw, col, row, bTurn );
+			CString strIdx;
+			strIdx.Format( "%02d", iMdlIdx );
+			GridData( iGrid, iw + 1, ih + 1, strIdx );
+
+			if( g_Tray.GetTray(iIdx).IsExistModule(iMdlIdx - 1) )
+			{
+				GridColor( iGrid, iw + 1, ih + 1, CalcModuleColor( g_Tray.GetTray(iIdx).GetModule(iMdlIdx - 1) ), BLACK_C);
+			}
+		}
+	}
+	
+	Grid = NULL;
+	delete Grid;
+
+	SetTrayPos( iIdx );
+}
+
+int CScreen_Main::GetCustom_TrayMove( int iIdx )
+{
+	switch( iIdx )
+	{
+	case 0: return IDC_CUSTOM_TM_1;
+	case 1: return IDC_CUSTOM_TM_2;
+	case 2: return IDC_CUSTOM_TM_3;
+	case 3: return IDC_CUSTOM_TM_4;
+	case 4: return IDC_CUSTOM_TM_5;
+	case 5: return IDC_CUSTOM_TM_6;
+	case 6: return IDC_CUSTOM_TM_7;
+	case 7: return IDC_CUSTOM_TM_8;
+	case 8: return IDC_CUSTOM_TM_9;
+	case 9: return IDC_CUSTOM_TM_10;
+	case 10: return IDC_CUSTOM_TM_11;
+	case 11: return IDC_CUSTOM_TM_12;
+	case 12: return IDC_CUSTOM_TM_13;
+	case 13: return IDC_CUSTOM_TM_14;
+	case 14: return IDC_CUSTOM_TM_15;
+	case 15: return IDC_CUSTOM_TM_16;
+	}
+
+	return IDC_CUSTOM_TM_1;
+}
+
+void CScreen_Main::SetTrayPos( int iIdx )
+{
+	RECT rt;
+
+	switch( g_Tray.GetTray(iIdx).GetPos() )
+	{
+	case TPOS_NONE:					rt.left = 0;	rt.top = 0;		rt.right = 0;				rt.bottom = 0;				break;
+	case TPOS_CONV1:				rt.left = 213;	rt.top = 648;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV2:				rt.left = 341;	rt.top = 648;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV3:				rt.left = 469;	rt.top = 648;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_FRONT_TO_CONV1:		rt.left = 190;	rt.top = 648;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV1_TO_CONV2:		rt.left = 277;	rt.top = 648;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV2_TO_CONV3:		rt.left = 405;	rt.top = 648;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV3_TO_NEXT:		rt.left = 485;	rt.top = 648;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV_TO_BIN1:			rt.left = 213;	rt.top = 578;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV_TO_BIN2:			rt.left = 341;	rt.top = 578;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_CONV_TO_BIN3:			rt.left = 469;	rt.top = 578;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_BIN_TO_CONV1:			rt.left = 213;	rt.top = 578;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_BIN_TO_CONV2:			rt.left = 341;	rt.top = 578;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_BIN_TO_CONV3:			rt.left = 469;	rt.top = 578;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_BIN1:					rt.left = 213;	rt.top = 508;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_BIN2:					rt.left = 341;	rt.top = 508;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_BIN3:					rt.left = 469;	rt.top = 508;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_BIN3_TO_REJECT:		rt.left = 469;	rt.top = 438;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_REJECT_TO_BIN3:		rt.left = 469;	rt.top = 438;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+	case TPOS_REJECT:				
+		if( g_Tray.GetRejSelectedTray() == iIdx )
+		{
+									rt.left = 630;	rt.top = 508;	rt.right = rt.left + 120;	rt.bottom = rt.top + 120;	break;
+		}
+		else
+		{
+									rt.left = 0;	rt.top = 0;		rt.right = 0;				rt.bottom = 0;
+		}
+		break;
+
+	default:						rt.left = 0;	rt.top = 0;		rt.right = 120;				rt.bottom = 120;			break;	
+	}
+
+	GetDlgItem( GetCustom_TrayMove(iIdx) )->MoveWindow( &rt );
+}
+
+void CScreen_Main::OnMain_Init_Reject_Floor()
+{
+	TSpread* Grid;
+	int row = 5;
+	int col = 1;
+
+	Grid = (TSpread*)GetDlgItem( IDC_CUSTOM_REJ_FLOOR );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	for( int iw=0; iw<row; iw++ )
+	{
+		Grid -> SetRowHeightInPixels(iw + 1, 120 / row );
+		for( int ih=0; ih<col; ih++ )
+		{
+			if( iw == 0 )
+				Grid -> SetColWidthInPixels(ih + 1, 120 );
+			
+			GridFont( IDC_CUSTOM_REJ_FLOOR, iw + 1, ih + 1, 15);
+			GridControl(IDC_CUSTOM_REJ_FLOOR, STATIC, iw + 1, ih + 1, 0);
+		}
+	}
+	
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnCellClick( WPARAM wParam, LPARAM lParam )
+{
+	LPSS_CELLCOORD lpcc = (LPSS_CELLCOORD)lParam;
+
+	if( lpcc->Col == 1 && lpcc->Row == 1 )
+	{
+		CalcPopupMenuByClick( wParam );
+	}
+
+	if(wParam==IDC_CUSTOM_REJ_FLOOR )
+	{
+		int iSelectedIdx = 5 - lpcc->Row;
+		int iSelectedTray_Old = g_Tray.GetRejSelectedTray();
+		g_Tray.SetRejSelected( iSelectedIdx );
+		int iSelectedTray = g_Tray.GetRejSelectedTray();
+
+		if( iSelectedTray_Old != iSelectedTray )
+		{
+			OnMain_Change_Reject_Floor();
+			OnMain_Init_TrayMove( iSelectedTray_Old );
+			OnMain_Init_TrayMove( iSelectedTray );
+		}
+		return;
+	}
+
+	if( wParam == IDC_CUSTOM_SITE_1 )
+	{
+		if( lpcc->Row > 2 )
+		{
+			g_handler.SelectVideo( lpcc->Row - 3 );
+		}
+		return;
+	}
+
+	if( wParam == IDC_CUSTOM_SITE_2 )
+	{
+		if( lpcc->Row > 2 )
+		{
+			g_handler.SelectVideo( 10 + lpcc->Row - 3 );
+		}
+		return;
+	}
+
+	if( wParam == IDC_CUSTOM_NET_USABLE )
+	{
+		if( lpcc->Row == 2 && g_client_bpc.GetUsable() == false )
+		{
+			g_client_bpc.SetUsable( true );
+			OnMain_Display_NetUsable();
+		}
+	}
+
+
+	if( wParam == IDC_CUSTOM_TM_1 )		{ g_Tray.SetSelectedTray(0);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_2 )		{ g_Tray.SetSelectedTray(1);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_3 )		{ g_Tray.SetSelectedTray(2);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_4 )		{ g_Tray.SetSelectedTray(3);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_5 )		{ g_Tray.SetSelectedTray(4);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_6 )		{ g_Tray.SetSelectedTray(5);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_7 )		{ g_Tray.SetSelectedTray(6);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_8 )		{ g_Tray.SetSelectedTray(7);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_9 )		{ g_Tray.SetSelectedTray(8);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_10 )	{ g_Tray.SetSelectedTray(9);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_11 )	{ g_Tray.SetSelectedTray(10);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_12 )	{ g_Tray.SetSelectedTray(11);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_13 )	{ g_Tray.SetSelectedTray(12);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_14 )	{ g_Tray.SetSelectedTray(13);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_15 )	{ g_Tray.SetSelectedTray(14);	OnMain_Change_Selected_Tray(); return; } 
+	if( wParam == IDC_CUSTOM_TM_16 )	{ g_Tray.SetSelectedTray(15);	OnMain_Change_Selected_Tray(); return; } 
+}
+
+void CScreen_Main::OnMain_Change_Reject_Floor()
+{
+	int iRejCnt = g_Tray.GetRejCnt();
+	int iRejSelectedIdx = g_Tray.GetRejSelected();
+
+	for( int iw=0; iw<5; iw++ )
+	{
+		COLORREF col = BLACK_L;
+		CString strData = "";
+		if( 5 - iw <= iRejCnt )						{col = BLUE_L;}
+		if( 5 - iw - 1 == iRejSelectedIdx )			{col = YELLOW_L;	strData = "Selected";}
+		GridColor( IDC_CUSTOM_REJ_FLOOR, iw + 1, 1, col, BLACK_C);
+		GridData( IDC_CUSTOM_REJ_FLOOR, iw + 1, 1, strData );
+	}
+}
+
+void CScreen_Main::OnMain_Init_SelectedTray()
+{
+	TSpread* Grid;
+	int col = 2;
+	int row = 22;
+
+	Grid = (TSpread*)GetDlgItem( IDC_CUSTOM_SELECTED_TRAY );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+	
+	int iMdlCnt = st_basic.n_tray_x * st_basic.n_tray_y;
+	Grid -> SetColWidthInPixels(1, 20 );
+	Grid -> SetColWidthInPixels(2, 248 );
+	for( int iy=0; iy<row; iy++ )
+	{
+		Grid -> SetRowHeightInPixels(iy + 1, 15 );
+		for( int ix=0; ix<col; ix++ )
+		{
+			GridFont( IDC_CUSTOM_SELECTED_TRAY, iy + 1, ix + 1, 15);
+			GridControl(IDC_CUSTOM_SELECTED_TRAY, STATIC, iy + 1, ix + 1, 0);
+
+			if( iy >= iMdlCnt + 2 )
+				GridColor( IDC_CUSTOM_SELECTED_TRAY, iy + 1, ix + 1, BLACK, BLACK );
+			else
+				GridColor( IDC_CUSTOM_SELECTED_TRAY, iy + 1, ix + 1, WHITE_C, BLACK );
+		}
+
+		if( iy >= 2 )
+		{
+			CString strIdx;
+			strIdx.Format("%02d", iy - 1 );
+			GridData( IDC_CUSTOM_SELECTED_TRAY, iy + 1, 1, strIdx );
+		}
+	}
+
+	GridColor( IDC_CUSTOM_SELECTED_TRAY, 1, 1, BLACK_GC, WHITE_C );
+	GridMerge( IDC_CUSTOM_SELECTED_TRAY, 1, 1, 1, 2 );
+	GridColor( IDC_CUSTOM_SELECTED_TRAY, 2, 1, GRAY_C, WHITE_C );
+	GridColor( IDC_CUSTOM_SELECTED_TRAY, 2, 2, YELLOW_D, WHITE_C );
+
+	GridData( IDC_CUSTOM_SELECTED_TRAY, 2, 2, "SERIAL" );
+	
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Change_Selected_Tray()
+{
+	int iSelected = g_Tray.GetSelectedTray();
+	ATray tray;
+	if( iSelected >= 0 )
+	{
+		tray = g_Tray.GetTray(iSelected);	
+	}
+	
+	int iMdlCnt = st_basic.n_tray_x * st_basic.n_tray_y;
+	for( int i=0; i<iMdlCnt; i++ )
+	{
+		if( tray.GetModule(i).IsExist() )
+		{
+			GridColor( IDC_CUSTOM_SELECTED_TRAY, 3 + i, 2, CalcModuleColor( tray.GetModule(i) ), BLACK_C );
+
+			CString strData;
+			switch( m_emvt_mdl )
+			{
+			case EMVT_SERIAL:		strData = tray.GetModule(i).GetSerial();					break;
+			case EMVT_LOTNO:		strData = tray.GetModule(i).GetLotNo();						break;
+			case EMVT_SN:			strData = tray.GetModule(i).GetSN();						break;
+			case EMVT_PPID:			strData = tray.GetModule(i).GetPPID();						break;
+			case EMVT_WWN:			strData = tray.GetModule(i).GetWWN();						break;
+			case EMVT_BIN:			strData = tray.GetModule(i).GetBin();						break;
+			case EMVT_SCRAPCODE:	strData = tray.GetModule(i).GetScrapCode();					break;
+			case EMVT_TESTCNT:		strData.Format( "%d", tray.GetModule(i).GetTestCnt() );		break;
+			}
+			GridData( IDC_CUSTOM_SELECTED_TRAY, 3 + i, 2, strData );
+		}
+		else
+		{
+			GridColor( IDC_CUSTOM_SELECTED_TRAY, 3 + i, 2, WHITE_C, BLACK_C );
+			GridData( IDC_CUSTOM_SELECTED_TRAY, 3 + i, 2, "" );
+		}
+	}
+
+	CString strTrayInfo;
+	if( tray.GetPos() == TPOS_NONE )
+	{
+		strTrayInfo = "NONE";
+	}
+	else
+	{
+		strTrayInfo.Format( "[%s] ->[%s] {%s}", 
+		g_Tray.GetStrPos(tray.GetPos() ), g_Tray.GetStrPos( tray.GetTargetPos() ), tray.GetStrLotID() );
+	}
+	GridData( IDC_CUSTOM_SELECTED_TRAY, 1, 1, strTrayInfo );
+	GridData( IDC_CUSTOM_SELECTED_TRAY, 2, 2, GetStringEMVT( m_emvt_mdl ) );
+}
+
+void CScreen_Main::OnBtnTest2() 
+{
+// 
+// 	g_handler.ControlConv(0, EC_RECEIVE );
+// 
+// 	int nCnt = st_basic.n_tray_x * st_basic.n_tray_y;
+// 	CString strBufferIn;
+// 	strBufferIn.Format( "FUNCTION=BUFFER_IN EQPID=SRS-01 LOTID=AAA0001 BUFFER_NO=01 LAST_MDL=NO EMPTY_TRAY=YES POCKET_CNT=%d ", 0);
+// 
+// 	g_server_front.OnReceived_BufferIn( strBufferIn );
+
+	if( g_lotMgr.GetLotCount() > 0 )
+	{
+		// 뒷 설비로 전달.
+		g_client_next.SetNewLotInID( g_lotMgr.GetLotIDAt(0) );
+		
+		// bpc로 전달.
+		g_client_bpc.SetNewLotInID( g_lotMgr.GetLotIDAt(0) );
+	}
+}
+
+void CScreen_Main::OnMain_Init_TestSite( int iIdx )
+{
+	int iGrid = IDC_CUSTOM_SITE_1;
+	CString strTitle = "TEST SITE 1";
+	if( iIdx == 1 )
+	{
+		iGrid = IDC_CUSTOM_SITE_2;
+		strTitle = "TEST SITE 2";
+	}
+
+	TSpread* Grid;
+	int col = 2;
+	int row = 10 + 2;
+
+	Grid = (TSpread*)GetDlgItem( iGrid );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+	
+	Grid -> SetColWidthInPixels(1, 30 );
+	Grid -> SetColWidthInPixels(2, 141 );
+	for( int iy=0; iy<row; iy++ )
+	{
+		Grid -> SetRowHeightInPixels(iy + 1, 30 );
+		for( int ix=0; ix<col; ix++ )
+		{
+			GridFont( iGrid, iy + 1, ix + 1, 15);
+			GridControl(iGrid, STATIC, iy + 1, ix + 1, 0);
+
+			GridColor( iGrid, iy + 1, ix + 1, WHITE_C, BLACK );
+		}
+
+		if( iy >= 2 )
+		{
+			CString strIdx;
+			strIdx.Format("%02d", iy - 1 );
+			GridData( iGrid, iy + 1, 1, strIdx );
+		}
+	}
+
+	GridMerge( iGrid, 1, 1, 1, 2 );
+	GridMerge( iGrid, 2, 1, 1, 2 );
+	GridData( iGrid, 1, 1, strTitle );
+
+	GridColor( iGrid, 1, 1, BLACK_GC, WHITE_C );
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Init_COK_Robot()
+{
+	TSpread* Grid;
+	int row = 1;
+	int col = 1;
+
+	Grid = (TSpread*)GetDlgItem( IDC_CUSTOM_COK_ROBOT );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	Grid -> SetRowHeightInPixels(1, 23 );
+	Grid -> SetColWidthInPixels(1, 82 );
+	GridFont( IDC_CUSTOM_COK_ROBOT, 1, 1, 15);
+	GridControl(IDC_CUSTOM_COK_ROBOT, STATIC, 1, 1, 0);
+	GridData( IDC_CUSTOM_COK_ROBOT, 1, 1, "COK" );
+	
+	Grid = NULL;
+	delete Grid;
+
+	GridColor( IDC_CUSTOM_COK_ROBOT, 1, 1, GetCokCol( Run_Robot.GetCokID() ), BLACK );
+}
+
+void CScreen_Main::OnMain_Init_Robot_Module()
+{
+	TSpread* Grid;
+	int row = 5;
+	int col = 1;
+
+	Grid = (TSpread*)GetDlgItem( IDC_CUSTOM_ROBOT_MODULE );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	for( int iw=0; iw<row; iw++ )
+	{
+		Grid -> SetRowHeightInPixels(iw + 1, 20);
+		Grid -> SetColWidthInPixels(1, 82 );
+			
+		GridFont( IDC_CUSTOM_ROBOT_MODULE, iw + 1, 1, 15);
+		GridControl(IDC_CUSTOM_ROBOT_MODULE, STATIC, iw + 1, 1, 0);
+	}
+
+	GridColor( IDC_CUSTOM_ROBOT_MODULE, 1, 1, BLACK, WHITE_C );
+	GridData( IDC_CUSTOM_ROBOT_MODULE, 1, 1, "Serial" );
+	
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_display_RobotPicker()
+{
+	for( int i=0; i<PICKER_CNT; i++ )
+	{
+		if( g_robot.GetPicker(i).GetModule().IsExist() )
+		{
+			GridColor( IDC_CUSTOM_ROBOT_MODULE, 2 + i, 1, CalcModuleColor( g_robot.GetPicker(i).GetModule() ), BLACK_C );
+
+			CString strData;
+			switch( m_emvt_mdl )
+			{
+			case EMVT_SERIAL:		strData = g_robot.GetPicker(i).GetModule().GetSerial();						break;
+			case EMVT_LOTNO:		strData = g_robot.GetPicker(i).GetModule().GetLotNo();						break;
+			case EMVT_SN:			strData = g_robot.GetPicker(i).GetModule().GetSN();							break;
+			case EMVT_PPID:			strData = g_robot.GetPicker(i).GetModule().GetPPID();						break;
+			case EMVT_WWN:			strData = g_robot.GetPicker(i).GetModule().GetWWN();						break;
+			case EMVT_BIN:			strData = g_robot.GetPicker(i).GetModule().GetBin();						break;
+			case EMVT_SCRAPCODE:	strData = g_robot.GetPicker(i).GetModule().GetScrapCode();					break;
+			case EMVT_TESTCNT:		strData.Format( "%d", g_robot.GetPicker(i).GetModule().GetTestCnt() );		break;
+			}
+			GridData( IDC_CUSTOM_ROBOT_MODULE, 2 + i, 1, strData );
+		}
+		else
+		{
+			GridColor( IDC_CUSTOM_ROBOT_MODULE, 2 + i, 1, WHITE_C, BLACK_C );
+			GridData( IDC_CUSTOM_ROBOT_MODULE, 2 + i, 1, "" );
+		}
+	}
+}
+
+void CScreen_Main::OnMain_Display_TestSite()
+{
+	GridData( IDC_CUSTOM_SITE_1, 2, 1, GetStringEMVT( m_emvt_ts ) );
+	GridData( IDC_CUSTOM_SITE_2, 2, 1, GetStringEMVT( m_emvt_ts ) );
+	for( int i=0; i<TSITE_SOCKET_CNT; i++ )
+	{
+		int iGrid = IDC_CUSTOM_SITE_1;
+		int x = 3 + i;
+
+		if( i >= 10 )
+		{
+			iGrid = IDC_CUSTOM_SITE_2;
+			x = 3 + i - 10;
+		}
+
+		if( g_site.GetEnableSocket(i) == false )
+		{
+			GridColor( iGrid, x, 2, GRAY_C, BLACK_C );
+			GridData( iGrid, x, 2, "DISABLE" );
+			continue;
+		}
+		
+		if( g_site.GetModule(i).IsExist() || m_emvt_ts >= EMVT_USABLE )
+		{
+			CString strData;
+			switch( m_emvt_ts )
+			{
+			case EMVT_SERIAL:		strData = g_site.GetModule(i).GetSerial();						break;
+			case EMVT_LOTNO:		strData = g_site.GetModule(i).GetLotNo();						break;
+			case EMVT_SN:			strData = g_site.GetModule(i).GetSN();							break;
+			case EMVT_PPID:			strData = g_site.GetModule(i).GetPPID();						break;
+			case EMVT_WWN:			strData = g_site.GetModule(i).GetWWN();							break;
+			case EMVT_BIN:			strData = g_site.GetModule(i).GetBin();							break;
+			case EMVT_SCRAPCODE:	strData = g_site.GetModule(i).GetScrapCode();					break;
+			case EMVT_TESTCNT:		strData.Format( "%d", g_site.GetModule(i).GetTestCnt() );		break;
+						
+			case EMVT_USABLE:		strData = "";													break;
+			case EMVT_BOARDOK:		strData = g_site.GetBoardOn(i) ? "ON" : "OFF";					break;
+			case EMVT_TS_TESTCNT:	strData.Format( "%d", g_site.GetTestCount(i) );					break;
+			case EMVT_BINHISTORY:	strData = g_site.GetBinHistory(i);								break;
+			}
+			strData.Format( "%s", strData );
+			GridColor( iGrid, x, 2, CalcModuleColor( g_site.GetModule(i)), BLACK_C );
+			GridData( iGrid, x, 2, strData );
+		}
+		else
+		{
+			CString strCount;
+			strCount.Format( "", g_site.GetTestCount(i) );
+			GridColor( iGrid, x, 2, WHITE_C, BLACK_C );
+			GridData( iGrid, x, 2, strCount );
+		}
+	}
+}
+
+void CScreen_Main::OnMain_Init_BinTray( int iIdx )
+{
+	int iGrid = IDC_CUSTOM_BIN_TRAY_1;
+	if( iIdx == 1 )
+		iGrid = IDC_CUSTOM_BIN_TRAY_2;
+
+	TSpread* Grid;
+	int col = 2;
+	int row = 22;
+
+	Grid = (TSpread*)GetDlgItem( iGrid );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+	
+	int iMdlCnt = st_basic.n_tray_x * st_basic.n_tray_y;
+	Grid -> SetColWidthInPixels(1, 20 );
+	Grid -> SetColWidthInPixels(2, 176 );
+	for( int iy=0; iy<row; iy++ )
+	{
+		Grid -> SetRowHeightInPixels(iy + 1, 15 );
+		for( int ix=0; ix<col; ix++ )
+		{
+			GridFont( iGrid, iy + 1, ix + 1, 15);
+			GridControl(iGrid, STATIC, iy + 1, ix + 1, 0);
+
+			if( iy >= iMdlCnt + 2 )
+				GridColor( iGrid, iy + 1, ix + 1, BLACK, BLACK );
+			else
+				GridColor( iGrid, iy + 1, ix + 1, WHITE_C, BLACK );
+		}
+
+		if( iy >= 2 )
+		{
+			CString strIdx;
+			strIdx.Format("%02d", iy - 1 );
+			GridData( iGrid, iy + 1, 1, strIdx );
+		}
+	}
+
+	GridColor( iGrid, 1, 1, BLACK_GC, WHITE_C );
+	GridMerge( iGrid, 1, 1, 1, 2 );
+	GridColor( iGrid, 2, 1, GRAY_C, WHITE_C );
+	GridColor( iGrid, 2, 2, YELLOW_D, WHITE_C );
+
+	CString strTitle;
+	strTitle.Format( "Bin %d", iIdx + 1 );
+	GridData( iGrid, 1, 1, strTitle );
+	GridData( iGrid, 2, 2, "SERIAL" );
+	
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Change_BinTray( int iIdx )
+{
+	int iGrid = IDC_CUSTOM_BIN_TRAY_1;
+	if( iIdx == 1 )
+		iGrid = IDC_CUSTOM_BIN_TRAY_2;
+
+	int iTray = g_Tray.GetIdxByPos( (ETRAY_POS)(TPOS_BIN1 + iIdx) );
+	
+	ATray tray;
+	if( iTray >= 0 )
+	{
+		tray = g_Tray.GetTray( iTray );
+	}
+
+	int iMdlCnt = st_basic.n_tray_x * st_basic.n_tray_y;
+	for( int i=0; i<iMdlCnt; i++ )
+	{
+		if( tray.GetModule(i).IsExist() )
+		{
+			GridColor( iGrid, 3 + i, 2, CalcModuleColor( tray.GetModule(i) ), BLACK_C );
+
+			CString strData;
+			switch( m_emvt_mdl )
+			{
+			case EMVT_SERIAL:		strData = tray.GetModule(i).GetSerial();					break;
+			case EMVT_LOTNO:		strData = tray.GetModule(i).GetLotNo();						break;
+			case EMVT_SN:			strData = tray.GetModule(i).GetSN();						break;
+			case EMVT_PPID:			strData = tray.GetModule(i).GetPPID();						break;
+			case EMVT_WWN:			strData = tray.GetModule(i).GetWWN();						break;
+			case EMVT_BIN:			strData = tray.GetModule(i).GetBin();						break;
+			case EMVT_SCRAPCODE:	strData = tray.GetModule(i).GetScrapCode();					break;
+			case EMVT_TESTCNT:		strData.Format( "%d", tray.GetModule(i).GetTestCnt() );		break;
+			}
+			GridData( iGrid, 3 + i, 2, strData );
+		}
+		else
+		{
+			GridColor( iGrid, 3 + i, 2, WHITE_C, BLACK_C );
+			GridData( iGrid, 3 + i, 2, "" );
+		}
+	}
+
+	CString strTrayInfo;
+	if( tray.GetPos() == TPOS_NONE )
+	{
+		strTrayInfo.Format( "BIN %d", iIdx + 1);
+	}
+	else
+	{
+		strTrayInfo.Format( "BIN %d [%s]", iIdx + 1, tray.GetStrLotID() );
+	}
+	GridData( iGrid, 1, 1, strTrayInfo );
+
+	GridData( iGrid, 2, 2, GetStringEMVT( m_emvt_mdl ) );
+}
+
+void CScreen_Main::CalcPopupMenuByClick( int iCustom )
+{
+	if( iCustom != IDC_CUSTOM_LOT_INFO &&
+		iCustom != IDC_CUSTOM_ROBOT_MODULE &&
+		iCustom != IDC_CUSTOM_SITE_1 && 
+		iCustom != IDC_CUSTOM_SITE_2 &&
+		iCustom != IDC_CUSTOM_COK_ROBOT &&
+		iCustom != IDC_CUSTOM_ROBOT_MODULE )
+	{
+		return;
+	}
+
+	if( iCustom == m_iClick && 
+		GetCurrentTime() - m_dwTimeClicked < 1000 )
+	{
+		m_iClickCnt++;	
+	}
+	else
+	{
+		m_iClickCnt = 1;
+	}
+
+	if( m_iClickCnt >= 3 )
+	{
+		switch( iCustom )
+		{
+		case IDC_CUSTOM_LOT_INFO:	
+			{
+				CDialog_Data_Lot dlgDataLot;
+				dlgDataLot.DoModal();
+			}
+			break;
+
+		case IDC_CUSTOM_SITE_1:
+		case IDC_CUSTOM_SITE_2:
+			{
+				CDialog_Data_TestSite dlgDataTestSite;
+				dlgDataTestSite.DoModal();
+			}
+			break;
+
+		case IDC_CUSTOM_COK_ROBOT:
+			{
+				CDialog_Data_Cok dlgDataCok;
+				dlgDataCok.DoModal();
+			}
+			break;
+
+		case IDC_CUSTOM_ROBOT_MODULE:
+			{
+				CDialog_Data_Module dlgDataModule;
+				dlgDataModule.DoModal();
+			}
+			break;
+		}
+		
+		m_iClickCnt = 0;
+	}
+
+	m_iClick = iCustom;
+	m_dwTimeClicked = GetCurrentTime();
+}
+
+void CScreen_Main::OnDrawVideo()
+{
+	for( int i=0; i<SITE_COK_CNT; i++ )
+	{
+		GridColor( IDC_CUSTOM_SITE_1, i + 3, 1, WHITE_C, BLACK_C );
+		GridColor( IDC_CUSTOM_SITE_2, i + 3, 1, WHITE_C, BLACK_C );
+	}
+
+	int nVideo = g_handler.GetVideo();
+	int iGrid = IDC_CUSTOM_SITE_1;
+	if( nVideo >= 10 )
+		iGrid = IDC_CUSTOM_SITE_2;
+
+	if( nVideo >= 0 )
+	{
+		GridColor( iGrid, (nVideo % 10) + 3, 1, RED_L, BLACK_C );
+	}
+}
+
+void CScreen_Main::OnMain_Init_NetUsable()
+{
+	TSpread *Grid;
+	int row = 5;
+	int col = 1;
+	int i;
+
+	int iGrid = IDC_CUSTOM_NET_USABLE;
+	Grid = (TSpread*)GetDlgItem(iGrid);
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	Grid -> SetColWidthInPixels(1, 120);
+	for (i = 1; i <= row; i++)
+	{
+		Grid -> SetRowHeightInPixels(i, 20);
+		GridControl(iGrid, STATIC, i, 1, 0);
+		GridFont(iGrid, i, 1, 15);
+		GridColor(iGrid, i, 1, BLUE_L, BLACK_C);
+	}
+	GridData(iGrid, 1, 1, "R Sorter");
+	GridData(iGrid, 2, 1, "TESTER");
+	GridData(iGrid, 3, 1, "EC Server");
+	GridData(iGrid, 4, 1, "Front Machine");
+	GridData(iGrid, 5, 1, "Next Machine");
+
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnMain_Display_NetUsable()
+{
+	for (int i = 1; i <= 5; i++)
+	{
+		GridColor(IDC_CUSTOM_NET_USABLE, i, 1, BLUE_L, BLACK_C);
+	}
+
+	if( g_client_router.GetUsable() == false )
+		GridColor( IDC_CUSTOM_NET_USABLE, 1, 1, RED_C, BLACK_C );
+
+	if( g_client_bpc.GetUsable() == false )
+		GridColor( IDC_CUSTOM_NET_USABLE, 2, 1, RED_C, BLACK_C );
+
+	if( g_client_ec.GetUsable() == false )
+		GridColor( IDC_CUSTOM_NET_USABLE, 3, 1, RED_C, BLACK_C );
+
+	if( g_client_front.GetUsable() == false )
+		GridColor( IDC_CUSTOM_NET_USABLE, 4, 1, RED_C, BLACK_C );
+
+	if( g_client_next.GetUsable() == false )
+		GridColor( IDC_CUSTOM_NET_USABLE, 5, 1, RED_C, BLACK_C );
+
+}
+
+void CScreen_Main::OnBtnTest3() 
+{
+	// 진행중인 랏이 없다.
+	if( g_lotMgr.GetLotCount() == 0 )
+	{
+		DoModal_Msg( "진행중인 랏이 없습니다.");
+		return;
+	}
+
+	// 트레이 빈 공간이 없어야 한다.
+	if( g_Tray.GetVecRejEmptyCell().size() > 0 )
+	{
+		DoModal_Msg( "아직 빈 공간이 남아 있습니다.");
+		return;
+	}
+
+	// 4장 넘으면 안된다.
+	if( g_Tray.GetRejCnt() >= 4 )
+	{
+		DoModal_Msg( "리젝트 스태커에는 트레이가 4장을 넘을 수 없습니다.");
+		return;
+	}
+	
+	ATray tray;
+	tray.SetTargetPos( TPOS_REJECT );
+	if( g_lotMgr.GetLotCount() > 0 )
+		tray.SetLotID( g_lotMgr.GetLotIDAt(0) );
+
+	g_Tray.AddTray( tray );
+	g_Tray.TrayMoved( TPOS_NONE, TPOS_REJECT );
+}
+
+void CScreen_Main::OnMain_Display_Bin_Info()
+{
+	for( int i=0; i<BIN_MAX; i++ )
+	{
+		// LOT
+		CString strBinCnt;
+		strBinCnt.Format( "%04d", g_lotMgr.GetLotAt(0).GetBinCnt(i));
+		GridData( IDC_CUSTOM_BIN_INFO, i + 1, 3, strBinCnt );
+
+		// Daily
+		strBinCnt.Format( "%04d", g_lotMgr.GetBinCnt(i) );
+		GridData( IDC_CUSTOM_BIN_INFO, i + 1, 2, strBinCnt );
+	}
+}
+
+void CScreen_Main::OnBtnTest4() 
+{
+	SYSTEMTIME st;
+	st.wYear = 2012;
+	st.wMonth = 1;
+	st.wDay = 2;
+
+	AMTRegistry::RegWriteTime( st );
+}
+
+void CScreen_Main::OnBtnTest5() 
+{
+// 	SYSTEMTIME st = AMTRegistry::RegReadTime();
+// 	SYSTEMTIME st2;
+// 	COleDateTime::GetAsSystemTime( st2 );
+// 
+// 	SYSTEMTIME st3 = st2 - st;
+}
+
+LRESULT CScreen_Main::OnMain_Change_View( WPARAM wParam, LPARAM lParam )
+{
+	switch( wParam )
+	{
+	case ECVT_TESTSITE:
+		m_emvt_ts = (ENUM_MAIN_VIEW_TYPE)(m_emvt_ts + 1);
+		if( m_emvt_ts <= EMVT_BOARDOK || m_emvt_ts >= EMVT_MAX )
+			m_emvt_ts = EMVT_BOARDOK;
+
+		OnMain_Display_TestSite();
+		break;
+
+	case ECVT_MODULE:
+		m_emvt_mdl = (ENUM_MAIN_VIEW_TYPE)(m_emvt_mdl + 1);
+		if( m_emvt_mdl >= EMVT_USABLE )
+			m_emvt_mdl = EMVT_SERIAL;
+
+		m_emvt_ts = m_emvt_mdl;
+
+		OnMain_Display_TestSite();
+		OnMain_display_RobotPicker();
+		OnMain_Change_BinTray(0);
+		OnMain_Change_BinTray(1);
+		OnMain_Change_Selected_Tray();
+		break;
+	}
+
+	return 0;
+}
+
+CString CScreen_Main::GetStringEMVT( ENUM_MAIN_VIEW_TYPE emvt )
+{
+	switch( emvt )
+	{
+	case EMVT_SERIAL:		return "SERIAL";
+	case EMVT_LOTNO:		return "LOT NO";
+	case EMVT_SN:			return "SN";
+	case EMVT_PPID:			return "PPID";
+	case EMVT_WWN:			return "WWN";
+	case EMVT_BIN:			return "BIN";
+	case EMVT_SCRAPCODE:	return "SCRAP CODE";
+	case EMVT_TESTCNT:		return "TEST COUNT";
+	
+	case EMVT_USABLE:		return "ENABLE/DISABLE";
+	case EMVT_BOARDOK:		return "BOARD ON/OFF";
+	case EMVT_TS_TESTCNT:	return "SOCKET TEST COUNT";
+	case EMVT_BINHISTORY:	return "BIN HISTORY";
+	//EMVT_MAX,
+	}
+
+	return "";
+}
+
+void CScreen_Main::OnMain_Init_Ref_Color()
+{
+	TSpread* Grid;
+	int row = 7;
+	int col = 1;
+
+	Grid = (TSpread*)GetDlgItem( IDC_CUSTOM_REF_COLOR );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	for( int iw=0; iw<row; iw++ )
+	{
+		Grid -> SetRowHeightInPixels(iw + 1, 26);
+		Grid -> SetColWidthInPixels(1, 82 );
+			
+		GridFont( IDC_CUSTOM_REF_COLOR, iw + 1, 1, 15);
+		GridControl(IDC_CUSTOM_REF_COLOR, STATIC, iw + 1, 1, 0);
+	}
+
+	GridColor( IDC_CUSTOM_REF_COLOR, 1, 1, CalcModuleColor( EMS_LOAD ), BLACK_C );
+	GridData( IDC_CUSTOM_REF_COLOR, 1, 1, "LOAD" );
+
+	GridColor( IDC_CUSTOM_REF_COLOR, 2, 1, CalcModuleColor( EMS_READY ), BLACK_C );
+	GridData( IDC_CUSTOM_REF_COLOR, 2, 1, "READY" );
+
+	GridColor( IDC_CUSTOM_REF_COLOR, 3, 1, CalcModuleColor( EMS_TEST ), BLACK_C );
+	GridData( IDC_CUSTOM_REF_COLOR, 3, 1, "TEST" );
+
+	GridColor( IDC_CUSTOM_REF_COLOR, 4, 1, CalcModuleColor( EMS_ABORT ), BLACK_C );
+	GridData( IDC_CUSTOM_REF_COLOR, 4, 1, "ABORT" );
+
+	GridColor( IDC_CUSTOM_REF_COLOR, 5, 1, CalcModuleColor( EMS_GOOD ), BLACK_C );
+	GridData( IDC_CUSTOM_REF_COLOR, 5, 1, "GOOD" );
+
+	GridColor( IDC_CUSTOM_REF_COLOR, 6, 1, CalcModuleColor( EMS_FAIL ), BLACK_C );
+	GridData( IDC_CUSTOM_REF_COLOR, 6, 1, "FAIL" );
+
+	GridColor( IDC_CUSTOM_REF_COLOR, 7, 1, CalcModuleColor( EMS_RELOAD ), BLACK_C );
+	GridData( IDC_CUSTOM_REF_COLOR, 7, 1, "RELOAD" );
+	
+	Grid = NULL;
+	delete Grid;
+}
+
+void CScreen_Main::OnBtnTest6() 
+{
+	// TODO: Add your control notification handler code here
+
+	g_Tray.SetSendNextFromRejForce( true );
+	g_handler.CalcTrayMoveNext_fromReject();
+	g_Tray.SetSendNextFromRejForce( false );
+}
+
+void CScreen_Main::OnMain_Init_Door()
+{
+	TSpread* Grid;
+	int row = 2;
+	int col = 2;
+
+	Grid = (TSpread*)GetDlgItem( IDC_CUSTOM_DOOR );
+	Grid -> SetBool(SSB_EDITMODEPERMANENT, TRUE);
+	Grid -> SetBool(SSB_SHOWCOLHEADERS, FALSE);
+	Grid -> SetBool(SSB_SHOWROWHEADERS, FALSE);
+	Grid -> SetBool(SSB_HORZSCROLLBAR, FALSE);
+	Grid -> SetBool(SSB_VERTSCROLLBAR, FALSE);
+	Grid -> SetMaxRows(row);
+	Grid -> SetMaxCols(col);
+
+	for( int ih=0; ih<row; ih++ )
+	{
+		Grid -> SetRowHeightInPixels(ih + 1, 26);
+
+		for( int iw = 0; iw<col; iw++ )
+		{
+			Grid -> SetColWidthInPixels(iw + 1, 93 );
+			
+			GridFont( IDC_CUSTOM_DOOR, ih + 1, iw + 1, 15);
+			GridControl(IDC_CUSTOM_DOOR, STATIC, ih + 1, iw + 1, 0);
+		}
+	}
+
+	GridData( IDC_CUSTOM_DOOR, 1, 1, "DOOR 1" );
+	GridData( IDC_CUSTOM_DOOR, 1, 2, "DOOR 2" );
+	GridData( IDC_CUSTOM_DOOR, 2, 1, "DOOR 3" );
+	GridData( IDC_CUSTOM_DOOR, 2, 2, "DOOR 4" );
+}
+
+void CScreen_Main::OnMain_Display_Door()
+{
+	COLORREF col = RED_C;
+	if( g_ioMgr.get_in_bit( st_io.i_door1_chk ) == IO_ON )	col = BLUE_L;
+	GridColor( IDC_CUSTOM_DOOR, 1, 1, col, BLACK_C );
+
+	col = RED_C;	if( g_ioMgr.get_in_bit( st_io.i_door2_chk ) == IO_ON )	col = BLUE_L;
+	GridColor( IDC_CUSTOM_DOOR, 1, 2, col, BLACK_C );
+
+	col = RED_C;	if( g_ioMgr.get_in_bit( st_io.i_door3_chk ) == IO_ON )	col = BLUE_L;
+	GridColor( IDC_CUSTOM_DOOR, 2, 1, col, BLACK_C );
+
+	col = RED_C;	if( g_ioMgr.get_in_bit( st_io.i_door4_chk ) == IO_ON )	col = BLUE_L;
+	GridColor( IDC_CUSTOM_DOOR, 2, 2, col, BLACK_C );
+}

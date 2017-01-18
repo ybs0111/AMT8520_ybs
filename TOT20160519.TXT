@@ -1,0 +1,36 @@
+[2016/05/19 13:20:12.977]  : #0 Port : 4000 Server Create
+[2016/05/19 13:20:12.995]  : #1 Port : 9999 Server Create
+[2016/05/19 13:20:12.998]  : #2 Port : 9998 Server Create
+[2016/05/19 13:20:14.309]  : [OnMain_Motor_Setting]
+[2016/05/19 13:20:14.311]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.312]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.313]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.316]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.318]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.319]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.321]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.323]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.324]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.326]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.328]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.330]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.332]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.334]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.336]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.337]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.339]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/05/19 13:20:14.341]  : [OnMain_Motor_Setting]
+[2016/05/19 13:20:16.012]  : Connect Fail To [NEXT]
+[2016/05/19 13:20:20.049]  : [Stop Button] Handler Stop
+[2016/05/19 13:20:21.133]  : [초 기 화] 장비 초기화 실패
+[2016/05/19 13:20:23.018]  : [초 기 화] 장비 초기화 실패
+[2016/05/19 13:20:23.024]  : Connect Fail To [NEXT]
+[2016/05/19 13:20:23.032]  : Connect Fail To [NEXT]
+[2016/05/19 13:20:23.040]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/05/19 13:20:27.007]  : Connect Fail To [EC SERVER]
+[2016/05/19 13:20:28.020]  : Connect Fail To [XGEM]
+[2016/05/19 13:20:33.018]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000097
+[2016/05/19 13:20:33.024]  : C_Send to [XGEM] : <SUSPENDED> HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/05/19 13:20:33.119]  : C_RECV From ClientSocket : 97
+[2016/05/19 13:20:33.120]  : C_RECV From [XGEM]: HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/05/19 13:20:34.992]  : Level 2 Mode (Machine Teaching Mode)

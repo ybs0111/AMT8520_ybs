@@ -1,0 +1,268 @@
+14:22:58 [Proc:Seq] >>>>>>>>>>>>>>>>>>>>>>>  Logging Started  <<<<<<<<<<<<<<<<<<<<<<<<
+14:22:58 [Proc:Seq] Build date time: Jan 20 2014 17:03:38 th=2504
+14:22:58 [Proc:Seq] File Version: 3.1.1.4
+          th=2504
+14:22:58 [Proc:Seq] ProjectType : XGem200. th=2504
+14:22:58 [Alarm:000071] can't read product type from license driver., th=2504
+14:22:58 [Proc:Seq] Can't find license key. XGem is started for trial version. th=2504
+14:22:58 [Proc:Seq] Loaded config file path: C:\XGEM\AMT_UF200\AMT_UF200\XGem.cfg. th=2504
+14:22:58 [Proc:Seq] Success to open database(MDB). th=2504
+14:22:58 [Debug:LDBInterface] Start to reading data SV/DVVAL information from database(mdb file). th=2504
+14:22:58 [Debug:LDBInterface] 	0000    Name=Clock, Vid=1, Type=16, Size=16, Class=SV, Min=, Max=, Unit=YYYYMMDDhhmmsscc, Def=, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0001    Name=ALCD, Vid=2, Type=8, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=BIN:00 th=2504
+14:22:58 [Debug:LDBInterface] 	0002    Name=AlarmSet, Vid=3, Type=0, Size=0, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=L:{
+         } th=2504
+14:22:58 [Debug:LDBInterface] 	0003    Name=ControlState, Vid=4, Type=41, Size=1, Class=SV, Min=1, Max=5, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0004    Name=EventsEnabled, Vid=5, Type=0, Size=0, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=L:{
+         } th=2504
+14:22:58 [Debug:LDBInterface] 	0005    Name=ProcessState, Vid=6, Type=41, Size=1, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0006    Name=PreviousProcessState, Vid=7, Type=41, Size=1, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0007    Name=AlarmsEnabled, Vid=8, Type=0, Size=0, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=L:{
+         } th=2504
+14:22:58 [Debug:LDBInterface] 	0008    Name=SpoolCountActual, Vid=11, Type=42, Size=1, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U2:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0009    Name=SpoolCountTotal, Vid=12, Type=42, Size=1, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U2:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0010    Name=SpoolFullTime, Vid=13, Type=16, Size=16, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0011    Name=MDLN, Vid=14, Type=16, Size=20, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0012    Name=SOFTREV, Vid=15, Type=16, Size=20, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0013    Name=SpoolStartTime, Vid=16, Type=16, Size=16, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0014    Name=SpoolStatus, Vid=17, Type=41, Size=1, Class=SV, Min=, Max=1, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0015    Name=SpoolFull, Vid=18, Type=41, Size=1, Class=SV, Min=5, Max=6, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0016    Name=AlarmID, Vid=24, Type=42, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U2:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0017    Name=ChangedECID, Vid=25, Type=0, Size=0, Class=DVVAL, Min=, Max=, Unit=cm, Def=, Use=1, MemoryType=1, Val=L:{
+         } th=2504
+14:22:58 [Debug:LDBInterface] 	0018    Name=EventLimit, Vid=26, Type=42, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U2:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0019    Name=LimitVariable, Vid=27, Type=42, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U2:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0020    Name=OperatorCommand, Vid=28, Type=41, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0021    Name=PPChangeName, Vid=29, Type=16, Size=20, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0022    Name=PPChangeStatus, Vid=30, Type=41, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0023    Name=PPError, Vid=31, Type=16, Size=20, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0024    Name=TransitionType, Vid=32, Type=8, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=BIN:00 th=2504
+14:22:58 [Debug:LDBInterface] 	0025    Name=PortID, Vid=33, Type=41, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0026    Name=PreviousControlState, Vid=34, Type=41, Size=1, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0027    Name=CommState, Vid=35, Type=41, Size=1, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0028    Name=PreviousCommState, Vid=36, Type=41, Size=1, Class=SV, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0029    Name=EQPID, Vid=2101, Type=16, Size=9, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] 	0030    Name=Process State, Vid=2102, Type=44, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=U4:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0031    Name=PartNo, Vid=2103, Type=16, Size=22, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] 	0032    Name=LotNo, Vid=2104, Type=16, Size=10, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] 	0033    Name=Model Name, Vid=2108, Type=16, Size=20, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] 	0034    Name=TactTime, Vid=2110, Type=16, Size=6, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] 	0035    Name=ToTCnt, Vid=2111, Type=44, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=U4:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0036    Name=PassCnt, Vid=2112, Type=44, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=U4:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0037    Name=FailCnt, Vid=2113, Type=44, Size=1, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=U4:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0038    Name=TIME, Vid=2114, Type=16, Size=16, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] 	0039    Name=2D Barcode, Vid=2115, Type=16, Size=32, Class=DVVAL, Min=, Max=, Unit=, Def=, Use=1, MemoryType=2, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] Complete to reading SV/DVVAL information from database(mdb file). th=2504
+14:22:58 [Debug:LDBInterface] Start to reading data ECV information from database(mdb file). th=2504
+14:22:58 [Debug:LDBInterface] 	0000    Name=Equipment_Initiated_Connected, Vid=101, Type=9, Size=1, Min=, Max=, Unit=, Def=0, Use=1, MemoryType=1, Val=BOOL:1 th=2504
+14:22:58 [Debug:LDBInterface] 	0001    Name=EstablishCommunicationsTimeout, Vid=102, Type=42, Size=1, Min=, Max=, Unit=, Def=20, Use=1, MemoryType=1, Val=U2:20 th=2504
+14:22:58 [Debug:LDBInterface] 	0002    Name=MaxSpoolTransmit, Vid=103, Type=44, Size=1, Min=, Max=, Unit=, Def=10, Use=1, MemoryType=1, Val=U4:10 th=2504
+14:22:58 [Debug:LDBInterface] 	0003    Name=OverWriteSpool, Vid=104, Type=9, Size=1, Min=, Max=, Unit=, Def=0, Use=1, MemoryType=1, Val=BOOL:1 th=2504
+14:22:58 [Debug:LDBInterface] 	0004    Name=EnableSpooling, Vid=105, Type=9, Size=0, Min=, Max=, Unit=, Def=0, Use=1, MemoryType=1, Val=BOOL:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0005    Name=TimeFormat, Vid=106, Type=9, Size=1, Min=, Max=, Unit=, Def=0, Use=1, MemoryType=1, Val=BOOL:1 th=2504
+14:22:58 [Debug:LDBInterface] 	0006    Name=T3Timeout, Vid=109, Type=42, Size=1, Min=1, Max=120, Unit=seconds, Def=45, Use=1, MemoryType=1, Val=U2:45 th=2504
+14:22:58 [Debug:LDBInterface] 	0007    Name=T5Timeout, Vid=110, Type=42, Size=1, Min=1, Max=240, Unit=seconds, Def=10, Use=1, MemoryType=1, Val=U2:10 th=2504
+14:22:58 [Debug:LDBInterface] 	0008    Name=T6Timeout, Vid=111, Type=42, Size=1, Min=1, Max=240, Unit=seconds, Def=5, Use=1, MemoryType=1, Val=U2:5 th=2504
+14:22:58 [Debug:LDBInterface] 	0009    Name=T7Timeout, Vid=112, Type=42, Size=1, Min=1, Max=240, Unit=seconds, Def=10, Use=1, MemoryType=1, Val=U2:10 th=2504
+14:22:58 [Debug:LDBInterface] 	0010    Name=T8Timeout, Vid=113, Type=42, Size=1, Min=1, Max=120, Unit=seconds, Def=5, Use=1, MemoryType=1, Val=U2:5 th=2504
+14:22:58 [Debug:LDBInterface] 	0011    Name=InitControlState, Vid=117, Type=41, Size=1, Min=1, Max=2, Unit=, Def=1, Use=1, MemoryType=1, Val=U1:1 th=2504
+14:22:58 [Debug:LDBInterface] 	0012    Name=OffLineSubState, Vid=118, Type=41, Size=1, Min=1, Max=3, Unit=, Def=1, Use=1, MemoryType=1, Val=U1:1 th=2504
+14:22:58 [Debug:LDBInterface] 	0013    Name=OnLineFailState, Vid=120, Type=41, Size=1, Min=1, Max=2, Unit=, Def=2, Use=1, MemoryType=1, Val=U1:2 th=2504
+14:22:58 [Debug:LDBInterface] 	0014    Name=Maker, Vid=121, Type=16, Size=20, Min=, Max=, Unit=, Def=, Use=1, MemoryType=1, Val=A: th=2504
+14:22:58 [Debug:LDBInterface] 	0015    Name=OnLineSubState, Vid=122, Type=41, Size=1, Min=1, Max=2, Unit=, Def=1, Use=1, MemoryType=1, Val=U1:1 th=2504
+14:22:58 [Debug:LDBInterface] 	0016    Name=MaxSpoolMsg, Vid=123, Type=42, Size=1, Min=0, Max=300, Unit=100, Def=100, Use=1, MemoryType=1, Val=U2:300 th=2504
+14:22:58 [Debug:LDBInterface] 	0017    Name=DeviceID, Vid=124, Type=16, Size=20, Min=, Max=, Unit=, Def=0, Use=1, MemoryType=1, Val=A:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0018    Name=IPAddress, Vid=125, Type=16, Size=16, Min=, Max=, Unit=, Def=127.0.0.1, Use=1, MemoryType=1, Val=A:127.0.0.1 th=2504
+14:22:58 [Debug:LDBInterface] 	0019    Name=PortNumber, Vid=126, Type=42, Size=1, Min=, Max=, Unit=, Def=6000, Use=1, MemoryType=1, Val=U2:6000 th=2504
+14:22:58 [Debug:LDBInterface] 	0020    Name=ActiveMode, Vid=127, Type=9, Size=1, Min=, Max=, Unit=, Def=0, Use=1, MemoryType=1, Val=BOOL:0 th=2504
+14:22:58 [Debug:LDBInterface] 	0021    Name=LinkTestInterval, Vid=128, Type=41, Size=1, Min=, Max=, Unit=, Def=30, Use=1, MemoryType=1, Val=U1:30 th=2504
+14:22:58 [Debug:LDBInterface] 	0022    Name=RetryLimit, Vid=129, Type=41, Size=1, Min=, Max=, Unit=, Def=0, Use=1, MemoryType=1, Val=U1:0 th=2504
+14:22:58 [Debug:LDBInterface] Complete to reading ECV information from database(mdb file). th=2504
+14:22:58 [Debug:LDBInterface] Start to reading data item dictionary information from database(mdb file). th=2504
+14:22:58 [Debug:LDBInterface] 	0000    Name=ABS, Type=8, Size=-1 th=2504
+14:22:58 [Debug:LDBInterface] 	0001    Name=ACCESSMODE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0002    Name=ACDS, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0003    Name=ACKA, Type=9, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0004    Name=ACKC10, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0005    Name=ACKC5, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0006    Name=ACKC6, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0007    Name=ACKC7, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0008    Name=ACKC7A, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0009    Name=ALCD, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0010    Name=ALED, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0011    Name=ALID, Type=42, Size=-1 th=2504
+14:22:58 [Debug:LDBInterface] 	0012    Name=ALTX, Type=16, Size=120 th=2504
+14:22:58 [Debug:LDBInterface] 	0013    Name=ATTRDATA, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0014    Name=ATTRID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0015    Name=BATCHLOCID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0016    Name=BATCHLOCIDVALUE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0017    Name=CAACK, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0018    Name=CARRIERACTION, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0019    Name=CARRIERID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0020    Name=CARRIERINPUTID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0021    Name=CARRIERINPUTSPEC, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0022    Name=CARRIERSPEC, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0023    Name=CATTRDATA, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0024    Name=CATTRID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0025    Name=CCODE, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0026    Name=CEED, Type=9, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0027    Name=CEID, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0028    Name=CEPACK, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0029    Name=COMMACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0030    Name=CPACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0031    Name=CPNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0032    Name=CPVAL, Type=32, Size=-1 th=2504
+14:22:58 [Debug:LDBInterface] 	0033    Name=CTLJOBCMD, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0034    Name=CTLJOBID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0035    Name=DATA, Type=16, Size=100 th=2504
+14:22:58 [Debug:LDBInterface] 	0036    Name=DATAID, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0037    Name=DATALENGTH, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0038    Name=DATASEG, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0039    Name=DESTCARRIERID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0040    Name=DRACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0041    Name=DSID, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0042    Name=DSPER, Type=16, Size=8 th=2504
+14:22:58 [Debug:LDBInterface] 	0043    Name=DVVAL, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0044    Name=EAC, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0045    Name=ECDEF, Type=16, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0046    Name=ECID, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0047    Name=ECMAX, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0048    Name=ECMIN, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0049    Name=ECNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0050    Name=ECV, Type=32, Size=-1 th=2504
+14:22:58 [Debug:LDBInterface] 	0051    Name=EDID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0052    Name=ERACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0053    Name=ERRCODE, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0054    Name=ERRTEXT, Type=16, Size=120 th=2504
+14:22:58 [Debug:LDBInterface] 	0055    Name=ERRW7, Type=16, Size=120 th=2504
+14:22:58 [Debug:LDBInterface] 	0056    Name=FCNID, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0057    Name=GRANT, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0058    Name=GRANT6, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0059    Name=HCACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0060    Name=LENGTH, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0061    Name=LIMITACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0062    Name=LIMITID, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0063    Name=LIMITMAX, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0064    Name=LIMITMIN, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0065    Name=LINKID, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0066    Name=LOCID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0067    Name=LOTID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0068    Name=LOWERDB, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0069    Name=LRACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0070    Name=LVACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0071    Name=MATERIALSTATUS, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0072    Name=MDLN, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0073    Name=MEXP, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0074    Name=MF, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0075    Name=MHEAD, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0076    Name=MID, Type=16, Size=80 th=2504
+14:22:58 [Debug:LDBInterface] 	0077    Name=MTRLOUTSPEC, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0078    Name=OBJACK, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0079    Name=OBJID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0080    Name=OBJSPEC, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0081    Name=OBJTYPE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0082    Name=OFLACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0083    Name=ONLACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0084    Name=OPID, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0085    Name=ORDERVALUE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0086    Name=OUTPUTRULEVALUE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0087    Name=PARAMNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0088    Name=PARAMVAL, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0089    Name=PAUSEEVENT, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0090    Name=PFCD, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0091    Name=PORTACTION, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0092    Name=PPARM, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0093    Name=PPBODY, Type=16, Size=-1 th=2504
+14:22:58 [Debug:LDBInterface] 	0094    Name=PPGNT, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0095    Name=PPID, Type=16, Size=120 th=2504
+14:22:58 [Debug:LDBInterface] 	0096    Name=PPNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0097    Name=PPVALUE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0098    Name=PRCESSINGCTRLSPEC, Type=16, Size=80 th=2504
+14:22:58 [Debug:LDBInterface] 	0099    Name=PRCMDNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0100    Name=PREVENTID, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0101    Name=PRJOBID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0102    Name=PRJOBMILESTONE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0103    Name=PRJOBSPACE, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0104    Name=PRMTRLORDER, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0105    Name=PROCESSINGCTRLSPEC, Type=16, Size=80 th=2504
+14:22:58 [Debug:LDBInterface] 	0106    Name=PROCESSINGJOBID, Type=16, Size=80 th=2504
+14:22:58 [Debug:LDBInterface] 	0107    Name=PROCESSORDERMGMT, Type=16, Size=80 th=2504
+14:22:58 [Debug:LDBInterface] 	0108    Name=PRPROCESSSTART, Type=9, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0109    Name=PRRECIPEMETHOD, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0110    Name=PRSTATE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0111    Name=PTN, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0112    Name=RCMD, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0113    Name=RCPPARNM, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0114    Name=RCPPARVAL, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0115    Name=RCPSPEC, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0116    Name=REPGSZ, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0117    Name=RPTID, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0118    Name=RSDA, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0119    Name=RSDC, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0120    Name=RSPACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0121    Name=RULENAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0122    Name=SEQNUM, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0123    Name=SHEAD, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0124    Name=SLOTID, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0125    Name=SMPLN, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0126    Name=SOFTREV, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0127    Name=SPNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0128    Name=SPVAL, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0129    Name=SRCCARRIERID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0130    Name=SSACK, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0131    Name=STARTMETHOD, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0132    Name=STARTMETHODVALUE, Type=9, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0133    Name=STATUS, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0134    Name=STIME, Type=16, Size=16 th=2504
+14:22:58 [Debug:LDBInterface] 	0135    Name=STRACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0136    Name=STRID, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0137    Name=SUBSTID, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0138    Name=SUBSTLOCID, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0139    Name=SUBSTLOCIDVALUE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0140    Name=SUBSTPOSINBATCH, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0141    Name=SUBSTPOSINBATCHVALUE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0142    Name=SUBSTPROCESSINGSTATE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0143    Name=SUBSTPROCESSINGSTATEVALUE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0144    Name=SUBSTSTATE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0145    Name=SUBSTSTATEVALUE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0146    Name=SUBSTTYPE, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0147    Name=SUBSTTYPEVALUE, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0148    Name=SV, Type=32, Size=-1 th=2504
+14:22:58 [Debug:LDBInterface] 	0149    Name=SVCACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0150    Name=SVCNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0151    Name=SVID, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0152    Name=SVNAME, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0153    Name=TEXT, Type=16, Size=256 th=2504
+14:22:58 [Debug:LDBInterface] 	0154    Name=TIAACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0155    Name=TIACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0156    Name=TID, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0157    Name=TIME, Type=16, Size=16 th=2504
+14:22:58 [Debug:LDBInterface] 	0158    Name=TIMESTAMP, Type=16, Size=16 th=2504
+14:22:58 [Debug:LDBInterface] 	0159    Name=TOTSMP, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0160    Name=TRID, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0161    Name=UNITS, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0162    Name=UPPERDB, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0163    Name=USER_A, Type=16, Size=30 th=2504
+14:22:58 [Debug:LDBInterface] 	0164    Name=USER_F4, Type=36, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0165    Name=USER_F8, Type=32, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0166    Name=USER_I1, Type=25, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0167    Name=USER_I2, Type=26, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0168    Name=USER_I4, Type=28, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0169    Name=USER_I8, Type=28, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0170    Name=USER_U1, Type=41, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0171    Name=USER_U2, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0172    Name=USER_U4, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0173    Name=USER_U8, Type=44, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0174    Name=USER1_BOOL, Type=9, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0175    Name=USER2_B, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0176    Name=V, Type=32, Size=-1 th=2504
+14:22:58 [Debug:LDBInterface] 	0177    Name=VID, Type=42, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] 	0178    Name=VLAACK, Type=8, Size=1 th=2504
+14:22:58 [Debug:LDBInterface] Complete to reading data item dictionary information from database(mdb file). th=2504
+14:22:58 [Proc:Seq] Data Manager initialized. th=2504
+14:22:58 [Proc:Seq] Operator Manager initialized. th=2504
+14:22:58 [Proc:Seq] Host Communication Manager initialized. th=2504
+14:22:59 [Proc:Seq] Eq Communication Manager initialized. th=2504
+14:22:59 [Proc:Seq] Factory initialized. th=2504
+14:22:59 [Proc:Seq] XGem Initialized th=2504
+14:23:00 [Proc:Seq] XGem Started th=2504

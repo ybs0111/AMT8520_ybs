@@ -1,0 +1,6 @@
+15:22:58 [Alarm:000071] can't read product type from license driver., th=2f88
+15:22:58 [Proc:Seq] Exit XGem Process! Because XGem License was not detected. th=2f88
+15:22:59 [Proc:Seq] XGem Stopped th=2f88
+15:22:59 [Proc:Seq] XGem Not Initialized
+15:22:59 [Proc:Seq] >>>>>>>>>>>>>>>>>>>>>>>>  Logging Ended  <<<<<<<<<<<<<<<<<<<<<<<<<
+         

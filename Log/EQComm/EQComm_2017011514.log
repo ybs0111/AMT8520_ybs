@@ -1,0 +1,41 @@
+14:22:58 [Proc:Seq] >>>>>>>>>>>>>>>>>>>>>>>  Logging Started  <<<<<<<<<<<<<<<<<<<<<<<<
+14:22:58 [Proc:Seq] Build date time: Jan 20 2014 17:02:54
+14:22:58 [Proc:Seq] File Version: 3.1.1.4
+         
+14:22:58 [Proc:Seq] Initialize DeGem, Result = 0
+14:22:58 [Proc:Seq] Initialize DeCms, Result = 0
+14:22:58 [Proc:Seq] Initialize DePj, Result = 0
+14:22:58 [Proc:Seq] Initialize DeCj, Result = 0
+14:22:58 [Proc:Seq] Initialize DeSts, Result = 0
+14:22:58 [Proc:Seq] Initialize EnGem, Result = 0
+14:22:58 [Proc:Seq] Initialize EnCms, Result = 0
+14:22:58 [Proc:Seq] Initialize EnPj, Result = 0
+14:22:58 [Proc:Seq] Initialize EnCj, Result = 0
+14:22:58 [Proc:Seq] Initialize EnSts, Result = 0
+14:22:58 [Proc:Seq] Initialize TCP/IP, Result = 0
+14:22:59 [Proc:Seq] Initialize, Result = 0
+14:23:00 [Proc:Seq] Start, IP=127.0.0.1, Port=2001, Active=false TCP/IP Result = 0
+14:23:00 [Proc:Seq] Connected with equipment application. TCP/IP
+14:23:00 [Recv:00000000] command=GEMGetLicense
+14:23:00 [Send:00000000] command=GEMGetLicense
+14:23:00 [Proc:Seq] (EQ->E30) GEMGetLicense, m_sLicenseName=XGemUnknown
+14:23:00 [Proc:Seq] (E30->EQ) GEMGetLicense
+14:23:00 [Debug:LEqMain] LoadStream elapsed time : 00000000, RecvData elapsed time : 00000016, nLen=40
+14:23:00 [Recv:00000000] command=GEMGetParam
+14:23:00 [Send:00000000] command=GEMGetParam
+14:23:00 [Proc:Seq] (EQ->E30) GEMGetParam, Param Count=48
+14:23:00 [Proc:Seq] (E30->EQ) GEMGetParam
+14:23:00 [Debug:LEqMain] LoadStream elapsed time : 00000000, RecvData elapsed time : 00000000, nLen=40
+14:23:00 [Recv:00000000] command=GEMGetAttributeV
+14:23:00 [Send:00000000] command=GEMGetAttributeV
+14:23:00 [Proc:Seq] (EQ->E30) GEMGetAttributeV, Vid count=0
+14:23:00 [Proc:Seq] (E30->EQ) GEMGetAttributeV, class=2, memorytype=3
+14:23:00 [Debug:LEqMain] LoadStream elapsed time : 00000000, RecvData elapsed time : 00000000, nLen=48
+14:23:00 [Recv:00000000] command=GEMSetEstablish
+14:23:01 [Send:00000000] command=GEMCommStateChanged
+14:23:01 [Proc:Seq] (EQ->E30) GEMCommStateChanged, State=4
+14:23:01 [Proc:Seq] (E30->EQ) GEMSetEstablish, State=1
+14:23:01 [Debug:LEqMain] LoadStream elapsed time : 00000000, RecvData elapsed time : 00000094, nLen=43
+14:23:01 [Recv:00000000] command=GEMEQInitialized
+14:23:01 [Proc:Seq] (E30->EQ) GEMEQInitialized, InitType=1
+14:23:01 [Debug:LEqMain] LoadStream elapsed time : 00000000, RecvData elapsed time : 00000000, nLen=43

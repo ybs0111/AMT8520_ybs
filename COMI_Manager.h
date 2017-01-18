@@ -1,0 +1,270 @@
+// COMI_Manager.h: interface for the COMI_Manager class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#if !defined(AFX_COMI_MANAGER_H__E5BA7DF5_D6AB_4E96_88E6_6DFCC4FD4B18__INCLUDED_)
+#define AFX_COMI_MANAGER_H__E5BA7DF5_D6AB_4E96_88E6_6DFCC4FD4B18__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+class COMI_Manager  
+{
+public:
+	COMI_Manager();
+	virtual ~COMI_Manager();
+
+	int HomeCheck_Mot(int n_Axis, int n_TimeOut);
+	int Get_MotPower(int n_Axis);
+	double Get_MotCurrentPos(int n_Axis);
+
+	long _cmmSxIsDone(long Axis, long *IsDone);
+	long _cmmCfgSetSpeedPattern_T(long Axis, long SpeedMode, double WorkSpeed, double Accel, double Decel);
+	long _cmmSxSetSpeedRatio(long Axis, long SpeedMode, double VelRatio, double AccRatio, double DecRatio);	// check
+	long _cmmSxMoveToStart(long Axis, double Position);
+	long _cmmMsCheckSlaveState(long SlaveAxis, long* SlaveState);
+
+	long _cmmIxIsDone( long MapIndex, long *IsDone );
+	long _cmmIxLineToStart(long MapIndex, double* PosList);
+	
+public:
+	void OnMain_Motor_Setting();
+
+public:
+	void SetMotBoardInit( int nVal ) { m_nMotBoardInit = nVal; }
+	int GetMotBoardInit()	{ return m_nMotBoardInit; }
+
+protected:
+	int m_nMotBoardInit;
+};
+
+extern COMI_Manager g_comiMgr;
+
+enum ENUM_MOTOR
+{
+	MOTOR_BIN_1_Z,
+	MOTOR_BIN_1_R,
+	MOTOR_BIN_2_Z,
+	MOTOR_BIN_2_R,
+	MOTOR_REJECT_Z,
+	MOTOR_REJECT_R,
+	MOTOR_TRAY_TR_Y,
+	MOTOR_TRAY_TR_CLAMP,
+	MOTOR_TRAY_STACKER,
+	MOTOR_ROBOT_Z,
+	MOTOR_ROBOT_X,
+	MOTOR_ROBOT_Y,
+	MOTOR_TESTSITE_1_Z,
+	MOTOR_TESTSITE_2_Z,
+	MOTOR_COK_ROBOT_Y,
+	MOTOR_COK_ROBOT_Z,
+	MOTOR_PITCH_Z,//MOTOR_GRIPPER_P,
+// 	MOTOR_PITCH_Z,
+	
+	MOTOR_COUNT,
+};
+
+// BIN Z
+enum
+{
+	P_BIN_Z_TOP,
+	P_BIN_Z_WAIT,
+	P_BIN_Z_ROTATE,
+	P_BIN_Z_PUT_ON,
+	P_BIN_Z_BASE,
+};
+
+// BIN R
+enum
+{
+	P_BIN_R_BASE,
+	P_BIN_R_ROTATE,
+};
+
+// TRANSFER_Y
+enum
+{
+	P_TRANSFER_Y_REJ,
+	P_TRANSFER_Y_BIN,
+	P_TRANSFER_Y_SAFETY,
+};
+
+// TRANSFER_CLAMP
+enum
+{
+	P_CLAMP_UNCLAMP,
+	P_CLAMP_CLAMP,
+	P_CLAMP_SAFETY,//완전 오무린걸로 티칭해야 될거 같다//2016.0213
+};
+
+// REJ_STACKER
+enum
+{
+	P_REJ_TRAY_1EA,
+	P_REJ_TRAY_5EA,
+	P_REJ_1EA_WORK,
+};
+
+// ROBOT_Z
+enum
+{
+	P_Z_SAFETY,
+	P_Z_SITE1_PICK_START,
+	P_Z_SITE1_PICK_END,
+	P_Z_SITE2_PICK_START,
+	P_Z_SITE2_PICK_END,
+	P_Z_TRAY1_PICK,
+	P_Z_TRAY2_PICK,
+	P_Z_TRAY3_PICK,//ybs
+	P_Z_REJ_PLACE,
+	P_Z_COK_SITE1_PICK_START,
+	P_Z_COK_STACKER_PICK_START,
+	P_Z_COK_STACKER_PICK_END,
+
+	P_Z_SITE1_PLACE_START,
+	P_Z_TRAY1_PLACE,
+	P_Z_COK_SITE1_PLACE_START,
+	P_Z_COK_STACKER_PLACE_START,
+	P_XY_JIG_PLACE, //2013,0131
+	P_XY_JIG_PICK,	
+};
+
+// SITE
+enum
+{
+	P_SITE_COK_CHANGE,
+	P_SITE_SOCKET,
+};
+
+// ROBOT_P
+enum
+{
+	P_P_SAFETY,
+	P_P_TRAY,
+	P_P_SOCKET,
+};
+
+// ROBOT_XY
+enum
+{
+	P_XY_SAFETY,
+	P_XY_SITE1_START,
+	P_XY_SITE1_END,
+	P_XY_SITE2_START,
+	P_XY_SITE2_END,
+	P_XY_TRAY1_START,
+	P_XY_TRAY1_END,
+	P_XY_TRAY2_START,
+	P_XY_TRAY2_END,
+	P_XY_TRAY3_START,//ybs
+	P_XY_TRAY3_END,//ybs
+	P_XY_REJ_START,
+	P_XY_REJ_END,
+	P_XY_COK_SITE1_START,
+	P_XY_COK_STACKER_START,
+	P_XY_COK_STACKER_END,
+
+	P_XY_SITE_1_2,
+	P_XY_SITE_1_3,
+	P_XY_SITE_1_4,
+	P_XY_SITE_2_2,
+	P_XY_SITE_2_3,
+	P_XY_SITE_2_4,
+
+	P_XY_TRAY1_CALC,
+	P_XY_TRAY2_CALC,
+	P_XY_TRAY3_CALC,//ybs
+	P_XY_REJ_CALC,
+	P_XY_JIG,  //2013,0131
+	P_XY_SITE_PITCH,
+	P_XY_TRAY_PITCH	
+};
+
+
+
+// COK ROBOT Y
+enum
+{
+	P_CY_COK_0,
+	P_CY_COK_5,
+};
+
+// COK ROBOT Z
+enum
+{
+	P_CZ_SAFETY,
+	P_CZ_COK_0,
+	P_CZ_COK_19,
+};
+
+//PITCH Z
+enum
+{
+	P_PZ_SAFETY,
+	P_PZ_TRAY,
+	P_PZ_ZIG,
+	P_PZ_SITE,
+};
+
+
+enum COMMON_TEACHING
+{
+	CT_TSITE_1_Z,
+	CT_TSITE_2_Z,
+	CT_ROBOT_PLACE_Z,
+	CT_ROBOT_SITE1_START_X,
+	CT_ROBOT_SITE1_START_Y,
+	CT_ROBOT_SITE1_START_Z,
+	CT_ROBOT_SITE1_END_X,
+	CT_ROBOT_SITE1_END_Y,
+	CT_ROBOT_SITE1_END_Z,
+
+	CT_ROBOT_SITE2_START_X,
+	CT_ROBOT_SITE2_START_Y,
+	CT_ROBOT_SITE2_START_Z,
+	CT_ROBOT_SITE2_END_X,
+	CT_ROBOT_SITE2_END_Y,
+	CT_ROBOT_SITE2_END_Z,
+
+	CT_ROBOT_COK_START_X,
+	CT_ROBOT_COK_START_Y,
+	CT_ROBOT_COK_START_Z,
+	CT_ROBOT_COK_END_X,
+	CT_ROBOT_COK_END_Y,
+	CT_ROBOT_COK_END_Z,
+
+	CT_COK_Y_START,
+	CT_COK_Y_END,
+	
+	CT_COK_Z_SAFETY,
+	CT_COK_Z_0,
+	CT_COK_Z_19,
+
+	COMMON_TEACHING_MAX,
+};
+
+
+enum
+{
+	CRBT_NONE=-1,
+	CRBT_TRAY1=0,
+	CRBT_TRAY2=100,
+	CRBT_TRAY3=200,
+	CRBT_REJECT=300,
+	CRBT_SITE1_INSERT1=400,
+	CRBT_SITE1_INSERT2=410,
+	CRBT_SITE1_INSERT3=420,
+	CRBT_SITE1_INSERT4=430,
+	CRBT_SITE1_INSERT5=440,
+	CRBT_SITE2_INSERT1=500,
+	CRBT_SITE2_INSERT2=510,
+	CRBT_SITE2_INSERT3=520,
+	CRBT_SITE2_INSERT4=530,
+	CRBT_SITE2_INSERT5=540,
+};
+
+
+
+
+#endif // !defined(AFX_COMI_MANAGER_H__E5BA7DF5_D6AB_4E96_88E6_6DFCC4FD4B18__INCLUDED_)

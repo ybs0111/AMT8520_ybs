@@ -1,0 +1,140 @@
+[2016/07/12 00:39:06.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:40:07.004]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 00:40:07.008]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:41:09.016]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:42:11.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:43:13.007]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 00:43:13.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:44:15.017]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:45:17.015]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:46:19.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 00:46:19.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:47:21.004]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:48:23.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:49:25.005]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 00:49:25.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:50:27.017]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:51:29.015]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:52:31.014]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 00:52:31.019]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:53:33.019]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:54:35.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:55:37.008]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 00:55:37.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:56:39.017]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:57:41.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:58:43.008]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 00:58:43.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 00:59:45.019]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:00:47.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:01:49.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:01:49.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:02:51.020]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:03:53.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:04:55.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:04:55.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:05:57.018]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:06:59.015]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:08:01.008]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:08:01.014]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:09:03.005]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:10:05.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:11:07.011]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:11:07.016]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:12:09.018]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:13:11.004]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:14:13.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:14:13.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:15:15.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:16:17.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:17:19.007]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:17:19.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:18:21.020]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:19:23.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:20:25.009]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:20:25.015]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:21:27.017]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:22:29.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:23:31.007]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:23:31.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:24:33.018]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:25:35.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:26:37.007]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:26:37.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:27:39.016]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:28:41.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:29:43.007]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:29:43.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:30:45.016]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:31:47.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:32:49.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:32:49.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:33:51.018]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:34:53.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:35:55.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:35:55.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:36:57.015]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:37:59.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:39:01.005]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:39:01.009]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:40:04.017]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:41:06.015]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:42:08.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:42:08.009]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:43:10.017]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:44:12.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:45:14.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:45:14.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:46:16.002]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:47:18.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:48:20.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:48:20.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:49:22.002]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:50:24.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:51:26.003]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:51:26.006]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:52:28.015]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:53:30.010]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:54:32.005]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:54:32.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:55:34.004]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:56:36.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:57:38.009]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 01:57:38.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:58:40.016]  : Connect Fail To [EC SERVER]
+[2016/07/12 01:59:42.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:00:44.003]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:00:44.006]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:01:46.016]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:02:48.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:03:50.007]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:03:50.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:04:52.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:05:54.014]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:06:56.002]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:06:56.005]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:07:58.014]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:09:00.009]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:10:02.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:10:02.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:11:04.014]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:12:06.011]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:13:08.004]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:13:08.006]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:14:10.006]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:15:12.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:16:12.368]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:16:14.004]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:17:16.003]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:18:18.012]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:19:18.400]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:19:20.005]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:20:22.013]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:21:24.008]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:22:26.005]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:22:26.008]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:23:28.014]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:24:30.009]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:25:32.002]  : Tool 정보 전송 요구 3회 무응답
+[2016/07/12 02:25:32.005]  : Connect Fail To [EC SERVER]
+[2016/07/12 02:26:34.004]  : Connect Fail To [EC SERVER]
