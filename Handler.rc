@@ -1581,7 +1581,7 @@ BEGIN
     GROUPBOX        "daily yield info",IDC_GROUP_DAILY_YIELD_INFO,0,201,85,
                     76
     GROUPBOX        "lot yield info",IDC_GROUP_LOT_YIELD_INFO,0,123,85,77
-    GROUPBOX        "time info",IDC_GROUP_TIME_INFO,1,410,85,84
+    GROUPBOX        "time info",IDC_GROUP_TIME_INFO,1,409,85,84
     CONTROL         "",IDC_CUSTOM_LOT_INFO,"fpSpread70",WS_TABSTOP,4,10,77,
                     59
     CONTROL         "",IDC_CUSTOM_DAILY_YIELD_INFO,"fpSpread70",WS_TABSTOP,4,

@@ -2408,6 +2408,8 @@ LRESULT CMainFrame::OnMainMessageEvent(WPARAM wParam, LPARAM lParam)
 		else
 		{
 			mp_msg_dlg = new CDialog_Event_Msg( st_msg.mstr_event_msg[0], st_msg.mstr_event_msg[1], st_msg.mstr_event_msg[2]);
+			//2017.0201
+			//mp_msg_dlg = new CDialog_Event_Msg;
 			mp_msg_dlg->Create();
 			mp_msg_dlg->ShowWindow(SW_SHOW);
 		}

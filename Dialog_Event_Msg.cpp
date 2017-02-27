@@ -129,7 +129,11 @@ void CDialog_Event_Msg::OnEventMsg_Text_Set()
 	
 	for (i = 0; i < 3; i++)
 	{
-		//if (st_msg.mstr_event_msg[i] != "")
+//		if (st_msg.mstr_event_msg[i] != "")
+//		{
+//			strMsg += st_msg.mstr_event_msg[i];
+//			strMsg += "\n";
+//		}
 		//2017.0115
 		if (mstr_event_msg[i] != "")
 		{
