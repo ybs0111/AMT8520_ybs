@@ -1,0 +1,84 @@
+[2016/06/15 11:42:56.698]  : #0 Port : 4000 Server Create
+[2016/06/15 11:42:56.723]  : #1 Port : 9999 Server Create
+[2016/06/15 11:42:57.295]  : #2 Port : 9998 Server Create
+[2016/06/15 11:42:59.010]  : [OnMain_Motor_Setting]
+[2016/06/15 11:42:59.011]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.014]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.015]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.019]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.021]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.024]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.026]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.028]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.032]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.034]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.036]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.039]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.042]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.045]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.046]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.048]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.051]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/15 11:42:59.053]  : [OnMain_Motor_Setting]
+[2016/06/15 11:43:01.007]  : Connect Fail To [NEXT]
+[2016/06/15 11:43:08.012]  : Connect Fail To [NEXT]
+[2016/06/15 11:43:09.474]  : [Stop Button] Handler Stop
+[2016/06/15 11:43:09.602]  : [초 기 화] 장비 초기화 실패
+[2016/06/15 11:43:10.631]  : [초 기 화] 장비 초기화 실패
+[2016/06/15 11:43:10.637]  : Connect Fail To [XGEM]
+[2016/06/15 11:43:10.685]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/06/15 11:43:13.004]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:43:15.625]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000063
+[2016/06/15 11:43:15.631]  : C_Send to [XGEM] : <SUSPENDED> HD=000053,FUNC=PPID_CHANGE,PP_NAME=AMT8520,PP_PATH=AMT8520.txt,
+[2016/06/15 11:43:15.745]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000097
+[2016/06/15 11:43:15.750]  : C_Send to [XGEM] : <SUSPENDED> HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/06/15 11:43:15.761]  : C_RECV From ClientSocket : 97
+[2016/06/15 11:43:15.763]  : C_RECV From [XGEM]: HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/06/15 11:44:15.022]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:45:17.006]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:46:19.068]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 11:46:19.072]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:47:22.014]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:48:24.007]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:51:02.021]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 11:51:02.026]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:51:09.012]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:52:09.010]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:54:08.017]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 11:54:08.022]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:54:17.007]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:56:07.008]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:56:51.012]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 11:56:51.018]  : Connect Fail To [EC SERVER]
+[2016/06/15 11:57:53.006]  : Connect Fail To [EC SERVER]
+[2016/06/15 12:01:26.014]  : Connect Fail To [EC SERVER]
+[2016/06/15 12:01:26.032]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 12:01:33.016]  : Connect Fail To [EC SERVER]
+[2016/06/15 12:02:30.017]  : Connect Fail To [EC SERVER]
+[2016/06/15 12:04:14.004]  : Connect Fail To [EC SERVER]
+[2016/06/15 12:04:50.019]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 12:04:50.024]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:20:31.017]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:21:33.010]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:22:35.008]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 13:22:35.014]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:23:37.017]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:24:39.008]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:25:41.004]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 13:25:41.009]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:26:43.016]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:27:45.012]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:28:47.003]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 13:28:47.005]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:29:49.014]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:30:51.013]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:31:53.004]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 13:31:53.010]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:32:55.018]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:33:57.006]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:34:59.002]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 13:34:59.005]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:36:01.018]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:37:03.009]  : Connect Fail To [EC SERVER]
+[2016/06/15 13:38:05.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/15 13:38:05.011]  : Connect Fail To [EC SERVER]

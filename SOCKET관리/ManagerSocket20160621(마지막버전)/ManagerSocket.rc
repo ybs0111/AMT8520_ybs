@@ -1,0 +1,253 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Korean resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+#ifdef _WIN32
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 18, 1\r\n"
+    "#pragma code_page(949)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\ManagerSocket.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.kor\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041204B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "ManagerSocket DLL\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "ManagerSocket\0"
+            VALUE "LegalCopyright", "Copyright (C) 2016\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "ManagerSocket.DLL\0"
+            VALUE "ProductName", "ManagerSocket 동적 연결 라이브러리\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x412, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_ADD DIALOG DISCARDABLE  0, 0, 236, 182
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 10, "System"
+BEGIN
+    DEFPUSHBUTTON   "Add",IDC_BTN_ADD,17,135,90,33
+    PUSHBUTTON      "Exit",IDC_BTN_EXIT,123,134,90,33
+    CTEXT           "Serial",IDC_MSG_SERIAL,17,16,79,29,SS_CENTERIMAGE | 
+                    WS_BORDER
+    CTEXT           "Serial Data",IDC_MSG_SERIAL_DATA,105,16,113,29,
+                    SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Hifix",IDC_MSG_HIFIX,17,52,79,29,SS_CENTERIMAGE | 
+                    WS_BORDER
+    CTEXT           "Hifix Data",IDC_MSG_HIFIX_DATA,105,52,113,29,
+                    SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Count",IDC_MSG_COUNT,17,90,79,29,SS_CENTERIMAGE | 
+                    WS_BORDER
+    CTEXT           "Count Data",IDC_MSG_COUNT_DATA,105,90,113,29,
+                    SS_CENTERIMAGE | WS_BORDER
+END
+
+IDD_DIALOG_MANAGER_SOCKET DIALOG DISCARDABLE  0, 0, 630, 524
+STYLE DS_MODALFRAME | WS_CHILD
+FONT 10, "Courier"
+BEGIN
+    CTEXT           "Hifix",IDC_MSG_HIFIX,522,54,79,29,SS_CENTERIMAGE | 
+                    WS_BORDER
+    CTEXT           "Hifix Data",IDC_MSG_HIFIX_DATA,369,9,113,29,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_BORDER
+    GROUPBOX        "Socket Info",IDC_GROUP_SOCKET,241,344,384,135
+    CTEXT           "Serial",IDC_MSG_SERIAL,250,358,79,36,SS_CENTERIMAGE | 
+                    WS_BORDER
+    CTEXT           "Serial Data",IDC_MSG_SERIAL_DATA,337,358,113,36,
+                    SS_NOTIFY | SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Slot",IDC_MSG_SLOT,250,397,79,36,SS_CENTERIMAGE | 
+                    WS_BORDER
+    CTEXT           "Slot Data",IDC_MSG_SLOT_DATA,337,397,113,36,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_BORDER
+    CTEXT           "Count",IDC_MSG_COUNT_1,250,436,79,36,SS_CENTERIMAGE | 
+                    WS_BORDER
+    CTEXT           "Count Data",IDC_MSG_COUNT_DATA_1,337,436,113,36,
+                    SS_NOTIFY | SS_CENTERIMAGE | WS_BORDER
+    PUSHBUTTON      "Socket Insert",IDC_BTN_SOCKET_INSERT,454,358,75,114
+    PUSHBUTTON      "Socket Remove",IDC_BTN_SOCKET_REMOVE,541,358,75,114
+    PUSHBUTTON      "Add Socket",IDC_BTN_ADD_SOCKET,242,482,78,30
+    PUSHBUTTON      "Delete Socket",IDC_BTN_DELETE_SOCKET,412,482,78,30
+    GROUPBOX        "",IDC_GROUP_MANAGER,3,111,624,230
+    CTEXT           "Hifix",IDC_MSG_HIFIX_NUM,499,433,79,29,SS_CENTERIMAGE | 
+                    NOT WS_VISIBLE | WS_DISABLED | WS_BORDER
+    CTEXT           "HifixNumData",IDC_MSG_HIFIX_NUM_DATA,481,458,113,29,
+                    SS_CENTERIMAGE | NOT WS_VISIBLE | WS_DISABLED | 
+                    WS_BORDER
+    CONTROL         "",IDC_CUSTOM_MANAGER,"fpSpread70",WS_BORDER | 
+                    WS_TABSTOP,9,120,613,214
+    CONTROL         "",IDC_CUSTOM_SOCKET,"fpSpread70",WS_BORDER | WS_TABSTOP,
+                    7,346,226,167
+    CONTROL         "Custom1",IDC_CUSTOM_HIFIX,"fpSpread70",WS_BORDER | 
+                    WS_TABSTOP,3,8,200,103
+    COMBOBOX        IDC_COMBO_HIFIX,495,17,48,69,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Apply",IDC_BTN_APPLY,216,8,50,29
+    PUSHBUTTON      "Change Socket",IDC_BTN_CHANGE_SOCKET,327,482,78,30
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG_ADD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 229
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 175
+    END
+
+    IDD_DIALOG_MANAGER_SOCKET, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 517
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP_ADD          BITMAP  DISCARDABLE     "bitmap1.bmp"
+IDB_BITMAP_DEL          BITMAP  DISCARDABLE     "bmp00001.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DIALOG_MANAGER_SOCKET DLGINIT
+BEGIN
+    IDC_COMBO_HIFIX, 0x403, 2, 0
+0x0031, 
+    IDC_COMBO_HIFIX, 0x403, 2, 0
+0x0032, 
+    IDC_COMBO_HIFIX, 0x403, 2, 0
+0x0033, 
+    IDC_COMBO_HIFIX, 0x403, 2, 0
+0x0034, 
+    IDC_COMBO_HIFIX, 0x403, 2, 0
+0x0035, 
+    0
+END
+
+#endif    // Korean resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+#ifdef _WIN32
+LANGUAGE 18, 1
+#pragma code_page(949)
+#endif //_WIN32
+#include "res\ManagerSocket.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.kor\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

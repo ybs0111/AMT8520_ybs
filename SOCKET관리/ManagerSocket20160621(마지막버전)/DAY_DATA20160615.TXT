@@ -1,0 +1,21 @@
+********************************************************************************************************
+| AMT8520 [SSD Interface Tester] : TP - 20160510_Test                                                  |
+| Day Data Info File                                                                                   |
+| DIVISION  : AMT Coporation                                                                           |
+| File Name : DAY_DATA20160615                                                                         |
+| Save Time : 2016/06/15 11:43:01                                                                      |
+| Input Prime : 000000                                                                                 |
+| Pass  Prime : 000000                                                                                 |
+| Fail Prime : 000000                                                                                  |
+| Prime Yield  : 0.00%                                                                                 |
+| Input Cum   : 000000                                                                                 |
+| Pass  Cum   : 000000                                                                                 |
+| Fail Cum  : 000000                                                                                   |
+| Cum   Yield  : 0.00%                                                                                 |
+|                                                                                                      |
+| Run Time : 00:00:00                                                                                  |
+| Stop Time : 01:31:42                                                                                 |
+| Alarm Time : 00:00:00                                                                                |
+| Alarm Count : 0                                                                                      |
+| MTBI : 00:00:00                                                                                      |
+********************************************************************************************************
