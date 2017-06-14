@@ -1281,8 +1281,16 @@ void CMainFrame::OnMain_Path_Set()
 	st_path.mstr_wait_time_map		= _T(strSettingPath + "AMT8520_WAITTIME_MAP.xls");
 	if ( g_local.GetLocalType() == LOCAL_ENG ) st_path.mstr_wait_time_map		= _T(strSettingPath + "AMT8520_WAITTIME_MAP_ENG.xls");
 
+	//2017.0602
+	if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
+	{
+		st_path.mstr_recipe_path = _T("C:\\XGEM\\AMT8520_1\\AMT8520\\XWork\\Recipe\\");
+	}
+	else
+	{
+		st_path.mstr_recipe_path = _T("C:\\XGEM\\AMT8520\\AMT8520\\XWork\\Recipe\\");
+	}
 	//2013,1105
-	st_path.mstr_recipe_path = _T("C:\\XGEM\\AMT8520\\AMT8520\\XWork\\Recipe\\");
 	fclose(fp);
 }
 

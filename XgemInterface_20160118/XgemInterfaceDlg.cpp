@@ -180,7 +180,7 @@ BOOL CXgemInterfaceDlg::OnInitDialog()
 		k++;
 	}
 	CString strHead, strFunc, strGemInit;
-	CString strPath = "C:\\XGEM\\EqSample.cfg";
+	CString strPath = "C:\\XGEM\\EqSample_1.cfg";
 	
 	strFunc = "FUNC=COMMUNICATION,CONFIG=" + strPath + ",";
 	strHead.Format("HD=%06d,", strFunc.GetLength());
@@ -1336,7 +1336,7 @@ void CXgemInterfaceDlg::OnXgemVariable()
 	int nVidCnt;
 	char chdata[100];
 
-	CString strPath = "C:\\XGEM\\XGEM_DATA.TXT";
+	CString strPath = "C:\\XGEM\\XGEM_DATA_1.TXT";
 	CString strTmp;
 	CString strCeid;
 	CString strReport;
@@ -1471,7 +1471,7 @@ BOOL CXgemInterfaceDlg::CreateFolder(LPCTSTR szPath)
 void CXgemInterfaceDlg::OnButton1() 
 {	
 	
-	CString strPath = "C:\\XGEM\\EqSample.cfg";
+	CString strPath = "C:\\XGEM\\EqSample_1.cfg";
 	
 	CString strFunc = "FUNC=COMMUNICATION,CONFIG=" + strPath + ",";
 

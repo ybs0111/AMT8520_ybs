@@ -996,11 +996,14 @@ void AClient_Xgem::XgemSendPPID()
 	m_dwTime_GemPPid_Send = GetCurrentTime();
 	m_nCnt_GemPPid++;
 
-	strFunc.Format("FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,%s],[DA_02=01,%s]},", st_lamp.mstr_equip_id, st_basic.mstr_revipe_name);
-	strHead.Format("HD=%06d,", strFunc.GetLength());
-
-	CString strJobChange = strHead+strFunc;
-	PushSendMsg( (LPCTSTR)strJobChange );
+    if( st_handler.mn_xgem_mode == CTL_NO )
+	{
+// 		strFunc.Format("FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,%s],[DA_02=01,%s]},", st_lamp.mstr_equip_id, st_basic.mstr_revipe_name);
+// 		strHead.Format("HD=%06d,", strFunc.GetLength());
+// 		
+// 		CString strJobChange = strHead+strFunc;
+// 		PushSendMsg( (LPCTSTR)strJobChange );
+	}
 
 
 	m_bGemPPid = false;
@@ -1209,7 +1212,7 @@ void AClient_Xgem::XgemTrayLoadingEnd()
 		return;
 	}
 	
-	strFunc.Format("FUNC=CEID,CEID_NUM=9804,REPORT=1,REP_01={CNT=04,[DA_01=01,%s],[DA_02=01,%s],[DA_03=01,%s],[DA_04=01,%d]},", st_lamp.mstr_equip_id, m_strSPartid, m_nTrayEndNum);
+	strFunc.Format("FUNC=CEID,CEID_NUM=9804,REPORT=1,REP_01={CNT=04,[DA_01=01,%s],[DA_02=01,%s],[DA_03=01,%s],[DA_04=01,%d]},", st_lamp.mstr_equip_id, m_strSPartid, m_strSLotid, m_nTrayEndNum);
 	strHead.Format("HD=%06d,", strFunc.GetLength());
 	
 	strLotstart = strHead+strFunc;
@@ -1371,7 +1374,7 @@ void AClient_Xgem::XgemLdRbtPickupDvcEnd()
 		return;
 	}
 	
-	strFunc.Format("FUNC=CEID,CEID_NUM=9811,REPORT=1,REP_01={CNT=03,[DA_01=01,%s],[DA_02=01,%d],[DA_03=01,%s]},", st_lamp.mstr_equip_id, m_nTrayNumLdPickDVCEnd, m_strTrayLdPickDVCSerailEnd);
+	strFunc.Format("FUNC=CEID,CEID_NUM=9814,REPORT=1,REP_01={CNT=03,[DA_01=01,%s],[DA_02=01,%d],[DA_03=01,%s]},", st_lamp.mstr_equip_id, m_nTrayNumLdPickDVCEnd, m_strTrayLdPickDVCSerailEnd);
 	strHead.Format("HD=%06d,", strFunc.GetLength());
 	
 	strLotstart = strHead+strFunc;

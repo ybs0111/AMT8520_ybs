@@ -370,7 +370,7 @@ void CDialog_Data_TestSite::OnUse( int iIdx, bool bVal )//2016.0709
 			str_log.Format("Manual Socket Use : %d : On",iIdx);
 			Func.On_LogFile_Add(99, str_log);
 			//2017.0602
-			if(st_handler.mn_xgem_mode == CTL_YES)
+			if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 			{
 				strSokSerial = g_site.GetSocketSerial( iIdx , st_basic.n_cok_type );
 				if( strSokSerial != "") g_client_xgem.SetSocketOn( strSokSerial );
@@ -381,7 +381,7 @@ void CDialog_Data_TestSite::OnUse( int iIdx, bool bVal )//2016.0709
 			str_log.Format("Manual Socket Use : %d : OFF",iIdx);
 			Func.On_LogFile_Add(99, str_log);
 			//2017.0602
-			if(st_handler.mn_xgem_mode == CTL_YES)
+			if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 			{
 				strSokSerial = g_site.GetSocketSerial( iIdx , st_basic.n_cok_type );
 				if( strSokSerial != "") g_client_xgem.SetSocketOff( strSokSerial );

@@ -1,0 +1,139 @@
+[2016/04/18 10:26:39.290]  : #0 Port : 4000 Server Create
+[2016/04/18 10:26:39.295]  : #1 Port : 9999 Server Create
+[2016/04/18 10:26:39.295]  : #2 Port : 9998 Server Create
+[2016/04/18 10:26:40.259]  : [OnMain_Motor_Setting]
+[2016/04/18 10:26:40.260]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.262]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.263]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.265]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.267]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.268]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.270]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.272]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.273]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.275]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.277]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.278]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.280]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.282]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.284]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.350]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.352]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 10:26:40.353]  : [OnMain_Motor_Setting]
+[2016/04/18 10:26:42.014]  : Connect Fail To [NEXT]
+[2016/04/18 10:26:44.750]  : [Stop Button] Handler Stop
+[2016/04/18 10:26:44.756]  : [초 기 화] 장비 초기화 실패
+[2016/04/18 10:26:45.779]  : [초 기 화] 장비 초기화 실패
+[2016/04/18 10:26:45.785]  : Connect Fail To [XGEM]
+[2016/04/18 10:26:49.004]  : Connect Fail To [NEXT]
+[2016/04/18 10:26:53.007]  : Connect Fail To [EC SERVER]
+[2016/04/18 10:27:55.021]  : Connect Fail To [EC SERVER]
+[2016/04/18 10:28:20.411]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/04/18 10:28:57.009]  : Connect Fail To [EC SERVER]
+[2016/04/18 10:29:15.293]  : Level 2 Mode (Machine Teaching Mode)
+[2016/04/18 15:55:24.029]  : #0 Port : 4000 Server Create
+[2016/04/18 15:55:24.063]  : #1 Port : 9999 Server Create
+[2016/04/18 15:55:24.064]  : #2 Port : 9998 Server Create
+[2016/04/18 15:55:25.253]  : [OnMain_Motor_Setting]
+[2016/04/18 15:55:25.255]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.258]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.259]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.261]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.263]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.264]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.267]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.269]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.270]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.272]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.274]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.277]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.279]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.280]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.282]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.284]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.286]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/18 15:55:25.288]  : [OnMain_Motor_Setting]
+[2016/04/18 15:55:27.010]  : Connect Fail To [NEXT]
+[2016/04/18 15:55:30.006]  : Connect Fail To [EC SERVER]
+[2016/04/18 15:55:31.037]  : [Stop Button] Handler Stop
+[2016/04/18 15:55:31.127]  : [초 기 화] 장비 초기화 실패
+[2016/04/18 15:55:31.134]  : [초 기 화] 장비 초기화 실패
+[2016/04/18 15:55:31.493]  : C_RECV From [XGEM]: HD=000025,FUNC=RUN_STATUS,STATUS=0,
+[2016/04/18 15:55:34.014]  : Connect Fail To [NEXT]
+[2016/04/18 15:55:35.033]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/04/18 15:55:36.162]  : C_RECV From [XGEM]: HD=000026,FUNC=ALARM,CODE=,STATUS=0,
+[2016/04/18 15:55:37.852]  : Level 2 Mode (Machine Teaching Mode)
+[2016/04/18 15:55:41.638]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 15:56:11.092]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 15:57:28.006]  : Connect Fail To [EC SERVER]
+[2016/04/18 15:58:22.015]  : Connect Fail To [EC SERVER]
+[2016/04/18 15:59:24.025]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 15:59:24.030]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:00:26.021]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:01:28.014]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:01:28.033]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 16:02:30.012]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:02:30.017]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:02:55.027]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 16:03:32.021]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:03:59.262]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 16:04:34.019]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:04:35.879]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 16:05:09.989]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 16:05:36.012]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:05:36.017]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:05:39.098]  : Admin Mode (Machine Administrator Mode)
+[2016/04/18 16:06:38.017]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:07:37.124]  : Admin [ROBOT_Y_TRAY_SAFETY] Axis save : 0.000 -> -1.000
+[2016/04/18 16:07:40.009]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:07:47.822]  : Admin [ROBOT_Y_REJECT_SAFETY] Axis save : 0.000 -> -1.000
+[2016/04/18 16:08:42.022]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:08:42.027]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:08:45.233]  : Admin [ROBOT_Y_TRAY_SAFETY] Axis save : -1.000 -> -1.000
+[2016/04/18 16:09:00.234]  : Admin [ROBOT_Y_REJECT_SAFETY] Axis save : -1.000 -> 100.000
+[2016/04/18 16:09:08.914]  : Admin [ROBOT_Y_TRAY_SAFETY] Axis save : -1.000 -> 500.000
+[2016/04/18 16:09:31.676]  : Admin [ROBOT_Y_TRAY_SAFETY] Axis save : 500.000 -> -1.000
+[2016/04/18 16:09:36.695]  : Admin [ROBOT_Y_REJECT_SAFETY] Axis save : 100.000 -> 980.000
+[2016/04/18 16:09:44.005]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:10:46.013]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:11:48.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:11:48.011]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:12:50.003]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:13:52.015]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:14:54.012]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:14:54.017]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:15:56.004]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:16:58.011]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:18:00.010]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:18:00.015]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:19:02.015]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:20:04.017]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:21:06.004]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:21:06.009]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:22:08.022]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:23:10.017]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:24:12.004]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:24:12.007]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:25:14.020]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:26:16.012]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:27:18.002]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:27:18.005]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:28:20.004]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:29:22.015]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:30:24.006]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:30:24.008]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:31:27.022]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:32:28.012]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:33:30.004]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:33:30.009]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:34:32.031]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:35:34.016]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:36:36.003]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:36:36.008]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:37:38.006]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:38:40.020]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:39:42.007]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/18 16:39:42.012]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:51:40.056]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:52:38.020]  : Connect Fail To [EC SERVER]
+[2016/04/18 16:53:17.052]  : Level 2 Mode (Machine Teaching Mode)

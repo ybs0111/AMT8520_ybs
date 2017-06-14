@@ -508,7 +508,7 @@ void CRun_Bin_Stacker::Run_Move_RecvTray()
 			{
 				st_handler.m_nfront_request = CTL_FREE;
 				//2017.0602
-				if(st_handler.mn_xgem_mode == CTL_YES)
+				if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 				{
 					int nTrayIdx = g_Tray.GetIdxByPos( ETRAY_POS(TPOS_CONV1 + m_nSiteID) );
 					if( nTrayIdx > -1 )
@@ -967,7 +967,7 @@ void CRun_Bin_Stacker::Run_Move_TrayUp()
 		m_step_TrayUp = TRAY_UP_NONE;
 
 		//2017.0602
-		if(st_handler.mn_xgem_mode == CTL_YES)
+		if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 		{
 			int nTrayIdx = g_Tray.GetIdxByPos( ETRAY_POS(TPOS_BIN1 + m_nSiteID) );
 			if( nTrayIdx > -1 )
@@ -1009,7 +1009,7 @@ void CRun_Bin_Stacker::Run_Move_TrayDown()
 		m_step_TrayDown = TRAY_DOWN_READY_CHK;
 
 		//2017.0602
-		if(st_handler.mn_xgem_mode == CTL_YES)
+		if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 		{
 			int nTrayIdx = g_Tray.GetIdxByPos( ETRAY_POS(TPOS_BIN1 + m_nSiteID) );
 			if( nTrayIdx > -1 )
@@ -1807,7 +1807,7 @@ void CRun_Bin_Stacker::Run_Move_TraySend()
 			if(ml_wait_time[2] < 0)	ml_wait_time[0] = GetCurrentTime();			
 			if(ml_wait_time[2] < 1000) break;
 			//2017.0602
-			if(st_handler.mn_xgem_mode == CTL_YES)
+			if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 			{
 				int nTrayIdx = g_Tray.GetIdxByPos( ETRAY_POS(TPOS_CONV1_TO_CONV2 + m_nSiteID) );
 				if( nTrayIdx > -1 )

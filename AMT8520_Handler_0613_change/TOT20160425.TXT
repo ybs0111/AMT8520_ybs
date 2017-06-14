@@ -1,0 +1,38 @@
+[2016/04/25 11:45:58.658]  : #0 Port : 4000 Server Create
+[2016/04/25 11:45:58.665]  : #1 Port : 9999 Server Create
+[2016/04/25 11:45:58.666]  : #2 Port : 9998 Server Create
+[2016/04/25 11:46:00.506]  : [OnMain_Motor_Setting]
+[2016/04/25 11:46:00.508]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.509]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.510]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.512]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.515]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.516]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.518]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.520]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.521]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.523]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.525]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.526]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.528]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.529]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.531]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.533]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.535]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/04/25 11:46:00.536]  : [OnMain_Motor_Setting]
+[2016/04/25 11:46:02.005]  : Connect Fail To [NEXT]
+[2016/04/25 11:46:04.336]  : [Stop Button] Handler Stop
+[2016/04/25 11:46:04.392]  : [초 기 화] 장비 초기화 실패
+[2016/04/25 11:46:05.391]  : [초 기 화] 장비 초기화 실패
+[2016/04/25 11:46:05.398]  : Connect Fail To [XGEM]
+[2016/04/25 11:46:09.002]  : Connect Fail To [NEXT]
+[2016/04/25 11:46:13.015]  : Connect Fail To [EC SERVER]
+[2016/04/25 11:46:17.876]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/04/25 11:46:25.362]  : Invalid Password.
+[2016/04/25 11:46:31.579]  : Invalid Password.
+[2016/04/25 11:46:36.674]  : Admin Mode (Machine Administrator Mode)
+[2016/04/25 11:47:15.008]  : Connect Fail To [EC SERVER]
+[2016/04/25 11:48:17.020]  : Connect Fail To [EC SERVER]
+[2016/04/25 11:49:19.045]  : Tool 정보 전송 요구 3회 무응답
+[2016/04/25 11:49:19.050]  : Connect Fail To [EC SERVER]
+[2016/04/25 11:49:34.250]  : Level 2 Mode (Machine Teaching Mode)

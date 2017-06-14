@@ -6179,7 +6179,7 @@ void APartHandler::CheckLotEnd()
 		st_handler.m_tLotR[0] = 0;
 	}
 	//2017.0602
-	if(st_handler.mn_xgem_mode == CTL_YES)
+	if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 	{
 		g_client_xgem.SetLotEndStatus(g_lotMgr.GetLotAt(0).GetLotID(), g_lotMgr.GetLotAt(0).GetPartID(),st_xgem.m_lTotCnt,st_xgem.m_lPassCnt,st_xgem.m_lFailCnt);
 	}

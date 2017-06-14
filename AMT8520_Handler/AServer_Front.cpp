@@ -344,7 +344,7 @@ void AServer_Front::OnReceived_BufferIn( CString strRecv )
 
 
 	//2017.0602
-	if(st_basic.mn_mode_xgem == CTL_YES)
+	if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 	{
 		//전장비에서 생산된 자재가 올때 일단 로딩 후 언로딩한다
 // 		if( tray.IsAllState( EMS_GOOD ) || tray.IsAllState( EMS_FAIL ) )

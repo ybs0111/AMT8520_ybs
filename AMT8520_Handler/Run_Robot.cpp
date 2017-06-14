@@ -2746,11 +2746,28 @@ void CRun_Robot::Run_Move()
 				Run_Test_Site[(job.iPosFirst * 2 + 1) /10 ].isOutStandBy[(job.iPosFirst * 2 + 1) % 10] = CTL_NO;
 
 				//2017.0602 //9817 TestSite Robot이 제품을 Pick up 시작 시 올려준다.
-				if( st_handler.mn_xgem_mode == CTL_YES )
+				if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 				{
 					//TRAYNO SERIALNO, SocketNo
-					if( job.iRobotFirst != -1 && pMdl_1 != NULL ) g_client_xgem.SetDVCTestPickStart( pMdl_1->GetTrayNum(), pMdl_1->GetSerial(), job.iPosFirst * 2 );
-					if( job.iRobotSecond != -1 && pMdl_2 != NULL ) g_client_xgem.SetDVCTestPickStart( pMdl_2->GetTrayNum(), pMdl_2->GetSerial(), job.iPosFirst * 2 + 1 );
+					if(st_basic.n_pick_type == EPT_1V1M_4USE_2)
+					{
+						if( pMdl_1 != NULL && job.iRobotFirst != -1 && job.iRobotFirst == 0 && g_site.GetModule( job.iPosFirst * 2 ).IsExist())
+							g_client_xgem.SetDVCTestPickStart( pMdl_1->GetTrayNum(), pMdl_1->GetSerial(), job.iPosFirst * 2 );
+						if( pMdl_2 != NULL && job.iRobotSecond != -1 && job.iRobotSecond == 0 && g_site.GetModule( job.iPosFirst * 2 + 1 ).IsExist()) 
+							g_client_xgem.SetDVCTestPickStart( pMdl_2->GetTrayNum(), pMdl_2->GetSerial(), job.iPosFirst * 2 + 1 );
+					}
+					else
+					{
+						if( g_site.GetModule( job.iPosFirst * 2 ).IsExist() )
+						{
+							g_client_xgem.SetDVCTestPickStart( pMdl_1->GetTrayNum(), pMdl_1->GetSerial(), job.iPosFirst * 2 );
+						}
+						if( g_site.GetModule( job.iPosFirst * 2 + 1 ).IsExist() )
+						{
+							g_client_xgem.SetDVCTestPickStart( pMdl_2->GetTrayNum(), pMdl_2->GetSerial(), job.iPosFirst * 2 + 1 );
+						}
+
+					}
 				}
 
 			}
@@ -2791,7 +2808,7 @@ void CRun_Robot::Run_Move()
 				if( job.iRobotFourth != -1 ) st_modulemap.nDeviceRobotPicker[3][job.iRobotFourth] = CTL_YES;
 
 				//2017.0602
-				if( nTrayIdx > -1 && st_handler.mn_xgem_mode == CTL_YES )
+				if( nTrayIdx > -1 && st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 				{
 					if( job.iRobotFirst != -1 )
 					{
@@ -2885,7 +2902,7 @@ void CRun_Robot::Run_Move()
 				if( job.iRobotFourth != -1 ) st_modulemap.nDeviceRobotPicker[3][job.iRobotFourth] = CTL_YES;
 
 				//2017.0602
-				if( nTrayIdx > -1 && st_handler.mn_xgem_mode == CTL_YES )
+				if( nTrayIdx > -1 && st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 				{
 					if( job.iRobotFirst != -1 )
 					{
@@ -2981,7 +2998,7 @@ void CRun_Robot::Run_Move()
 
 				//2017.0602
 				//9811 LD Robot이 제품을 Pick up 시작 시 올려준다.
-				if( nTrayIdx > -1 && st_handler.mn_xgem_mode == CTL_YES )
+				if( nTrayIdx > -1 && st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 				{
 					if( job.iRobotFirst != -1 )
 					{
@@ -5684,6 +5701,7 @@ void CRun_Robot::Run_Move()
 						m_str_msg.Format("PLACE_FINISH1) TrayIdx :[%d] job.iPosFirst:[%d]", nTrayIdx, job.iPosFirst);
 						Func.On_LogFile_Add(99, m_str_msg);
 					}
+					//return;
 				}
 				//////////////////////////////////////////////////////////////////////////
 
@@ -5693,6 +5711,13 @@ void CRun_Robot::Run_Move()
 					pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( (job.iPosFirst + 1) % MPOS_DIVISION );
 // 					pMdl_3 = &g_Tray.GetTray( nTrayIdx ).GetModule( (job.iPosFirst - st_basic.n_tray_x) % MPOS_DIVISION );
 // 					pMdl_4 = &g_Tray.GetTray( nTrayIdx ).GetModule( (job.iPosFirst - st_basic.n_tray_x + 1) % MPOS_DIVISION );
+					//2017.0602
+// 					if( st_handler.mn_xgem_mode == CTL_YES )
+// 					{
+// 						//TRAYNO SERIALNO, SocketNo
+// 						if( pMdl_1 != NULL && (job.iPosFirst % MPOS_DIVISION) > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_1->GetSerial() );
+// 						if( pMdl_2 != NULL && job.iPosSecond > -1  ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_2->GetSerial() );
+// 					}
 				}
 				else
 				{
@@ -5700,16 +5725,26 @@ void CRun_Robot::Run_Move()
 					pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosSecond % MPOS_DIVISION );
 					pMdl_3 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosThird  % MPOS_DIVISION );
 					pMdl_4 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFourth % MPOS_DIVISION );
+
+					//2017.0602
+					if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
+					{
+						//TRAYNO SERIALNO, SocketNo
+						if( pMdl_1 != NULL && job.iPosFirst > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_1->GetSerial() );
+						if( pMdl_2 != NULL && job.iPosSecond > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_2->GetSerial() );
+						if( pMdl_3 != NULL && job.iPosThird > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_3->GetSerial() );
+						if( pMdl_4 != NULL && job.iPosFourth > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_4->GetSerial() );
+					}
 				}
 
 				//2017.0602
-				if( st_handler.mn_xgem_mode == CTL_YES )
+				if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 				{
 					//TRAYNO SERIALNO, SocketNo
-					if( pMdl_1 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_1->GetSerial() );
-					if( pMdl_2 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_2->GetSerial() );
-					if( pMdl_3 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_3->GetSerial() );
-					if( pMdl_4 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_4->GetSerial() );
+// 					if( pMdl_1 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_1->GetSerial() );
+// 					if( pMdl_2 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_2->GetSerial() );
+// 					if( pMdl_3 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_3->GetSerial() );
+// 					if( pMdl_4 != NULL ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_4->GetSerial() );
 				}
 
 			}
@@ -5725,6 +5760,7 @@ void CRun_Robot::Run_Move()
 						m_str_msg.Format("PLACE_FINISH2)TrayIdx :[%d] job.iPosFirst:[%d]", nTrayIdx, job.iPosFirst);
 						Func.On_LogFile_Add(99, m_str_msg);
 					}
+					//return;
 				}
 				//////////////////////////////////////////////////////////////////////////
 
@@ -5741,6 +5777,15 @@ void CRun_Robot::Run_Move()
 					pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosSecond % MPOS_DIVISION );
 					pMdl_3 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosThird  % MPOS_DIVISION );
 					pMdl_4 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFourth % MPOS_DIVISION );
+					//2017.0602
+					if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
+					{
+						//TRAYNO SERIALNO, SocketNo
+						if( pMdl_1 != NULL && job.iPosFirst > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_1->GetSerial() );
+						if( pMdl_2 != NULL && job.iPosSecond > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_2->GetSerial() );
+						if( pMdl_3 != NULL && job.iPosThird > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_3->GetSerial() );
+						if( pMdl_4 != NULL && job.iPosFourth > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_4->GetSerial() );
+					}
 				}
 			}
 			//ybs
@@ -5756,6 +5801,7 @@ void CRun_Robot::Run_Move()
 						m_str_msg.Format("PLACE_FINISH3)TrayIdx :[%d] job.iPosFirst:[%d]", nTrayIdx, job.iPosFirst);
 						Func.On_LogFile_Add(99, m_str_msg);
 					}
+					//return;
 				}
 				//////////////////////////////////////////////////////////////////////////
 
@@ -5772,6 +5818,15 @@ void CRun_Robot::Run_Move()
 					pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosSecond % MPOS_DIVISION );
 					pMdl_3 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosThird  % MPOS_DIVISION );
 					pMdl_4 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFourth % MPOS_DIVISION );
+					//2017.0602
+					if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
+					{
+						//TRAYNO SERIALNO, SocketNo
+						if( pMdl_1 != NULL && job.iPosFirst > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_1->GetSerial() );
+						if( pMdl_2 != NULL && job.iPosSecond > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_2->GetSerial() );
+						if( pMdl_3 != NULL && job.iPosThird > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_3->GetSerial() );
+						if( pMdl_4 != NULL && job.iPosFourth > -1 && nTrayIdx > -1 ) g_client_xgem.SetDVCTestPlaceEnd( g_Tray.GetTray( nTrayIdx ).GetBufferNo(), pMdl_4->GetSerial() );
+					}
 				}
 			}
 			else if( job.GetPosByTarget() == MPOS_INDEX_REJ )
@@ -5786,6 +5841,7 @@ void CRun_Robot::Run_Move()
 						m_str_msg.Format("PLACE_FINISH4)TrayIdx :[%d] job.iPosFirst:[%d]", nTrayIdx, job.iPosFirst);
 						Func.On_LogFile_Add(99, m_str_msg);
 					}
+					return;
 				}
 				//////////////////////////////////////////////////////////////////////////
 

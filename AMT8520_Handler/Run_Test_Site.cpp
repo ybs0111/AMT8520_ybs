@@ -619,7 +619,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 			m_step_test[iIdx] = ETEST_READY_CHK;
 
 			//2017.0602
-			if( st_handler.mn_xgem_mode == CTL_YES )
+			if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 			{
 				if( (!g_site.GetModule((iIdx  + nIdxAdd)* 2).IsExist() || g_site.GetModule((iIdx  + nIdxAdd)* 2).IsTestLoadState() ) )
 				{
@@ -1248,7 +1248,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 					g_client_bpc.SetSocketOnOff( (iIdx + nIdxAdd) * 2 );
 
 					//2017.0602
-					if(st_handler.mn_xgem_mode == CTL_YES)
+					if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 					{
 						strSokSerial = g_site.GetSocketSerial( (iIdx + nIdxAdd ) * 2, st_basic.n_cok_type );
 						if( strSokSerial != "") g_client_xgem.SetSocketOff( strSokSerial );
@@ -1294,7 +1294,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 						g_site.SetEnableSocket( (iIdx + nIdxAdd ) * 2, -4);//repair
 						g_client_bpc.SetSocketOnOff( (iIdx + nIdxAdd) * 2 );
 						//2017.0602
-						if(st_handler.mn_xgem_mode == CTL_YES)
+						if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 						{
 							strSokSerial = g_site.GetSocketSerial( (iIdx + nIdxAdd ) * 2, st_basic.n_cok_type );
 							if( strSokSerial != "") g_client_xgem.SetSocketOff( strSokSerial );
@@ -1387,7 +1387,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 				g_client_bpc.SetSocketOnOff( (iIdx + nIdxAdd) * 2 );
 
 				//2017.0602
-				if(st_handler.mn_xgem_mode == CTL_YES)
+				if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 				{
 					strSokSerial = g_site.GetSocketSerial( (iIdx + nIdxAdd ) * 2, st_basic.n_cok_type );
 					if( strSokSerial != "") g_client_xgem.SetSocketOff( strSokSerial );
@@ -1591,7 +1591,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 					g_client_bpc.SetSocketOnOff( (iIdx + nIdxAdd) * 2 + 1 );
 
 					//2017.0602
-					if(st_handler.mn_xgem_mode == CTL_YES)
+					if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 					{
 						strSokSerial = g_site.GetSocketSerial( (iIdx + nIdxAdd ) * 2 + 1, st_basic.n_cok_type );
 						if( strSokSerial != "") g_client_xgem.SetSocketOff( strSokSerial );
@@ -1639,7 +1639,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 						g_client_bpc.SetSocketOnOff( (iIdx + nIdxAdd) * 2 + 1 );
 
 						//2017.0602
-						if(st_handler.mn_xgem_mode == CTL_YES)
+						if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 						{
 							strSokSerial = g_site.GetSocketSerial( (iIdx + nIdxAdd ) * 2 + 1, st_basic.n_cok_type );
 							if( strSokSerial != "") g_client_xgem.SetSocketOff( strSokSerial );
@@ -1739,7 +1739,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 				g_client_bpc.SetSocketOnOff( (iIdx + nIdxAdd) * 2 + 1 );
 				
 				//2017.0602
-				if(st_handler.mn_xgem_mode == CTL_YES)
+				if(st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
 				{
 					strSokSerial = g_site.GetSocketSerial( (iIdx + nIdxAdd ) * 2 + 1, st_basic.n_cok_type );
 					if( strSokSerial != "") g_client_xgem.SetSocketOff( strSokSerial );
@@ -1840,7 +1840,7 @@ void CRun_Test_Site::Run_Move_Test( int iIdx )
 		
 
 		//2017.0602
-		if( st_handler.mn_xgem_mode == CTL_YES )
+		if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 		{
 			if( g_site.GetModule((iIdx  + nIdxAdd)* 2).IsExist() )
 			{

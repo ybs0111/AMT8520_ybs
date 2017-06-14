@@ -1,0 +1,7 @@
+[Folder_Data]
+Alarm=C:\\AMT8520\\Alarm\\
+Bmp=C:\\AMT8520\\Bmp\\
+Data=C:\\AMT8520\\Data\\
+Device=C:\\AMT8520\\Device\\
+Log=C:\\AMT8520\\Log\\
+Setting=C:\\AMT8520\\Setting\\

@@ -20,7 +20,7 @@ public:
 	CString m_strPPBody;
 
 	int		m_nProcessState[2];
-	int		m_nVid[5000][100][100];
+	int		m_nVid[10000][100][100];
 	int		m_nXgemOpenFlag;
 	int		m_nXgemStartFlag;
 	int		m_nXgemMachine;

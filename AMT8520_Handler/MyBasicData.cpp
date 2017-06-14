@@ -1913,13 +1913,13 @@ void CMyBasicData::OnBasic_Data_Load()
 	////
 	
 	//2017.0602
-	:: GetPrivateProfileString("BasicData", "XGEM_Mode", "-1", chr_data, 10, st_path.mstr_basic);
+	:: GetPrivateProfileString("BasicData", "XGEM_Mode_1", "-1", chr_data, 10, st_path.mstr_basic);
 	mn_chk = atoi(chr_data);
 	if (mn_chk < 0 || mn_chk > 1)
 	{
 		st_handler.mn_xgem_mode = 0;
 		mstr_temp = LPCTSTR(_itoa(st_handler.mn_xgem_mode, chr_buf, 10));
-		:: WritePrivateProfileString("BasicData", "XGEM_Mode", LPCTSTR(mstr_temp), st_path.mstr_basic);
+		:: WritePrivateProfileString("BasicData", "XGEM_Mode_1", LPCTSTR(mstr_temp), st_path.mstr_basic);
 	}
 	else  st_handler.mn_xgem_mode = mn_chk;
 
@@ -2256,7 +2256,7 @@ void CMyBasicData::OnBasic_Data_Save()
 
 	//2017.0602
 	mstr_temp = LPCTSTR(_itoa(st_handler.mn_xgem_mode, chr_buf, 10));
-	:: WritePrivateProfileString("BasicData", "XGEM_Mode", LPCTSTR(mstr_temp), st_path.mstr_basic);
+	:: WritePrivateProfileString("BasicData", "XGEM_Mode_1", LPCTSTR(mstr_temp), st_path.mstr_basic);
 	
 	//2015.1123
 	mstr_temp.Format("%d", st_basic.n_cserial2_mode);

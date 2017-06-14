@@ -292,6 +292,18 @@ void CScreen_Admin::OnInitialUpdate()
 		m_btn_filesave.ShowWindow( FALSE );
 		m_btn_fileload.ShowWindow( FALSE );
 	}
+
+	//2017.0602
+	if(st_handler.mn_xgem_mode == CTL_YES)
+	{
+		m_radio_xgem_new.SetCheck( true );
+		m_radio_xgem_old.SetCheck( false );
+	}
+	else
+	{
+		m_radio_xgem_new.SetCheck( false );
+		m_radio_xgem_old.SetCheck( true );
+	}
 }
 
 void CScreen_Admin::OnDestroy() 
@@ -2742,6 +2754,14 @@ void CScreen_Admin::OnRadioXgemNew()
 	
 	:: WritePrivateProfileString("BasicData", "XGEM_Mode", "1", st_path.mstr_basic);
 
+	if(st_handler.mn_xgem_mode == CTL_YES)
+	{
+		st_path.mstr_recipe_path = _T("C:\\XGEM\\AMT8520_1\\AMT8520\\XWork\\Recipe\\");
+	}
+	else
+	{
+		st_path.mstr_recipe_path = _T("C:\\XGEM\\AMT8520\\AMT8520\\XWork\\Recipe\\");
+	}
 
 }
 
@@ -2753,6 +2773,14 @@ void CScreen_Admin::OnRadioXgemOld()
 	st_handler.mn_xgem_mode = CTL_YES;
 	
 	:: WritePrivateProfileString("BasicData", "XGEM_Mode", "0", st_path.mstr_basic);
+	if(st_handler.mn_xgem_mode == CTL_YES)
+	{
+		st_path.mstr_recipe_path = _T("C:\\XGEM\\AMT8520_1\\AMT8520\\XWork\\Recipe\\");
+	}
+	else
+	{
+		st_path.mstr_recipe_path = _T("C:\\XGEM\\AMT8520\\AMT8520\\XWork\\Recipe\\");
+	}
 	
 }
 

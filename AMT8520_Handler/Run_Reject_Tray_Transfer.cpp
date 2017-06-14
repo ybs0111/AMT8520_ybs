@@ -1166,7 +1166,7 @@ void CRun_Reject_Tray_Transfer::Run_Move_To_Bin()
 				g_Tray.GetTray(iBin1).SetProcessID(st_handler.m_strProcessID);
 				g_Tray.GetTray(iBin1).SetPropertyEnd(st_handler.m_strRPropEnd);
 				//2017.0602
-				if( st_handler.mn_xgem_mode == CTL_YES )
+				if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 				{
 					g_Tray.GetTray(iBin1).SetBufferNo(100 + g_Tray.GetRejTrayNo() );
 					g_Tray.GetTray(iBin1).SetProductCnt(g_Tray.GetTray(iBin1).GetModuleCnt());
@@ -1184,7 +1184,7 @@ void CRun_Reject_Tray_Transfer::Run_Move_To_Bin()
 				g_Tray.GetTray(iBin3).SetProcessID(st_handler.m_strProcessID);
 				g_Tray.GetTray(iBin3).SetPropertyEnd(st_handler.m_strRPropEnd);
 				//2017.0602
-				if( st_handler.mn_xgem_mode == CTL_YES )
+				if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
 				{
 					g_Tray.GetTray(iBin3).SetBufferNo(100 + g_Tray.GetRejTrayNo());
 					g_Tray.GetTray(iBin3).SetProductCnt(g_Tray.GetTray(iBin3).GetModuleCnt());

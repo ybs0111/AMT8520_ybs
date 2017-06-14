@@ -1,0 +1,451 @@
+[2016/06/29 10:51:02.924]  : #0 Port : 4000 Server Create
+[2016/06/29 10:51:02.951]  : #1 Port : 9999 Server Create
+[2016/06/29 10:51:03.408]  : #2 Port : 9998 Server Create
+[2016/06/29 10:51:04.642]  : [OnMain_Motor_Setting]
+[2016/06/29 10:51:04.644]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.646]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.647]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.651]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.653]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.655]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.657]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.659]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.661]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.663]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.665]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.667]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.669]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.671]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.673]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.675]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.677]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 10:51:04.679]  : [OnMain_Motor_Setting]
+[2016/06/29 10:51:06.007]  : Connect Fail To [NEXT]
+[2016/06/29 10:51:13.016]  : Connect Fail To [NEXT]
+[2016/06/29 10:51:18.047]  : Connect Fail To [EC SERVER]
+[2016/06/29 10:51:19.549]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000063
+[2016/06/29 10:51:20.058]  : C_Send to [XGEM] : <SUSPENDED> HD=000053,FUNC=PPID_CHANGE,PP_NAME=AMT8520,PP_PATH=AMT8520.txt,
+[2016/06/29 10:51:20.616]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000097
+[2016/06/29 10:51:20.774]  : C_Send to [XGEM] : <SUSPENDED> HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/06/29 10:51:20.775]  : C_RECV From ClientSocket : 97
+[2016/06/29 10:51:20.776]  : C_RECV From [XGEM]: HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/06/29 10:51:23.410]  : [Stop Button] Handler Stop
+[2016/06/29 10:51:24.065]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000035
+[2016/06/29 10:51:24.068]  : [초 기 화] 장비 초기화 실패
+[2016/06/29 10:51:24.578]  : C_Send to [XGEM] : <SUSPENDED> HD=000025,FUNC=RUN_STATUS,STATUS=0,
+[2016/06/29 10:51:24.580]  : [초 기 화] 장비 초기화 실패
+[2016/06/29 10:51:24.581]  : C_RECV From ClientSocket : 35
+[2016/06/29 10:51:24.583]  : C_RECV From [XGEM]: HD=000025,FUNC=RUN_STATUS,STATUS=0,
+[2016/06/29 10:51:27.618]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/06/29 10:51:33.097]  : Admin Mode (Machine Administrator Mode)
+[2016/06/29 10:51:37.610]  : Connect Fail To [TESTER]
+[2016/06/29 10:51:43.617]  : Connect Fail To [TESTER]
+[2016/06/29 10:51:54.347]  : g_client_xgem.GetPointer_Client()
+[2016/06/29 10:51:58.813]  : Connect Fail To [TESTER]
+[2016/06/29 10:52:04.816]  : Connect Fail To [TESTER]
+[2016/06/29 10:52:10.818]  : Connect Fail To [TESTER]
+[2016/06/29 10:52:16.815]  : Connect Fail To [TESTER]
+[2016/06/29 10:52:19.012]  : Connect Fail To [EC SERVER]
+[2016/06/29 10:52:29.535]  : Connect Fail To [TESTER]
+[2016/06/29 10:54:04.207]  : Connect Fail To [EC SERVER]
+[2016/06/29 10:54:08.239]  : C_Send to [TESTER] : <SUSPENDED> 0000000000000015
+[2016/06/29 10:54:12.301]  : C_Send to [TESTER] : <SUSPENDED> BPC Client Test
+[2016/06/29 10:54:28.462]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 10:54:28.463]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 10:54:28.464]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 10:54:34.779]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/29 10:54:34.784]  : Connect Fail To [EC SERVER]
+[2016/06/29 10:55:01.846]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 10:55:03.462]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 10:55:13.185]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 10:55:25.653]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 10:55:25.654]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 10:55:28.107]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 10:55:53.611]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 10:55:55.010]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 10:55:55.012]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 10:55:55.013]  : Connect Fail To [EC SERVER]
+[2016/06/29 10:55:55.015]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 10:55:59.733]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 10:56:05.197]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 10:56:05.198]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 10:56:05.198]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 10:56:08.670]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 10:56:08.675]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 10:56:08.678]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 10:56:08.679]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 10:57:38.101]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 10:57:40.018]  : Connect Fail To [EC SERVER]
+[2016/06/29 10:57:40.019]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 10:57:40.021]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 10:57:40.022]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 10:58:05.995]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:00:27.003]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:00:27.004]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:00:27.005]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:00:27.018]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:00:27.020]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:00:36.110]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:03.969]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:03.970]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:03.972]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:07.664]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:07.668]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:07.671]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:07.672]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:08.425]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:11.059]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:11.060]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:11.062]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:13.466]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:13.469]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:13.471]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:13.472]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:13.977]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:14.431]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:14.837]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:16.086]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:16.090]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:16.094]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:16.096]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:16.548]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:17.540]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:17.543]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:17.545]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:17.546]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:18.000]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:18.453]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:19.207]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:20.179]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:20.182]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:20.185]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:20.186]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:20.489]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:20.792]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:21.045]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:21.838]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:21.847]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:21.852]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:21.854]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:22.115]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:22.369]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:22.622]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:22.975]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:23.378]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:24.339]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:24.342]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:24.343]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:24.344]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:24.648]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:24.851]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:25.105]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:26.326]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:26.330]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:01:26.331]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:01:26.332]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:01:26.685]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:26.942]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:27.249]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:01:27.702]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:02:14.989]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:02:21.332]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:02:21.333]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:02:21.335]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:02:23.368]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:02:24.573]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:02:24.573]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:02:24.574]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:02:26.127]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:02:27.419]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:02:28.074]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:02:28.075]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:02:28.076]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:02:28.883]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:02:35.010]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:02:40.725]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:02:40.726]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:02:40.728]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:02:49.860]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:27.825]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:03:27.826]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:03:27.827]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:03:29.648]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:30.160]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:30.864]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:37.715]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/29 11:03:37.719]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:03:41.587]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:03:41.588]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:03:41.590]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:03:43.566]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:44.071]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:44.624]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:44.781]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:03:44.781]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:03:44.782]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:03:45.794]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:46.347]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:46.501]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:46.654]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:46.808]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:46.911]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.012]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.164]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.318]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.472]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.624]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.727]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.831]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:47.988]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:03:47.988]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:03:47.989]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:03:49.117]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:49.671]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:49.824]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:49.928]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.081]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.185]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.287]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.441]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.545]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.648]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.801]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:50.954]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:51.109]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:51.316]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:03:51.317]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:03:51.319]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:03:52.827]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:53.382]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:53.542]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:53.695]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:53.801]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:53.954]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:54.107]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:54.211]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:54.363]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:54.474]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:03:54.475]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:03:54.475]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:03:57.147]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:57.701]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:03:57.858]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:03:57.859]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:03:57.859]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:02.867]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:04:02.868]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:04:02.870]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:05.137]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:05.642]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:05.794]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:05.899]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:06.004]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:04:06.004]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:04:06.005]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:16.793]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:04:16.794]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:04:16.795]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:18.882]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:19.540]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:20.093]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:20.198]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:04:20.199]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:04:20.199]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:22.292]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:22.847]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:22.954]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:23.057]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:23.161]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:23.314]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:23.470]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:04:23.471]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:04:23.471]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:32.940]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:04:33.499]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:04:33.500]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:04:33.502]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:36.511]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:04:39.273]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:04:39.274]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:04:39.275]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:04:49.476]  : #0 Port : 4000 Server Create
+[2016/06/29 11:04:49.479]  : #1 Port : 9999 Server Create
+[2016/06/29 11:04:49.480]  : #2 Port : 9998 Server Create
+[2016/06/29 11:04:50.433]  : [OnMain_Motor_Setting]
+[2016/06/29 11:04:50.435]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.436]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.438]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.440]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.442]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.444]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.446]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.447]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.449]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.450]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.452]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.454]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.456]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.457]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.459]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.461]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.463]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/06/29 11:04:50.464]  : [OnMain_Motor_Setting]
+[2016/06/29 11:04:54.763]  : Connect Fail To [NEXT]
+[2016/06/29 11:05:01.668]  : Connect Fail To [NEXT]
+[2016/06/29 11:05:03.319]  : [Stop Button] Handler Stop
+[2016/06/29 11:05:03.672]  : [초 기 화] 장비 초기화 실패
+[2016/06/29 11:05:03.830]  : C_Send to [XGEM] <FAIL>: 0000000000000035
+[2016/06/29 11:05:03.831]  : C_Send to [XGEM] <FAIL> OnClientClose: 0000000000000035
+[2016/06/29 11:05:03.832]  : C_Step_SendMsg_Send [XGEM] <SOCKET_ERROR>
+[2016/06/29 11:05:03.835]  : C_Step_SendMsg_Send [XGEM] <SOCKET_ERROR>
+[2016/06/29 11:05:07.365]  : C_Send to [XGEM] <FAIL>: 0000000000000063
+[2016/06/29 11:05:07.365]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:05:07.366]  : C_Send to [XGEM] <FAIL> OnClientClose: 0000000000000063
+[2016/06/29 11:05:07.367]  : C_Step_SendMsg_Send [XGEM] <SOCKET_ERROR>
+[2016/06/29 11:05:07.469]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:07.571]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:07.675]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:07.777]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:07.879]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:07.981]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.083]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.185]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.287]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.389]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.492]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.594]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.698]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.800]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:08.904]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.008]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.113]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.215]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.317]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.421]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.525]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.627]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.731]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:09.835]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:10.039]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:10.141]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:10.245]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:10.347]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:10.452]  : C_Step_SendMsg_Wait [XGEM] <m_vecSendMsg.erase>
+[2016/06/29 11:05:10.558]  : C_Send to [XGEM] <FAIL>: 0000000000000097
+[2016/06/29 11:05:10.559]  : C_Send to [XGEM] <FAIL> OnClientClose: 0000000000000097
+[2016/06/29 11:05:10.559]  : C_Step_SendMsg_Send [XGEM] <SOCKET_ERROR>
+[2016/06/29 11:05:11.921]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/06/29 11:05:16.177]  : Admin Mode (Machine Administrator Mode)
+[2016/06/29 11:05:23.489]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:23.490]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:23.490]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:05:26.700]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:27.963]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:27.964]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:27.964]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:05:30.096]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:30.600]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:31.103]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:31.259]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:31.260]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:31.260]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:05:32.692]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:33.196]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:33.298]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:33.402]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:33.505]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:33.607]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:33.761]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:33.914]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:34.016]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:34.118]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:34.220]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:34.322]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:34.427]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:34.428]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:34.428]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:05:36.692]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:37.247]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:37.348]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:37.451]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:37.556]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:37.556]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:37.557]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:05:50.095]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:50.096]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:50.096]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:05:51.515]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:51.620]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:51.723]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:51.876]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:51.979]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:52.081]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:52.183]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:52.338]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:52.442]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:52.595]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:52.750]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:52.904]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:53.056]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:54.109]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:54.615]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:54.616]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:54.617]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:05:56.608]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:57.264]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:57.365]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:57.519]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:57.673]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:05:57.782]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:05:57.782]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:05:57.783]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:06:01.283]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:06:01.841]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:06:01.842]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:06:01.843]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:06:03.431]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:06:03.985]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:06:04.488]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:06:04.942]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:06:06.897]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:06:06.898]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:06:06.898]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:06:22.521]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:06:32.999]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:06:33.000]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:06:33.001]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:06:52.397]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:06:54.558]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:06:54.559]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:06:54.561]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:07:00.232]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:07:02.142]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:07:02.143]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:07:02.143]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:07:07.814]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:07:27.171]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:07:28.874]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:07:28.875]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:07:28.876]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:07:38.474]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:07:38.475]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:07:38.479]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:07:43.099]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:07:50.309]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:07:50.310]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:07:50.310]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:08:10.871]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:08:10.872]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:08:10.873]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:08:25.961]  : C_Step_SendMsg_Wait [TESTER] <m_vecSendMsg.erase>
+[2016/06/29 11:20:29.385]  : C_Send to [TESTER] <FAIL>: 0000000000000015
+[2016/06/29 11:20:29.386]  : C_Send to [TESTER] <FAIL> OnClientClose: 0000000000000015
+[2016/06/29 11:20:29.396]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:20:29.409]  : C_Step_SendMsg_Send [TESTER] <SOCKET_ERROR>
+[2016/06/29 11:20:29.413]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:20:35.315]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:21:53.016]  : Connect Fail To [EC SERVER]
+[2016/06/29 11:22:46.513]  : Tool 정보 전송 요구 3회 무응답
+[2016/06/29 11:22:46.517]  : Connect Fail To [EC SERVER]
+[2016/06/29 16:54:10.481]  : Connect Fail To [EC SERVER]
+[2016/06/29 16:54:21.009]  : Connect Fail To [EC SERVER]
