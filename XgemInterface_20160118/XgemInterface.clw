@@ -23,10 +23,10 @@ Class9=CXPGroupBox
 ResourceCount=6
 Resource1=IDR_MENU
 Resource2=IDD_ABOUTBOX
-Resource3=IDR_MENU (English (U.S.))
+Resource3=IDD_XGEMINTERFACE_DIALOG
 Resource4=IDD_ABOUTBOX (Korean)
 Resource5=IDD_XGEMINTERFACE_DIALOG (Korean)
-Resource6=IDD_XGEMINTERFACE_DIALOG
+Resource6=IDR_MENU (English (U.S.))
 
 [CLS:CClientSocket]
 Type=0
