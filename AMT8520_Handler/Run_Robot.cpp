@@ -234,72 +234,71 @@ void CRun_Robot::Run_Move()
 	case PSTEP_PICK_READY:
 		job.picker_step = PSTEP_PICK_READY_CHK;
 		
-		//2017.0602
-// 		if(st_handler.mn_xgem_mode == CTL_YES)
-// 		{
-// 			AModule* pMdl_1=NULL;
-// 			AModule* pMdl_2=NULL;
-// 			AModule* pMdl_3=NULL;
-// 			AModule* pMdl_4=NULL;
-// 			int nTrayIdx = -1;
-// 			if( job.GetPosByTarget() == MPOS_INDEX_TESTSITE )
-// 			{
-// 
-// 			}
-// 			else
-// 			{
-// 				if( job.GetPosByTarget() == MPOS_INDEX_BIN1 )
-// 				{
-// 					nTrayIdx = g_Tray.GetIdxByPos( TPOS_BIN1 );
-// 					if(nTrayIdx < 0 || job.iPosFirst < 0 || job.iPosFirst > 3 )
-// 					{
-// 						if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
-// 						{
-// 							m_str_msg.Format("PICK_FINISH1) TrayIdx :[%d] job.iPosFirst:[%d]", nTrayIdx, job.iPosFirst);
-// 							Func.On_LogFile_Add(99, m_str_msg);
-// 						}
-// 					}
-// 				}
-// 				else if (job.GetPosByTarget() == MPOS_INDEX_BIN2 )
-// 				{
-// 					nTrayIdx = g_Tray.GetIdxByPos( TPOS_BIN2 );
-// 				}
-// 				else if( job.GetPosByTarget() == MPOS_INDEX_BIN3 )
-// 				{
-// 					nTrayIdx = g_Tray.GetIdxByPos( TPOS_BIN3 );
-// 				}
-// 				if( nTrayIdx > -1 && job.iPosFirst >= 0 && job.iPosFirst <= 3)
-// 				{
-// 					if(st_basic.n_pick_type == EPT_1V1M_4USE_2 )
-// 					{
-// 						pMdl_1 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFirst % MPOS_DIVISION );
-// 						pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( (job.iPosFirst + 1) % MPOS_DIVISION );
-// 					}
-// 					else
-// 					{
-// 						pMdl_1 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFirst % MPOS_DIVISION );
-// 						pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosSecond % MPOS_DIVISION );
-// 						pMdl_3 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosThird % MPOS_DIVISION );
-// 						pMdl_4 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFourth % MPOS_DIVISION );
-// 					}
-// 
-// 					if( job.iRobotFirst != -1 )
-// 						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_1->GetSerial() );
-// 					if( job.iRobotSecond != -1 )
-// 						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_2->GetSerial() );
-// 					if( job.iRobotThird != -1 )
-// 						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_3->GetSerial() );
-// 					if( job.iRobotFourth != -1 )
-// 						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_4->GetSerial() );
-// 
-// 				}
-// 
-// 			}
-// 		}
-		
-		
-		
+		//////////////////////////////////////////////////////////////////
+		//2017.0626
+		if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES)
+		{
+			AModule* pMdl_1=NULL;
+			AModule* pMdl_2=NULL;
+			AModule* pMdl_3=NULL;
+			AModule* pMdl_4=NULL;
+			int nTrayIdx = -1;
+			if( job.GetPosByTarget() == MPOS_INDEX_TESTSITE )
+			{
+
+			}
+			else
+			{
+				if( job.GetPosByTarget() == MPOS_INDEX_BIN1 )
+				{
+					nTrayIdx = g_Tray.GetIdxByPos( TPOS_BIN1 );
+					if(nTrayIdx < 0 || job.iPosFirst < 0 || job.iPosFirst > 3 )
+					{
+						if (st_handler.cwnd_list != NULL)  // 리스트 바 화면 존재
+						{
+							m_str_msg.Format("PICK_FINISH1) TrayIdx :[%d] job.iPosFirst:[%d]", nTrayIdx, job.iPosFirst);
+							Func.On_LogFile_Add(99, m_str_msg);
+						}
+					}
+				}
+				else if (job.GetPosByTarget() == MPOS_INDEX_BIN2 )
+				{
+					nTrayIdx = g_Tray.GetIdxByPos( TPOS_BIN2 );
+				}
+				else if( job.GetPosByTarget() == MPOS_INDEX_BIN3 )
+				{
+					nTrayIdx = g_Tray.GetIdxByPos( TPOS_BIN3 );
+				}
+				if( nTrayIdx > -1 && job.iPosFirst >= MPOS_INDEX_BIN1 && job.iPosFirst < MPOS_INDEX_REJ)
+				{
+					if(st_basic.n_pick_type == EPT_1V1M_4USE_2 )
+					{
+						pMdl_1 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFirst % MPOS_DIVISION );
+						pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( (job.iPosFirst + 1) % MPOS_DIVISION );
+					}
+					else
+					{
+						pMdl_1 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFirst % MPOS_DIVISION );
+						pMdl_2 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosSecond % MPOS_DIVISION );
+						pMdl_3 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosThird % MPOS_DIVISION );
+						pMdl_4 = &g_Tray.GetTray( nTrayIdx ).GetModule( job.iPosFourth % MPOS_DIVISION );
+					}
+
+					if( job.iRobotFirst != -1 )
+						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_1->GetSerial() );
+					if( job.iRobotSecond != -1 )
+						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_2->GetSerial() );
+					if( job.iRobotThird != -1 )
+						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_3->GetSerial() );
+					if( job.iRobotFourth != -1 )
+						g_client_xgem.SetLdRbtPickupDVCStart( g_Tray.GetTray(nTrayIdx).GetBufferNo(), pMdl_4->GetSerial() );
+
+				}
+
+			}
+		}		
 		break;
+
 	case PSTEP_PICK_READY_CHK:
 		//ybs 2012.0225
 		if(st_handler.mn_mirror_type == CTL_YES)
@@ -3706,6 +3705,26 @@ void CRun_Robot::Run_Move()
 
 			m_dwTime_Robot = GetCurrentTime();
 			job.picker_step = PSTEP_PICK_JIG_FOR_Z_DOWN;
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//2017.0626  DVC Place in Buffer
+			if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
+			{
+				AModule* pMdl_1 = NULL;
+				AModule* pMdl_2 = NULL;
+				AModule* pMdl_3 = NULL;
+				AModule* pMdl_4 = NULL;
+				if( job.iRobotFirst != -1 )
+					g_client_xgem.SetLdRbtPickupBufferStart( g_robot.GetPicker(job.iRobotFirst).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotFirst).GetModule().GetSerial() );
+				if( job.iRobotSecond != -1 )
+					g_client_xgem.SetLdRbtPickupBufferStart( g_robot.GetPicker(job.iRobotSecond).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotSecond).GetModule().GetSerial() );
+				if( job.iRobotThird != -1 )
+					g_client_xgem.SetLdRbtPickupBufferStart( g_robot.GetPicker(job.iRobotThird).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotThird).GetModule().GetSerial() );
+				if( job.iRobotFourth != -1 )
+					g_client_xgem.SetLdRbtPickupBufferStart( g_robot.GetPicker(job.iRobotFourth).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotFourth).GetModule().GetSerial() );
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		}
 		break;
 
@@ -3980,6 +3999,32 @@ void CRun_Robot::Run_Move()
 					}
 				}
 				job.picker_step = PSTEP_PLACE_POGO_BACK;
+
+
+
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				//2017.0626  DVC Place in Buffer
+				if( st_basic.mn_mode_xgem == CTL_YES && st_handler.mn_xgem_mode == CTL_YES )
+				{
+					//AModule* pMdl_1 = NULL;
+					//AModule* pMdl_2 = NULL;
+					//AModule* pMdl_3 = NULL;
+					//AModule* pMdl_4 = NULL;
+					if( job.iRobotFirst != -1 )
+						g_client_xgem.SetLdRbtPickupBufferEnd( g_robot.GetPicker(job.iRobotFirst).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotFirst).GetModule().GetSerial() );
+					if( job.iRobotSecond != -1 )
+						g_client_xgem.SetLdRbtPickupBufferEnd( g_robot.GetPicker(job.iRobotSecond).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotSecond).GetModule().GetSerial() );
+					if( job.iRobotThird != -1 )
+						g_client_xgem.SetLdRbtPickupBufferEnd( g_robot.GetPicker(job.iRobotThird).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotThird).GetModule().GetSerial() );
+					if( job.iRobotFourth != -1 )
+						g_client_xgem.SetLdRbtPickupBufferEnd( g_robot.GetPicker(job.iRobotFourth).GetModule().GetTrayNum(), g_robot.GetPicker(job.iRobotFourth).GetModule().GetSerial() );
+				}
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 			}
 			else if( nRet == BD_ERROR || nRet == BD_SAFETY )
 			{
@@ -5841,7 +5886,7 @@ void CRun_Robot::Run_Move()
 						m_str_msg.Format("PLACE_FINISH4)TrayIdx :[%d] job.iPosFirst:[%d]", nTrayIdx, job.iPosFirst);
 						Func.On_LogFile_Add(99, m_str_msg);
 					}
-					return;
+					//return;
 				}
 				//////////////////////////////////////////////////////////////////////////
 

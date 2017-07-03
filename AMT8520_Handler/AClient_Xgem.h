@@ -155,11 +155,30 @@ public:
 		m_strTrayLdPickDVCSerailStart = StrSreial;
 		m_bGemTrayLdPickStart = true;
 	}
+	//////////////////////////////////////////////////////////////////////////////
+	//2017.0626
 	//9812 LD Robot이 제품을 L/D Buffer로 이동 후 올려준다.
-	//void XgemLdRbtPickupDvcEnd();
+	//void XgemLdRbtPickupBufferStart();//EQPID, TRAYNO, SERIALNO
+	void SetLdRbtPickupBufferStart(  int nTrayNum, CString StrSreial )
+	{
+		m_nCntTrayPickBufferStart = 0;
+		m_nTrayNumLdPickBufferStart = nTrayNum;
+		m_strTrayLdPickBufferSerailStart = StrSreial;
+		m_bGemTrayLdPickBufferStart = true;
+	}	
 	//9813 TestSite Robot이 제품을 Pick up 시작 시 올려준다.
+	//void XgemLdRbtPickupBufferEnd();//EQPID, TRAYNO, SERIALNO
+	void SetLdRbtPickupBufferEnd(  int nTrayNum, CString StrSreial )
+	{
+		m_nCntTrayPickBufferEnd = 0;
+		m_nTrayNumLdPickBufferEnd = nTrayNum;
+		m_strTrayLdPickBufferSerailEnd = StrSreial;
+		m_bGemTrayLdPickBufferEnd = true;
+	}
+	//////////////////////////////////////////////////////////////////////////////
 
 	//9814 TestSite Robot이 제품을 Socket에 이동 후 올려준다.
+	//void XgemLdRbtPickupDvcEnd();
 	void SetLdRbtPickupDVCEnd(  int nTrayNum, CString StrSreial )
 	{
 		m_nCntTrayPickDVCEnd = 0;
@@ -241,16 +260,20 @@ public:
 	}
 	//9825 Socket을 살릴 경우 올려준다.
 	//void XGemSocketOn();//EQPID, SokSerialNo
-	void SetSocketOn( CString StrSokSerialNo )
+	//void SetSocketOn( CString StrSokSerialNo )
+	void SetSocketOn( int nSocknum )
 	{
-		m_strSocketSerialOn = StrSokSerialNo;		
+		//m_strSocketSerialOn = StrSokSerialNo;
+		m_nSockOnnum = nSocknum + 1;		
 		m_nCntSocketSerialOn = 0;
 		m_bGemSocketSerialOn = true;
 	}
 
-	void SetSocketOff( CString StrSokSerialNo )
+	//void SetSocketOff( CString StrSokSerialNo )
+	void SetSocketOff( int nSocknum )
 	{
-		m_strSocketSerialOff = StrSokSerialNo;		
+		//m_strSocketSerialOff = StrSokSerialNo;
+		m_nSockOffnum = nSocknum + 1;
 		m_nCntSocketSerialOff = 0;
 		m_bGemSocketSerialOff = true;
 	}
@@ -280,9 +303,16 @@ public:
 	//9811 LD Robot이 제품을 Pick up 시작 시 올려준다.
 	void XgemLdRbtPickupDvcStart();//EQPID, TRAYNO, SERIALNO
 
+
+	///////////////////////////////////////////////////////////////////////////
+	//2017.0626
 	//9812 LD Robot이 제품을 L/D Buffer로 이동 후 올려준다.//NOT USE
+	void XgemLdRbtPickupBufferStart();//EQPID, TRAYNO, SERIALNO
 
 	//9813 TestSite Robot이 제품을 Pick up 시작 시 올려준다.(pickup 후 올려준다.)//NOT USE
+	void XgemLdRbtPickupBufferEnd();//EQPID, TRAYNO, SERIALNO
+
+	///////////////////////////////////////////////////////////////////////////
 
 	//9814 TestSite Robot이 제품을 Socket에 이동 후 올려준다.
 	void XgemLdRbtPickupDvcEnd();
@@ -440,6 +470,24 @@ protected:
 	DWORD	m_dwTime_TrayLdPickDvcStart;
 	bool	m_bGemTrayLdPickStart;
 
+	//////////////////////////////////////////////
+	//2017.0626
+	//9812  Place DVC in Buffer
+	int		m_nTrayNumLdPickBufferStart;
+	CString	m_strTrayLdPickBufferSerailStart;
+	int     m_nCntTrayPickBufferStart;
+	DWORD	m_dwTime_TrayLdPickBufferStart;
+	bool	m_bGemTrayLdPickBufferStart;
+
+	//9813  Pickup DVC in Buffer
+	int		m_nTrayNumLdPickBufferEnd;
+	CString	m_strTrayLdPickBufferSerailEnd;
+	int     m_nCntTrayPickBufferEnd;
+	DWORD	m_dwTime_TrayLdPickBufferEnd;
+	bool	m_bGemTrayLdPickBufferEnd;
+
+	//////////////////////////////////////////////
+
 	//9814
 	int		m_nTrayNumLdPickDVCEnd;
 	CString	m_strTrayLdPickDVCSerailEnd;
@@ -508,12 +556,14 @@ protected:
 
 	//9825
 	CString	m_strSocketSerialOn;
+	int		m_nSockOnnum;
 	int		m_nCntSocketSerialOn;
 	DWORD	m_dwTime_SocketOn;
 	bool	m_bGemSocketSerialOn;
 
 	//9826
 	CString	m_strSocketSerialOff;
+	int		m_nSockOffnum;
 	int		m_nCntSocketSerialOff;
 	DWORD	m_dwTime_SocketOff;
 	bool	m_bGemSocketSerialOff;

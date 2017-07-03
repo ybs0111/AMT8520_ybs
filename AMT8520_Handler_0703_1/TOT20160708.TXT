@@ -1,0 +1,39 @@
+[2016/07/08 18:23:36.669]  : #0 Port : 4000 Server Create
+[2016/07/08 18:23:36.684]  : #1 Port : 9999 Server Create
+[2016/07/08 18:23:36.715]  : #2 Port : 9998 Server Create
+[2016/07/08 18:23:38.010]  : [OnMain_Motor_Setting]
+[2016/07/08 18:23:38.011]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.012]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.014]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.017]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.018]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.020]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.022]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.024]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.026]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.028]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.029]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.031]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.033]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.035]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.036]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.038]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.040]  : Set_HomeSet_Config Error [MotNum[16]]
+[2016/07/08 18:23:38.042]  : [OnMain_Motor_Setting]
+[2016/07/08 18:23:40.006]  : Connect Fail To [NEXT]
+[2016/07/08 18:23:45.004]  : Connect Fail To [NEXT]
+[2016/07/08 18:23:46.570]  : [Stop Button] Handler Stop
+[2016/07/08 18:23:46.629]  : [초 기 화] 장비 초기화 실패
+[2016/07/08 18:23:47.654]  : [초 기 화] 장비 초기화 실패
+[2016/07/08 18:23:47.657]  : Connect Fail To [XGEM]
+[2016/07/08 18:23:47.704]  : [initialization] SSD Auto Sorter initialization Skip.
+[2016/07/08 18:23:51.002]  : Connect Fail To [EC SERVER]
+[2016/07/08 18:23:51.006]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000063
+[2016/07/08 18:23:51.008]  : C_Send to [XGEM] : <SUSPENDED> HD=000053,FUNC=PPID_CHANGE,PP_NAME=AMT8520,PP_PATH=AMT8520.txt,
+[2016/07/08 18:23:51.110]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000097
+[2016/07/08 18:23:51.112]  : C_Send to [XGEM] : <SUSPENDED> HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/07/08 18:23:51.118]  : C_RECV From ClientSocket : 97
+[2016/07/08 18:23:51.118]  : C_RECV From [XGEM]: HD=000087,FUNC=CEID,CEID_NUM=1100,REPORT=1,REP_01={CNT=02,[DA_01=01,SIT-X01],[DA_02=01,AMT8520]},
+[2016/07/08 18:23:54.017]  : Connect Fail To [NEXT]
+[2016/07/08 18:23:54.024]  : C_Send to [XGEM] : <SUSPENDED> 0000000000000016
+[2016/07/08 18:23:54.027]  : C_Send to [XGEM] : <SUSPENDED> XGEM Client Test

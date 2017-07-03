@@ -1,0 +1,11 @@
+[LOG_FILE]
+OLD_NAME=D:\\AMT_RT500\\Samsung\\\2016040615.TXT
+
+[PATH]
+strPathSamsung=D:\\AMT_RT500\\Samsung\\
+strPathTotal=D:\\AMT_RT500\\Total\\
+strPathCommunication=D:\\AMT_RT500\\Communication\\
+strPathAlarm=D:\\AMT_RT500\\Alarm\\
+
+[ALARM]
+nAlarmTime=300000

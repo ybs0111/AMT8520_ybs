@@ -1,0 +1,265 @@
+// APartHandler_COK.h: interface for the APartHandler_COK class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#if !defined(AFX_APARTHANDLER_COK_H__F6AF315A_0F77_45A9_8CAC_687EF76B2050__INCLUDED_)
+#define AFX_APARTHANDLER_COK_H__F6AF315A_0F77_45A9_8CAC_687EF76B2050__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+
+#define COK_ITEM_CNT	20
+
+#define TSITE_COK_CNT	20
+
+// COK		-1 = NONE, 0 ~ 5
+enum ENUM_COK_CHANGE_TYPE
+{
+	CCT_NONE,
+	CCT_COK_CHANGE,
+	CCT_RECV,
+	CCT_SEND,
+	CCT_WORK_READY,
+};
+
+enum ENUM_CCT_SAFETY_STEP
+{
+	ECCT_SAFETY_START,
+	ECCT_ROBOT_Z_SAFETY,  //2012,1222
+	ECCT_ROBOT_XY_SAFETY,
+	ECCT_ROBOT_XY_SAFETY_CHK, //2013,0213
+	ECCT_ROBOT_XY_SAFETY_MOVE,
+	ECCT_ROBOT_XY_SAFETY_MOVE_CHK, //2013,0213
+	ECCT_ROBOT_TRANSFER_MOVE_SAFETY,
+	ECCT_ROBOT_TRANSFER_MOVE_SAFETY_CHK,
+	ECCT_RECV_ELEV_MOVE_READY,
+};
+
+enum ENUM_CCT_RECV_STEP
+{
+	ECCT_RECV_START,
+
+	ECCT_RECV_ELEV_MOVE_Z_SAFETY,
+	ECCT_RECV_ELEV_MOVE_Y,
+	ECCT_RECV_ELEV_MOVE_Z_TOP,
+	ECCT_RECV_ELEV_Z_TOP_CHK,
+	ECCT_RECV_ELEV_DOWN_FLOOR,
+	ECCT_RECV_ELEV_DOWN_CHK,
+	ECCT_RECV_BACK_PLATE,
+	ECCT_RECV_BACK_PLATE_CHK,
+	ECCT_RECV_INSERT_FORWARD,
+	ECCT_RECV_INSERT_FORWARD_CHK,
+	ECCT_RECV_UNLOCK,
+	ECCT_RECV_UNLOCK_CHK,
+	ECCT_RECV_ROBOT_Z_SAFTY,
+	ECCT_RECV_PICK_GV_UP,
+	ECCT_RECV_PICK_GV_UP_CHK,
+	ECCT_RECV_MOVESITE,
+	ECCT_RECV_PICK_ROBOT_XY_SITE,
+	ECCT_RECV_PICK_GRIP_UNPICK,
+	ECCT_RECV_PICK_GRIP_UNPICK_CHK,
+	ECCT_RECV_PICK_ROBOT_Z_DOWN,
+	ECCT_RECV_PICK_GRIP_DOWN,
+	ECCT_RECV_PICK_GRIP_DOWN_CHK,
+	ECCT_RECV_PICK_GRIP_PICK,
+	ECCT_RECV_PICK_GRIP_PICK_CHK,
+	ECCT_RECV_PICK_GRIP_UP,
+	ECCT_RECV_PICK_GRIP_UP_CHK,
+	ECCT_RECV_PICK_ROBOT_Z_UP,
+	ECCT_RECV_MOVE_ROBOT_XY_COK_TACKER,
+	ECCT_RECV_PLACE_ROBOT_Z_COK_STACKER_PLACE,
+	ECCT_RECV_PLACE_GRIPPER_DOWN,
+	ECCT_RECV_PLACE_GRIPPER_DOWN_CHK,
+	ECCT_RECV_PLACE_GRIP_PALCE,
+	ECCT_RECV_PLACE_GRIP_PALCE_CHK,
+	ECCT_RECV_PLACE_GRIPPER_UP,
+	ECCT_RECV_PLACE_GRIPPER_UP_CHK,
+	ECCT_RECV_PLACE_ROBOT_Z_UP,
+
+	ECCT_RECV_FINISH,
+};
+
+enum ENUM_CCT_SEND_STEP
+{
+	ECCT_SEND_START,
+
+	ECCT_SEND_ELEV_Z_SAFETY,
+	ECCT_SEND_ELEV_Y,
+	ECCT_SEND_ELEV_Z_UNDER_FLOOR,
+	ECCT_SEND_ELEV_Z_UNDER_FLOOR_CHK,
+	ECCT_SEND_ELEV_Z_TOP,
+	ECCT_SEND_ELEV_Z_TOP_CHK,
+	ECCT_SEND_BACK_PLATE,
+	ECCT_SEND_BACK_PLATE_CHK,
+	ECCT_SEND_INSERT_FORWARD,
+	ECCT_SEND_INSERT_FORWARD_CHK,
+	ECCT_SEND_UNLOCK,
+	ECCT_SEND_UNLOCK_CHK,
+	ECCT_SEND_ROBOT_Z_SAFTY,
+	ECCT_SEND_MOVESITE,
+	ECCT_SEND_PICK_GV_UP,
+	ECCT_SEND_PICK_GV_UP_CHK,
+	ECCT_SEND_MOVE_ROBOT_XY_COK_STACKER,
+	ECCT_SEND_PICK_GRIP_UNPICK,
+	ECCT_SEND_PICK_GRIP_UNPICK_CHK,
+	ECCT_SEND_PICK_ROBOT_Z_DOWN,
+	ECCT_SEND_PICK_GRIPPER_DOWN,
+	ECCT_SEND_PICK_GRIPPER_DOWN_CHK,
+	ECCT_SEND_PICK_GRIP_PICK,
+	ECCT_SEND_PICK_GRIP_PICK_CHK,
+	ECCT_SEND_PICK_GRIPPER_UP,
+	ECCT_SEND_PICK_GRIPPER_UP_CHK,
+	ECCT_SEND_PICK_ROBOT_Z_UP,
+	ECCT_SEND_PLACE_ROBOT_XY_SITE,
+	ECCT_SEND_PLACE_ROBOT_Z_SITE_PLACE,
+	ECCT_SEND_PLACE_GRIPPER_DOWN,
+	ECCT_SEND_PLACE_GRIPPER_DOWN_CHK,
+	ECCT_SEND_PLACE_GRIP_PALCE,
+	ECCT_SEND_PLACE_GRIP_PALCE_CHK,
+	ECCT_SEND_PLACE_GRIPPER_UP,
+	ECCT_SEND_PLACE_GRIPPER_UP_CHK,
+	ECCT_SEND_PLACE_ROBOT_Z_UP,
+
+	ECCT_SEND_FINISH,
+};
+
+enum ENUM_CCT_WORK_READY
+{
+	ECCT_READY_START,
+	ECCT_READY_COK_CHK,
+	ECCT_READY_Z,
+	ECCT_READY_Z_CHK,
+	ECCT_READY_INSERT_BACK,
+	ECCT_READY_INSERT_BACK_CHK,
+	ECCT_READY_LOCK,
+	ECCT_READY_LOCK_CHK,
+	ECCT_READY_PLATE_FORWARD,
+	ECCT_READY_PLATE_FORWARD_CHK,
+
+	ECCT_READY_REJ_CHK,
+	ECCT_READY_REJ_GUIDE_BACK,
+	ECCT_READY_REJ_GUIDE_BACK_CHK,
+	ECCT_READY_REJ_MOVE,
+	ECCT_READY_REJ_GUIDE_FORWARD,
+	ECCT_READY_REJ_GUIDE_FORWARD_CHK,
+	ECCT_READY_TR_CLAMP_SAFETY,
+
+	ECCT_READY_FINISH,
+};
+
+class APartHandler_COK  
+{
+public:
+	APartHandler_COK();
+	virtual ~APartHandler_COK();
+
+	// 교체 가능한 상태인지 검사..
+	void LoadRegDatas();
+	//2014,0310
+	int GetHifixPos();
+	void SetHifixPos( int iVal );
+	int GetSiteCok( int iIdx );
+	void SetSiteCok( int iIdx, int iVal );
+	int GetCokCnt( int iStacker ) { return m_nCokCnt[iStacker]; }
+	void SetCokCnt( int iStacker, int nCnt );
+	void AddCokCnt( int iStacker, int iAdd );
+	bool GetChangingCOK() { return (m_cct != CCT_NONE); }
+
+	void CheckCokTypeChange();
+
+	void Run_Move();
+	void Run_Move_Safety();
+	void Run_Move_COK_RECV();
+	void Run_Move_COK_SEND();
+	void Run_Move_Work_Ready();
+
+	void ClearOldStep();
+
+protected:
+	bool Run_Move_COK_SAFETY_Chk_Jam();
+	bool Run_Move_Cok_SAFETY_Chk_Time();
+
+	bool Run_Move_COK_RECV_Chk_Jam();
+	bool Run_Move_COK_SEND_Chk_Jam();
+
+	bool Run_Move_Cok_RECV_Chk_Time();
+	bool Run_Move_Cok_SEND_Chk_Time();
+
+protected:
+	void MoveDataSite2Robot();
+	void MoveDataRobot2CokStacker();
+	void MoveDataCokStacker2Robot();
+	void MoveDataRobot2Site();
+
+protected:
+	bool Chk_COK_Robot_Z_Safety();
+	bool Chk_COK_Robot_Y( int iIdx );
+	bool Chk_Robot_Z_Safety();
+	bool Chk_XY_Recv_Pick();
+	bool Chk_Z_Recv_Pick();
+	bool Chk_XY_Recv_Place();
+	bool Chk_Z_Recv_Place();
+
+	bool Chk_XY_Send_Pick();
+	bool Chk_Z_Send_Pick();
+	bool Chk_XY_Send_Place();
+	bool Chk_Z_Send_Place();
+	
+
+	bool InTime_Safety( int iMilliSec );
+	bool InTime_Recv( int iMilliSec );
+	bool InTime_Send( int iMilliSec );
+
+
+protected:
+	int m_nCokCnt[COK_TYPE_CNT];
+	int m_nSite[TSITE_COK_CNT];
+	int m_nHifixpos;
+	
+	int m_nRecvCok;
+	int m_nSendCok;
+
+	ENUM_COK_CHANGE_TYPE m_cct;
+	int m_nTargetCokIdx;
+
+	ENUM_CCT_SAFETY_STEP	m_step_safety;
+	ENUM_CCT_RECV_STEP		m_step_recv;
+	ENUM_CCT_SEND_STEP		m_step_send;
+	ENUM_CCT_WORK_READY		m_step_ready;
+
+	ENUM_CCT_SAFETY_STEP	m_step_safety_old;
+	ENUM_CCT_RECV_STEP		m_step_recv_old;
+	ENUM_CCT_SEND_STEP		m_step_send_old;
+
+	DWORD					m_dwTime_Safety;
+	DWORD					m_dwTime_Recv;
+	DWORD					m_dwTime_Send;
+	DWORD					m_dwTime_Hifix_Send;
+
+	double m_dPos[2];
+};
+
+extern APartHandler_COK g_handler_cok;
+
+#endif // !defined(AFX_APARTHANDLER_COK_H__F6AF315A_0F77_45A9_8CAC_687EF76B2050__INCLUDED_)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

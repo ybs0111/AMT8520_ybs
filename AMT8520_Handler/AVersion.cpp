@@ -89,7 +89,7 @@ void AVersion::SetVersion()
 
 ////2015.0604
 //	str_temp.Format("%04d%02d%02d", 2015, 10, 05);
-	str_temp.Format("TP - %04d%02d%02d", 2017, 06, 05);
+	str_temp.Format("TP - %04d%02d%02d", 2017, 07, 03);
 	m_strDate = str_temp;
 //	str_temp.Format("%04d/%02d/%02d", 2015, 6, 12);
 //	m_strDate = str_temp + "_TP";
